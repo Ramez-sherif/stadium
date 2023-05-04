@@ -18,6 +18,7 @@ public class Stadium {
     private String Capacity; 
     
     @OneToMany(mappedBy = "stadium")
+
     private List <Category> categories;
  
 
