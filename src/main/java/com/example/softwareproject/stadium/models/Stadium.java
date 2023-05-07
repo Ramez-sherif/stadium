@@ -1,12 +1,18 @@
 package com.example.softwareproject.stadium.models;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+
 
 
 @Entity //to let the spring know that this class will be a table in database
@@ -16,11 +22,19 @@ public class Stadium {
     private Long id;  
     private String name;
     private String Capacity; 
-    
-    @OneToMany(mappedBy = "stadium")
 
-    private List <Category> categories;
- 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "stadium_Image_Id", referencedColumnName = "id")
+    private StadiumImage stadiumImage;
+
+    @ManyToMany
+    @JoinTable(
+        name = "stadium_category",
+        joinColumns = @JoinColumn(name = "stadium_id"),
+        inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
+    private Set<Category> categories = new HashSet<>();
+
 
     public Long getId() {
         return this.id;
@@ -46,12 +60,14 @@ public class Stadium {
         this.Capacity = Capacity;
     }
 
-    public List<Category> getCategories() {
+    public Set<Category> getCategories() {
         return this.categories;
     }
 
-    public void setCategories(List<Category> categories) {
+    public void setCategories(Set<Category> categories) {
         this.categories = categories;
     }
+
+
     
 }

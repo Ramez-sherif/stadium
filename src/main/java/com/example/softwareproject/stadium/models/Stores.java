@@ -1,9 +1,13 @@
 package com.example.softwareproject.stadium.models;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 
 @Entity //to let the spring know that this class will be a table in database
 public class Stores {
@@ -12,6 +16,10 @@ public class Stores {
   private long id;
   private String name;
   private String location;
+  
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "manager_id", referencedColumnName = "id")
+  private User manager;
 
     public long getId() {
         return this.id;
@@ -36,5 +44,14 @@ public class Stores {
     public void setLocation(String location) {
         this.location = location;
     }
+
+    public User getManager() {
+        return this.manager;
+    }
+
+    public void setManager(User manager) {
+        this.manager = manager;
+    }
+  
 
 }
