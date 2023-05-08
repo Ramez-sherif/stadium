@@ -1,6 +1,6 @@
 package com.example.softwareproject.stadium.models;
 
-import java.util.HashSet;
+
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -9,9 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 
 
@@ -27,6 +26,9 @@ public class Stadium {
     @JoinColumn(name = "stadium_Image_Id", referencedColumnName = "id")
     private StadiumImage stadiumImage;
 
+    @OneToMany(mappedBy = "stadium")
+    Set<StadiumCategories> stadiumCategories; 
+/* 
     @ManyToMany
     @JoinTable(
         name = "stadium_category",
@@ -34,7 +36,7 @@ public class Stadium {
         inverseJoinColumns = @JoinColumn(name = "category_id")
     )
     private Set<Category> categories = new HashSet<>();
-
+*/
 
     public Long getId() {
         return this.id;
@@ -60,12 +62,12 @@ public class Stadium {
         this.Capacity = Capacity;
     }
 
-    public Set<Category> getCategories() {
-        return this.categories;
+    public Set<StadiumCategories> getCategories() {
+        return this.stadiumCategories;
     }
 
-    public void setCategories(Set<Category> categories) {
-        this.categories = categories;
+    public void setCategories(Set<StadiumCategories> stadiumCategories) {
+        this.stadiumCategories = stadiumCategories;
     }
 
 

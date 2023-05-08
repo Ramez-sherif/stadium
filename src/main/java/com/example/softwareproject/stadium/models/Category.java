@@ -1,9 +1,12 @@
 package com.example.softwareproject.stadium.models;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity //to let the spring know that this class will be a table in database
 public class Category {
@@ -13,6 +16,9 @@ public class Category {
     private String name;
     private double capacityPercentage;
     private double pricePercentage;
+    
+    @OneToMany(mappedBy = "category")
+    Set<StadiumCategories> stadiumCategories; 
 
 
     public Long getId() {
