@@ -34,7 +34,7 @@
                     </select> -->
                 </div>
     
-    <!--modify here, teams from db in thymeleaf, use function AddTeam, obj->user-->
+    <!--modify here, teams from db in thymeleaf, use function AddTeam, obj->user
                 <div class="mb-4">
                     <label class="block text-gray-700 font-bold mb-2" for="location">
                         Location
@@ -42,7 +42,7 @@
                     <input th:field="*{name}" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="location" type="text" placeholder="Stadium Location">
 
                     
-                        </div>
+                        </div> -->
                 <div class="mb-4">
                     <label class="block text-gray-700 font-bold mb-2" for="capacity">
                         Capacity
@@ -55,6 +55,10 @@
                         <option value="2">Stadium 2</option>
                         <option value="3">Stadium 3</option>
                     </select> -->
+
+
+
+
                 </div>
                 <div class="mb-4">
                     <label class="block text-gray-700 font-bold mb-2" for="categories">
@@ -67,6 +71,135 @@
                         <option value="3"> 5 </option>
                     </select>
                 </div>
+
+                <!-- 
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-bold mb-2" for="Category 1 Name">
+                    Category 1 Name
+                    </label>
+                    <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Stadium Name">
+                    </div> 
+
+                    
+                    <div class="flex flex-wrap">
+                        <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                            <label for="category 1" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Category 1:</label>
+                          </div>
+                        <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                            <label for="category 2" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Category 2:</label>
+                          </div>
+                          <br>
+                        <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                            <label for="input3" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"> Category 3:</label>
+                          </div>
+                        
+                        <input class="appearance-none border rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Category 1 Name">
+                        <input class="appearance-none border rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Category 2 Name">
+                        <input class="appearance-none border rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Category 3 Name">
+
+                    </div>  -->
+                    
+                    <div class="flex flex-wrap -mx-2 mb-4">
+                        <div class="w-full md:w-1/3 px-2">
+                            <label for="input1" class="text-gray-700 font-bold mb-2 block md:inline-block md:mb-0 md:mr-2">Category 1 name:</label>
+                        </div>
+                        <div class="w-full md:w-1/3 px-2">
+                            <label for="input2" class="text-gray-700 font-bold mb-2 block md:inline-block md:mb-0 md:mr-2">Category 2 name:</label>
+                        </div>
+                        <div class="w-full md:w-1/3 px-2">
+                            <label for="input3" class="text-gray-700 font-bold mb-2 block md:inline-block md:mb-0">Category 3 name:</label>
+                        </div>
+                        
+                    </div>
+                    <div class="flex flex-wrap -mx-2">
+                        <div class="w-full md:w-1/3 px-2">
+                            <input type="text" id="input1" name="input1" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" th:value="${input1}">
+                        </div>
+                        <div class="w-full md:w-1/3 px-2">
+                            <input type="text" id="input2" name="input2" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" th:value="${input2}">
+                        </div>
+                        <div class="w-full md:w-1/3 px-2">
+                            <input type="text" id="input3" name="input3" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" th:value="${input3}">
+                        </div>
+                        
+
+                        
+                    </div>
+                        <div class="flex flex-wrap -mx-2 mb-4">
+                            
+                            <div class="w-full md:w-1/3 px-2">
+                                <label for="input4" class="text-gray-700 font-bold mb-2 block md:inline-block md:mb-0">Category 4 name:</label>
+                            </div>
+                            
+                            <div class="w-full md:w-1/3 px-2">
+                                <label for="input5" class="text-gray-700 font-bold mb-2 block md:inline-block md:mb-0">Category 5 name:</label>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap -mx-2">
+                            
+                            <div class="w-full md:w-1/3 px-2">
+                                <input type="text" id="input4" name="input4" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" th:value="${input4}">
+                            </div>
+                            
+                            <div class="w-full md:w-1/3 px-2">
+                                <input type="text" id="input5" name="input3" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" th:value="${input5}">
+                            </div>
+                            
+                        </div>
+                    
+                    <script>
+                        var cat4 = document.getElementById("input4").value;
+    var cat5 = document.getElementById("input5").value;
+    function DefauktCategory(){ 
+        cat4.classList.add("hidden");
+        cat5.classList.add("hidden");
+    }
+    function onCat4(){ 
+        cat4.classList.remove("hidden");
+    }
+    function onCat5(){ 
+        cat5.classList.remove("hidden");
+    }
+    cat5.classList.add("hidden");
+
+</script>   <!-- 
+    
+    <div class="flex flex-wrap justify-center">
+        <div class="w-full md:w-1/2 lg:w-1/3 p-4">
+            <form th:if="${selectedCategories != null}" th:action="@{/name-categories}" method="post">
+                <input type="hidden" name="numCategories" th:value="${numCategories}">
+                <div th:each="category, id : ${selectedCategories}">
+                    <label for="category[[${id.index}]]" class="block text-gray-700 font-bold mb-2">Category [[${categoryIndex.index + 1}]]:</label>
+                    <input type="text" id="category[[${id.index}]]" name="categoryNames[[${categoryIndex.index}]]" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                </div>
+            -->
+
+                    <!-- 
+                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">Submit</button> 
+                      </form>
+                      <div th:unless="${selectedCategories != null}" class="flex flex-wrap -mx-2">
+                        
+                        
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <script>
+                  function updateSelectedCategories(checkbox) {
+                    var numSelected = document.querySelectorAll('input[name="selectedCategories"]:checked').length;
+                    var numCategoriesSelect = document.getElementById('numCategories');
+                    if (numSelected >= 3 && numSelected <= 5) {
+                      numCategoriesSelect.value = numSelected;
+                      numCategoriesSelect.disabled = true;
+                    } else {
+                      numCategoriesSelect.value = '';
+                      numCategoriesSelect.disabled = false;
+                    }
+                  }
+                  </script>
+
+                --> <br>
+
                 <div class="flex justify-center">
                     <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline" type="submit">
                         Add Stadium
