@@ -47,6 +47,15 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependcy>
+		<groupId>
+		org.springframework.boot
+		</groupId>
+		<artifactId>spring-boot-starter-thymleaf</artifactId>
+		<version>
+		2.7.9
+		</version>
+		</dependcy>
 	</dependencies>
 
 	<build>
