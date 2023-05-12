@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.softwareproject.stadium.models.Matches;
+import com.example.softwareproject.stadium.models.Teams;
+import com.example.softwareproject.stadium.models.Tournaments;
 import com.example.softwareproject.stadium.repositories.MatchesRepository;
 
 @Service
@@ -13,7 +15,7 @@ public class MatchesService {
 
     @Autowired
     private MatchesRepository matchesRepository;
-   
+
     public List<Matches> getAllMatches() {
         return matchesRepository.findAll();
     }
@@ -22,7 +24,7 @@ public class MatchesService {
         return matchesRepository.findById(id).orElse(null);
     }
 
-    public Matches createNewMatch(Matches match) {
+    public Matches addMatch(Matches match) {
         return matchesRepository.save(match);
     }
 
@@ -30,24 +32,28 @@ public class MatchesService {
         matchesRepository.deleteById(id);
     }
 
-    public Matches updateMatch(Long id,Matches match) {
-         matchesRepository.findById(id).orElseThrow();
-         
+    public void deleteMatch(Matches match) {
+        matchesRepository.delete(match);
+    }
+
+    public Matches updateMatch(Long id, Matches match) {
+        matchesRepository.findById(id).orElseThrow();
         return matchesRepository.save(match);
+
     }
-/*
- 
- public List<Matches> getMatchesByTeam(Teams team) {
-     return matchesRepository.findByTeam1OrTeam2(team, team);
+
+    public List<Matches> getMatchesByTeam(Teams team) {
+        return matchesRepository.findByTeam1OrTeam2(team, team);
     }
-    
-    public List<Matches> getMatchesByTournament(Tournaments tournament) {
-        return matchesRepository.findByTournament(tournament);
+
+    public List<Matches> getMatchesByTournments(Tournaments tournaments) {
+        return matchesRepository.findByTournment(tournaments);
     }
-    
-    public List<Matches> getMatchesByDate(Date date) {
-        return matchesRepository.findByDate(date);
-    }
-    */
-    
+
+    /*
+     * public List<Matches> getMatchesByDate(Date date) {
+     * return matchesRepository.findByDate(date);
+     * }
+     */
+
 }
