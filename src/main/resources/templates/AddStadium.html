@@ -39,21 +39,15 @@
                     <label class="block text-gray-700 font-bold mb-2" for="location">
                         Location
                     </label>
-                    <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="location" type="text" placeholder="Stadium Location">
+                    <input th:field="*{name}" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="location" type="text" placeholder="Stadium Location">
 
-                    <!--
-                    <select class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="tournament">
-                        <option value="">Select Team 2</option>
-                        <option value="1">Team 1</option>
-                        <option value="2">Team 2</option>
-                        <option value="3">Team 3</option>
-                    </select> -->
+                    
                         </div>
                 <div class="mb-4">
                     <label class="block text-gray-700 font-bold mb-2" for="capacity">
                         Capacity
                     </label>
-                    <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="capacity" min="0" type="number" placeholder="Stadium Capacity">
+                    <input th:field="*{Capacity}" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="capacity" min="0" type="number" placeholder="Stadium Capacity">
 <!--
                     <select class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="stadium">
                         <option value="">Select a stadium</option>
@@ -66,7 +60,7 @@
                     <label class="block text-gray-700 font-bold mb-2" for="categories">
                         categories
                     </label>
-                    <select class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="categories">
+                    <select th:field="*{stadiumCategories}" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="categories">
                         <option value="">Select number of categories</option>
                         <option value="1"> 3 </option>
                         <option value="2"> 4 </option>
