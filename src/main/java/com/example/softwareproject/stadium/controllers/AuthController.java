@@ -17,44 +17,22 @@ import com.example.softwareproject.stadium.models.Role;
 import com.example.softwareproject.stadium.models.User;
 import com.example.softwareproject.stadium.repositories.RoleRepository;
 import com.example.softwareproject.stadium.repositories.UserRepository;
+import com.example.softwareproject.stadium.services.AuthService;
+import com.example.softwareproject.stadium.services.UserService;
 
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
     @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
-    @Autowired 
-    private RoleRepository roleRepository;
-    @Autowired 
-    private UserRepository userRepository;
+    private AuthService authService;
+   
     @PostMapping("register")
-    public String register(@RequestBody Map<String,String> body){
-        try{
-            List<Role> userRole = this.roleRepository.findByName("User");
-            String firstName = body.get("FirstName");
-            String secondName = body.get("SecondName");
-            String email = body.get("Email");
-            String password = body.get("Password");
-            String passwordHash = this.bCryptPasswordEncoder.encode(password);
-            /*
-            String firstName = user.getFirstName();
-            String secondName = user.getSecondName();
-            String email = user.getEmail();
-            String password = user.getPassword();
-            String passwordHash = this.bCryptPasswordEncoder.encode(password);
-            */
-            User newUser = new User();
-            newUser.setFirstName(firstName);
-            newUser.setSecondName(secondName);
-            newUser.setEmail(email);
-            newUser.setPassword(passwordHash);        
-            newUser.setRole(userRole.get(0));
-            this.userRepository.save(newUser);
-        }catch(Exception e){
-            return "redirect:/thymeleaf/register";
-        }
-       
-
-        return "redirect:/Home/Home";  
+    public String register(@ModelAttribute User user){
+        return this.authService.register(user);
+    }
+    
+    @PostMapping("login")
+    public String login(@ModelAttribute User user){
+        return this.authService.login(user);
     }
 }
