@@ -1,0 +1,78 @@
+<!--As an Admin, I want to be able to add matches and assign teams,
+    stadium and tournaments for them so that users can view and reserve tickets for matches.-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Add Matches</title>
+</head>
+<body class="bg-gray-200">
+    <div class="max-w-xl mx-auto p-8 bg-white shadow-md rounded-md">
+        <h2 class="text-2xl font-bold mb-4">Add Match</h2>
+        <form action="#" method="POST">
+            <!--
+            <div class="mb-4">
+                <label class="block text-gray-700 font-bold mb-2" for="team1">
+                    Team 1
+                </label>
+                <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="team1" type="text" placeholder="Team 1">
+            </div>  -->
+
+            <div class="mb-4">
+                <label class="block text-gray-700 font-bold mb-2" for="team1">
+                    Team 1
+                </label>
+                <select class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="tournament">
+                    <option value="">Select Team 1</option>
+                    <option value="1">Team 1</option>
+                    <option value="2">Team 2</option>
+                    <option value="3">Team 3</option>
+                </select>
+            </div>
+
+<!--modify here, teams from db in thymeleaf, use function AddTeam, obj->user-->
+            <div class="mb-4">
+                <label class="block text-gray-700 font-bold mb-2" for="team2">
+                    Team 2
+                </label>
+                <select class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="tournament">
+                    <option value="">Select Team 2</option>
+                    <option value="1">Team 1</option>
+                    <option value="2">Team 2</option>
+                    <option value="3">Team 3</option>
+                </select>
+                    </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 font-bold mb-2" for="stadium">
+                    Stadium
+                </label>
+                <select class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="stadium">
+                    <option value="">Select a stadium</option>
+                    <option value="1">Stadium 1</option>
+                    <option value="2">Stadium 2</option>
+                    <option value="3">Stadium 3</option>
+                </select>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 font-bold mb-2" for="tournament">
+                    Tournament
+                </label>
+                <select class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="tournament">
+                    <option value="">Select a tournament</option>
+                    <option value="1">Tournament 1</option>
+                    <option value="2">Tournament 2</option>
+                    <option value="3">Tournament 3</option>
+                </select>
+            </div>
+            <div class="flex justify-end">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline" type="submit">
+                    Add Match
+                </button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
