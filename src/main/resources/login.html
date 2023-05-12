@@ -9,6 +9,7 @@
   </head>
   <body class="bg-gray-200">
     <!-- modify here for backend -->
+    
     <form
       th:action="@{/auth/login}"
       th:objects="${User}"
@@ -47,14 +48,14 @@
           </div>
           <div class="flex items-center justify-between">
             <button
-              class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4  rounded transition-colors focus:outline-none focus:shadow-outline "
+              class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4  rounded-full  focus:outline-none focus:shadow-outline "
               type="submit"
             >
               Sign In
             </button>
             <a
-              class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-              href="sign_up.html"
+              class=" inline-block align-baseline font-bold text-sm text-green-500 hover:text-green-700 rounded-full"
+              href="register.html"
             >
               Sign Up
             </a>
