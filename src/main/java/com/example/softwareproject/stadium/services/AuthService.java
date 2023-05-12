@@ -1,5 +1,9 @@
 package com.example.softwareproject.stadium.services;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -19,7 +23,9 @@ public class AuthService {
     private UserRepository userRepository;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-    
+    @Autowired
+    private JwtService jwtService;
+
     public String register(@ModelAttribute User user){
        String userToJson = "";
         try{
@@ -32,21 +38,26 @@ public class AuthService {
         }
         return userToJson;
     }
-    public String login(@ModelAttribute User user){
-        String userToJson = "";
-        try{
-            User user2 = userRepository.findByEmail(user.getEmail()).orElse(null);
-            if(user2 == null)return "Error";     
-            if(!checkPassword(user.getPassword(), user2.getPassword())) return "";
-            userToJson = stringToJSON(user2);
+    public Map<String,String> login(@ModelAttribute User user){
+        Map<String,String> json = new HashMap<>();
+        User user2 = userRepository.findByEmail(user.getEmail()).orElse(null);
+        if(user2 == null)  {
+            json.put("Error","Not Found");     
+            return json;
         }
-        catch(Exception e){
-           return e.toString();
-        }
-        return userToJson;
-    } 
+        if(checkPassword(user.getPassword(), user2.getPassword())) return generateJwtToken(user2);                
+        json.put("Error","Not Found");
+        return json; 
+    }
+
+    private Map<String,String> generateJwtToken(User user){
+        String token = this.jwtService.GenerateToken(user.getId());
+        Map<String,String> TokenHolder = new HashMap<>();
+        TokenHolder.put("token", token);
+        return TokenHolder;
+    }
     private String stringToJSON(Object data){
-        try{
+        try{            
             ObjectMapper objectMapper = new ObjectMapper();
             String result = objectMapper.writeValueAsString(data);
             return result;

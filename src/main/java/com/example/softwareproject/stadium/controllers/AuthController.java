@@ -32,7 +32,7 @@ public class AuthController {
     }
     
     @PostMapping("login")
-    public String login(@ModelAttribute User user){
+    public Map<String,String> login(@ModelAttribute User user){
         return this.authService.login(user);
     }
 }
