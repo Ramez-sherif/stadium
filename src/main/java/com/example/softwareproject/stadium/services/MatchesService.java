@@ -47,7 +47,7 @@ public class MatchesService {
     }
 
     public List<Matches> getMatchesByTournments(Tournaments tournaments) {
-        return matchesRepository.findByTournment(tournaments);
+        return matchesRepository.findByTournament(tournaments);
     }
 
     /*
