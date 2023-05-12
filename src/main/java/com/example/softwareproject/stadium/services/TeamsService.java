@@ -23,7 +23,7 @@ public List<Teams> getAllTeams() {
 }
 
 public Teams getTeamById(long id) {
-    return teamsRepository.findById(id).orElseThrow();
+    return teamsRepository.findById(id).orElse(null);
 }
 
 public void deleteTeam(Teams t) {
@@ -34,9 +34,14 @@ public void deleteTeamById(long id) {
     teamsRepository.deleteById(id);
 }
 public Teams updateTeam(Long id, Teams team) {
-    Teams existeam = teamsRepository.findById(id).orElseThrow();
-    existeam.setTeamName(team.getTeamName());
-    return teamsRepository.save(existeam);
+    try{
+
+        Teams existeam = teamsRepository.findById(id).orElseThrow();
+        existeam.setTeamName(team.getTeamName());
+        return teamsRepository.save(existeam);
+    }catch(Exception e){
+        return null;
+    }
 }
 
 }

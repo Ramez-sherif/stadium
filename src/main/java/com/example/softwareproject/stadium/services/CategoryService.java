@@ -33,15 +33,20 @@ public class CategoryService {
     }
 
     public Category GetCategoryById(Long id) {
-        return categoryRepository.findById(id).orElseThrow();
+        return categoryRepository.findById(id).orElse(null);
     }
 
     public Category updateCategory(Long id, Category c) {
-        Category exisCategory = categoryRepository.findById(id).orElseThrow();
-        exisCategory.setName(c.getName());
-        exisCategory.setCapacityPercentage(c.getCapacityPercentage());
-        exisCategory.setPricePercentage(c.getPricePercentage());
-        return categoryRepository.save(exisCategory);
+        try{
+            Category exisCategory = categoryRepository.findById(id).orElseThrow();          
+            exisCategory.setName(c.getName());
+            exisCategory.setCapacityPercentage(c.getCapacityPercentage());
+            exisCategory.setPricePercentage(c.getPricePercentage());
+            return categoryRepository.save(exisCategory);
+        }catch(Exception e){
+            return null;
+        }
+        
     }
 
 }

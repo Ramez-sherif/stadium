@@ -36,10 +36,14 @@ public class MatchesService {
         matchesRepository.delete(match);
     }
 
-    public Matches updateMatch(Long id, Matches match) {
-        matchesRepository.findById(id).orElseThrow();
-        return matchesRepository.save(match);
+    public Matches updateMatch(Long id, Matches match) { 
+        try{
 
+            matchesRepository.findById(id).orElseThrow(); 
+            return matchesRepository.save(match);
+        }catch(Exception e){
+            return null;
+        }
     }
 
     public List<Matches> getMatchesByTeam(Teams team) {

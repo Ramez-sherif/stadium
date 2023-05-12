@@ -19,7 +19,7 @@ public class StoreService {
     }
 
     public Stores getStoreById(long id) {
-        return storesRepository.findById(id).orElseThrow();
+        return storesRepository.findById(id).orElse(null);
     }
 
     public Stores addStore(Stores store) {
@@ -35,11 +35,15 @@ public class StoreService {
         storesRepository.deleteById(id);
     }
     public Stores updateStores(Long id, Stores stores) {
-        Stores exisStores = storesRepository.findById(id).orElseThrow();
-        exisStores.setName(stores.getName());
-        exisStores.setLocation(stores.getLocation());
-        exisStores.setManager(stores.getManager());
-        return storesRepository.save(exisStores);
+        try{
+            Stores exisStores = storesRepository.findById(id).orElseThrow();
+            exisStores.setName(stores.getName());
+            exisStores.setLocation(stores.getLocation());
+            exisStores.setManager(stores.getManager());
+            return storesRepository.save(exisStores);
+        }catch(Exception e){
+            return null;
+        }
     }
     
    
