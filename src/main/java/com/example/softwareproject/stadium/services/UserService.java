@@ -1,6 +1,5 @@
 package com.example.softwareproject.stadium.services;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,5 +18,19 @@ public class UserService {
     @Autowired
     private RoleRepository roleRepository;
 
-        //finctions
+        //functions
+        public User login(User user){
+            //if user with e,ail and passwrod exists 
+            //login or return that user
+            //else returm mull
+            ////if(userRepository.)
+            return null;
+        }
+        public User register(){
+            return null;
+        }
+        public void function(User user){
+            //get from database where role name
+
+        }
 }

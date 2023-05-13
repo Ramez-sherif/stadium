@@ -17,6 +17,7 @@
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
+	
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -38,16 +39,28 @@
 			<groupId>jakarta.persistence</groupId>
 			<artifactId>jakarta.persistence-api</artifactId>
       	</dependency>
-    
-
-
-
+    	<dependency>
+   			 <groupId>org.springframework.boot</groupId>
+   			 <artifactId>spring-boot-starter-security</artifactId>
+			 <version>3.0.6</version>
+		</dependency>
+		<dependency>
+			<groupId>com.auth0</groupId>
+			<artifactId>java-jwt</artifactId>
+    		<version>4.4.0</version>
+		</dependency>
+		<dependency>  
+			<groupId>com.fasterxml.jackson.core</groupId>  
+			<artifactId>jackson-databind</artifactId>  
+			<version>2.12.1</version>  
+		</dependency>     
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
 
 	<dependcy>
     <groupId>
@@ -59,6 +72,7 @@
     </version>
     </dependcy>
 	
+
 	<build>
 		<plugins>
 			<plugin>

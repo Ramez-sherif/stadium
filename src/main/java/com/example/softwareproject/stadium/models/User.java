@@ -1,32 +1,51 @@
 package com.example.softwareproject.stadium.models;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 
 @Entity //to let the spring know that this class will be a table in database
-public class User {
+public class User implements UserDetails{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+        name = "UUID",
+        strategy = "org.hibernate.id.UUIDGenerator"
+    )
+   
+    private String id;
     private String firstName;
     private String secondName;
+    @Column(unique = true)
     private String email;
     private String password;
     @ManyToOne
     @JoinColumn(name="role_id")
     private Role role;
-
-    public Long getId() {
+    public User(){
+        this.role = new Role();
+        role.setId((long)1);
+        role.setName("User");
+    }
+    public String getId() {
         return this.id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -68,6 +87,36 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+     return new ArrayList(Arrays.asList(new SimpleGrantedAuthority(this.role.getName())));        
+    }
+
+    @Override
+    public String getUsername() {
+       return this.email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+       return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 
         /*
