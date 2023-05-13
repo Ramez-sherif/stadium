@@ -69,19 +69,6 @@
 		</dependency>
 
 	</dependencies>
-
-
-	<dependcy>
-    <groupId>
-    org.springframework.boot
-    </groupId>
-    <artifactId>spring-boot-starter-thymleaf</artifactId>
-    <version>
-    2.7.9
-    </version>
-    </dependcy>
-	
-
 	<build>
 		<plugins>
 			<plugin>
