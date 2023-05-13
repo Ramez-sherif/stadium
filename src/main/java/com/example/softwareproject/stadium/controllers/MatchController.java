@@ -55,11 +55,5 @@ public ModelAndView addMatch(){
 
        return "redirect:/home/home"; //redirect to home page when success
     }
-    @PostMapping("/save")
-    public String saveMatch(@ModelAttribute Matches matches)
-    {
-        matchesService.addMatch(matches);
-        return "redirect:home/home";
-
-    }
+ 
 }
