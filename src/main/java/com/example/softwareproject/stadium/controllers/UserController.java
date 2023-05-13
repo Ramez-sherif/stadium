@@ -9,5 +9,5 @@ import com.example.softwareproject.stadium.services.UserService;
 public class UserController {
     @Autowired
     private UserService userService;
-    
+        
 }
