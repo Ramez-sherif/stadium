@@ -20,8 +20,8 @@ public class WebSecurityConfig {
         httpSecurtiy.csrf().disable()
         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         .and()
-        .authorizeRequests()
-        .antMatchers("/auth/*").permitAll()
+        .authorizeRequests()// any role can access these end points
+        .antMatchers("/auth/test").hasAuthority("ADMIN") // only admins can access these End points
         .anyRequest().authenticated()
         .and()
         .addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class);
