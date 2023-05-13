@@ -14,7 +14,7 @@ import com.example.softwareproject.stadium.models.Category;
 import com.example.softwareproject.stadium.models.Stadium;
 import com.example.softwareproject.stadium.services.CategoryService;
 import com.example.softwareproject.stadium.services.StadiumService;
-
+//@Controller
 @RestController
 @RequestMapping("/stadium")
 public class StadiumController {

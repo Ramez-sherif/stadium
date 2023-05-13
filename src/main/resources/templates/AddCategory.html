@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http:thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Add Category</title>
+</head>
+<body class="bg-gray-200">
+    <div class="max-w-xl mx-auto p-8 bg-white shadow-md rounded-md">
+        <h2 class="text-2xl font-bold mb-4">Add Category</h2>
+        <form action="#" method="POST">
+            <!--
+            <div class="mb-4">
+                <label class="block text-gray-700 font-bold mb-2" for="team1">
+                    Team 1
+                </label>
+                <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="team1" type="text" placeholder="Team 1">
+            </div>  -->
+
+            <div class="mb-4">
+                <label class="block text-gray-700 font-bold mb-2" for="name">
+                 Name
+                </label>
+                <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Stadium Name">
+                <!--
+                <select class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="tournament">
+                    <option value="">Select Team 1</option>
+                    <option value="1">Team 1</option>
+                    <option value="2">Team 2</option>
+                    <option value="3">Team 3</option>
+                </select> -->
+            </div>
+
+<!--modify here, teams from db in thymeleaf, use function AddTeam, obj->user-->
+            <div class="mb-4">
+                <label class="block text-gray-700 font-bold mb-2" for="capacityPercentage">
+                    CapacityPercentage
+                </label>
+                <input th:field="*{capacityPercentage}" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="capacityPercentage" type="number" min="0" max="100" type="number" placeholder=" capacityPercentage %">
+
+                
+                    </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 font-bold mb-2" for="pricePercentage">
+                    PricePercentage
+                </label>
+                <input th:field="*{pricePercentage}" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="pricePercentage" min="0" max="100" type="number" placeholder=" pricePercentage %">
+<!--
+                <select class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="stadium">
+                    <option value="">Select a stadium</option>
+                    <option value="1">Stadium 1</option>
+                    <option value="2">Stadium 2</option>
+                    <option value="3">Stadium 3</option>
+                </select> -->
+            </div>
+            <!-- 
+            <div class="mb-4">
+                <label class="block text-gray-700 font-bold mb-2" for="categories">
+                    categories
+                </label>
+                <select th:field="*{stadiumCategories}" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="categories">
+                    <option value="">Select number of categories</option>
+                    <option value="1"> 3 </option>
+                    <option value="2"> 4 </option>
+                    <option value="3"> 5 </option>
+                </select>
+            </div> -->
+            <div class="flex justify-center">
+                <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline" type="submit">
+                    Add Category
+                </button>
+            </div>
+        </form>
+    </div>
+    <script>
+        // Open and close categories menu
+        const categoriesMenuButton = document.querySelector('#categories-menu-button');
+        const categoriesMenu = document.querySelector('#categories-menu');
+
+        categoriesMenuButton.addEventListener('click', () => {
+            categoriesMenu.classList.toggle('hidden');
+            categoriesMenuButton.setAttribute('aria-expanded', categoriesMenu.classList.contains('hidden') ? 'false' : 'true');
+        });
+
+        document.addEventListener('mousedown', (event) => {
+            if (!categoriesMenu.contains(event.target) && !categoriesMenuButton.contains(event.target)) {
+                categoriesMenu.classList.add('hidden');
+                categoriesMenuButton.setAttribute('aria-expanded', 'false');
+            }
+        });
+    </script>
+</body>
+</html>
