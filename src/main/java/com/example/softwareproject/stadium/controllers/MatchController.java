@@ -1,5 +1,6 @@
 package com.example.softwareproject.stadium.controllers;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.softwareproject.stadium.models.Matches;
@@ -45,7 +47,7 @@ public ModelAndView addMatch(){
 }
 
     @PostMapping("/add")
-    public ModelAndView addMatch(@ModelAttribute Matches match)
+    public ModelAndView addMatch(@ModelAttribute Matches match,@RequestParam("matchDate") String date)
     {
         Stadium newStadium = match.getStadium();
         Teams newTeam1 = match.getTeam1();
@@ -55,6 +57,8 @@ public ModelAndView addMatch(){
         match.setTeam1(this.teamsService.getTeamById(newTeam1.getId()));
         match.setTeam2(this.teamsService.getTeamById(newTeam2.getId()));
         match.setTournament(this.tournamentsService.getTournamentById(newTournaments.getId()));
+        LocalDateTime localDateTime = LocalDateTime.parse(date);
+        match.setDate(localDateTime);
 
         if(this.matchesService.addMatch(match) == null){
             ModelAndView matchView = new ModelAndView("AddMatches.html");

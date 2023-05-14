@@ -11,7 +11,7 @@
     <body class="bg-gray-200">
         <div class="max-w-xl mx-auto p-8 bg-white shadow-md rounded-md">
             <h2 class="text-2xl font-bold mb-4">Add Satdium</h2>
-            <form th-action="@{/stadium/add}" method="POST">
+            <form th:action="@{/stadium/add}" th:object="" method="POST">
                 <!--
                 <div class="mb-4">
                     <label class="block text-gray-700 font-bold mb-2" for="team1">
