@@ -20,11 +20,11 @@ public class Tournaments {
         this.id = id;
     }
 
-    public String getTournamentName() {
+    public String getName() {
         return this.name;
     }
 
-    public void setTournamentName(String tournamentName) {
+    public void setName(String tournamentName) {
         this.name = tournamentName;
     }
 

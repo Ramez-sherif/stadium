@@ -1,6 +1,7 @@
 package com.example.softwareproject.stadium.models;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,7 +34,7 @@ public class Matches {
     private Stadium stadium;
 
     @Column(nullable = false)
-    private Date date;
+    private LocalDateTime date;
 
     @Column(nullable = false)
     private double price;
@@ -79,11 +80,11 @@ public class Matches {
         this.stadium = stadium;
     }
 
-    public Date getDate() {
+    public LocalDateTime getDate() {
         return this.date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
