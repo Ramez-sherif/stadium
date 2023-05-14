@@ -3,6 +3,7 @@ package com.example.softwareproject.stadium.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
  import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +16,7 @@ import com.example.softwareproject.stadium.models.Stadium;
 import com.example.softwareproject.stadium.services.CategoryService;
 import com.example.softwareproject.stadium.services.StadiumService;
 //@Controller
-@RestController
+@Controller
 @RequestMapping("/stadium")
 public class StadiumController {
     @Autowired
@@ -26,12 +27,11 @@ public class StadiumController {
 
     @GetMapping("/add")
     public ModelAndView addStadium(){
-        List<Category> allCategories = this.categoryService.getAllCategories();       
+        //List<StadiumImage> allCategories = this.categoryService.getAllCategories();       
         ModelAndView view = new ModelAndView("AddStadium.html");
         Stadium stadium= new Stadium();
-        view.addObject("allCategories", allCategories)
-        .addObject("stadium",stadium );
-
+        view.addObject("stadium",stadium );
+        
         return view;
     }
     @PostMapping("/add")

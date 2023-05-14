@@ -21,7 +21,8 @@ public class WebSecurityConfig {
         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         .and()
         .authorizeRequests()// any role can access these end points
-        .antMatchers("/auth/test").hasAuthority("ADMIN") // only admins can access these End points
+        .antMatchers("/auth/register","/auth/login","/match/add","/category/add","/stadium/add").permitAll()
+        .antMatchers("/we").hasAuthority("USER")
         .anyRequest().authenticated()
         .and()
         .addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class);

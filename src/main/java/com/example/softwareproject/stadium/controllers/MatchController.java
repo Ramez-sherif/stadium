@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +22,7 @@ import com.example.softwareproject.stadium.services.StadiumService;
 import com.example.softwareproject.stadium.services.TeamsService;
 import com.example.softwareproject.stadium.services.TournamentsService;
 
-@RestController
+@Controller
 @RequestMapping("/match")
 public class MatchController {
     @Autowired
@@ -35,15 +36,16 @@ public class MatchController {
 
 @GetMapping("/add")
 public ModelAndView addMatch(){
-    ModelAndView view = new ModelAndView("AddMatch.html");
+    ModelAndView view = new ModelAndView("AddMatches.html");
 
     List<Teams> allTeams= teamsService.getAllTeams();
     List<Tournaments> allTournaments= tournamentsService.getAllTournaments();
     List<Stadium> allStadiums=stadiumService.getAllStadiums();
 
+    System.out.println("Thre are "+allTeams.size());
         Matches matches= new Matches();
-        view.addObject("matches", matches).addObject("allTeams", allTeams).addObject("allTournaments", allTournaments)
-        .addObject("allStadiums", allStadiums);
+        view.addObject("Matches", matches).addObject("AllTeams", allTeams).addObject("AllTournaments", allTournaments)
+        .addObject("AllStadiums", allStadiums);
  return view;      
 }
 
