@@ -30,8 +30,9 @@ public class StadiumController {
         //List<StadiumImage> allCategories = this.categoryService.getAllCategories();       
         ModelAndView view = new ModelAndView("AddStadium.html");
         Stadium stadium= new Stadium();
-        view.addObject("stadium",stadium );
-        
+       // view.addObject("allCategories", allCategories)
+        //.addObject("stadium",stadium );
+
         return view;
     }
     @PostMapping("/add")
