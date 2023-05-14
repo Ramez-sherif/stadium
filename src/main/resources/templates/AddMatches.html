@@ -12,7 +12,7 @@
 <body class="bg-gray-200">
     <div class="max-w-xl mx-auto p-8 bg-white shadow-md rounded-md">
         <h2 class="text-2xl font-bold mb-4">Add Match</h2>
-        <form th-action="@{match/add}" th-object="Matches" method="POST">
+        <form th:action="@{/match/add}" th:object="${Matches}" method="POST">
             <!--
             <div class="mb-4">
                 <label class="block text-gray-700 font-bold mb-2" for="team1">
@@ -25,8 +25,8 @@
                 <label class="block text-gray-700 font-bold mb-2" for="team1">
                     Team 1
                 </label>
-                <select th-field="{team1}" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="team1">
-                    <option th:each="team : ${AllTeams}" th:value="${team}" th:text="${team.name}">
+                <select th:field="*{team1.id}" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="team1">
+                    <option th:each="team : ${AllTeams}" th:value="${team.id}" th:text="${team.name}">
             </option></select>
                     <!--
 <section class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="tournament">
@@ -49,8 +49,8 @@
                     Team 2
                 </label>
                 
-                <select  class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="team2">
-                    <option th:each="team : ${AllTeams}" th:value="${team}" th:text="${team.name}" th:id="${team.name}">
+                <select th:field="*{team2.id}"  class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="team2">
+                    <option th:each="teams : ${AllTeams}" th:value="${teams.id}" th:text="${teams.name}" th:id="${teams.name}">
                     </option>
                     </select>
                 <!--    
@@ -72,8 +72,8 @@
                 <label class="block text-gray-700 font-bold mb-2" for="stadium">
                     Stadium
                 </label>
-                <select th-field="stadium" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="stadium">
-                    <option th:each="stadium : ${AllStadiums}" th:value="${stadium}" th:text="${stadium.name}" th:id="${stadium.name}">
+                <select th:field="*{stadium.id}" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="stadium">
+                    <option th:each="stadiums : ${AllStadiums}" th:value="${stadiums.id}" th:text="${stadiums.name}" th:id="${stadiums.name}">
                 </select>
 <!--
                 <section class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="tournament">
@@ -92,8 +92,8 @@
                 <label class="block text-gray-700 font-bold mb-2" for="tournament">
                     Tournament
                 </label>
-                <select class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="tournament">
-                    <option th:each="stadium : ${AllStadiums}" th:value="${stadium}" th:text="${stadium.name}" th:id="${stadium.name}">
+                <select th:field="*{tournament}" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="tournament">
+                    <option th:each="tournaments : ${AllTournaments}" th:value="${tournaments.id}" th:text="${tournaments.name}" th:id="${tournaments.name}">
             </option>
                 </select>
 <!--
@@ -109,14 +109,18 @@
             </section>
 -->
             </div>
+            <label class="block text-gray-700 font-bold mb-2" for="name">
+                Price of Match
+               </label>
+               <input th:field="*{price}" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="date" type="text" placeholder="Price"/>
 
-
-
+               <label class="block text-gray-700 font-bold mb-2" for="name">
+               Date
+               </label>
+               <input th:field="*{date}" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="price" type="datetime-local" placeholder="Date"/>
 
             <div class="flex justify-center">
-                <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline" type="submit">
-                    Add Match
-                </button>
+                <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline" type="submit"> Add Match </button>
             </div>
         </form>
     </div>

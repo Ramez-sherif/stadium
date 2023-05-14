@@ -31,7 +31,7 @@ public class TournamentsService {
             return null;
         }
             
-            tournaments.setTournamentName(newTournament.getTournamentName());
+            tournaments.setName(newTournament.getName());
             return tournamentsRepository.save(tournaments);
         
     }

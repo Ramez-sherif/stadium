@@ -10,6 +10,8 @@ import com.example.softwareproject.stadium.models.Teams;
 import com.example.softwareproject.stadium.models.Tournaments;
 import com.example.softwareproject.stadium.repositories.MatchesRepository;
 
+import net.bytebuddy.agent.builder.AgentBuilder.Identified.Extendable;
+
 @Service
 public class MatchesService {
 
@@ -25,7 +27,12 @@ public class MatchesService {
     }
 
     public Matches addMatch(Matches match) {
-        return matchesRepository.save(match);
+        try{
+            return matchesRepository.save(match);
+        }catch (Exception e){
+            System.out.println(e);
+            return null;
+        }
     }
 
     public void deleteMatchById(Long id) {

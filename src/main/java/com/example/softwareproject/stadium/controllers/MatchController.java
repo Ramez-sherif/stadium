@@ -3,27 +3,24 @@ package com.example.softwareproject.stadium.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.softwareproject.stadium.models.Matches;
 import com.example.softwareproject.stadium.models.Stadium;
 import com.example.softwareproject.stadium.models.Teams;
 import com.example.softwareproject.stadium.models.Tournaments;
-import com.example.softwareproject.stadium.repositories.TeamsRepository;
 import com.example.softwareproject.stadium.services.MatchesService;
 import com.example.softwareproject.stadium.services.StadiumService;
 import com.example.softwareproject.stadium.services.TeamsService;
 import com.example.softwareproject.stadium.services.TournamentsService;
 
-@Controller
 @RequestMapping("/match")
+@Controller
 public class MatchController {
     @Autowired
     private MatchesService matchesService;
@@ -41,21 +38,38 @@ public ModelAndView addMatch(){
     List<Teams> allTeams= teamsService.getAllTeams();
     List<Tournaments> allTournaments= tournamentsService.getAllTournaments();
     List<Stadium> allStadiums=stadiumService.getAllStadiums();
-
-    System.out.println("Thre are "+allTeams.size());
         Matches matches= new Matches();
         view.addObject("Matches", matches).addObject("AllTeams", allTeams).addObject("AllTournaments", allTournaments)
         .addObject("AllStadiums", allStadiums);
- return view;      
+         return view;      
 }
 
     @PostMapping("/add")
-    public String addMatch(@ModelAttribute Matches match)
+    public ModelAndView addMatch(@ModelAttribute Matches match)
     {
-        this.matchesService.addMatch(match);
-       // return this.matchesService.getAllMatches().ObjToJson();
+        Stadium newStadium = match.getStadium();
+        Teams newTeam1 = match.getTeam1();
+        Teams newTeam2 = match.getTeam2();
+        Tournaments newTournaments = match.getTournament();
+        match.setStadium(this.stadiumService.getStadiumById(newStadium.getId()));
+        match.setTeam1(this.teamsService.getTeamById(newTeam1.getId()));
+        match.setTeam2(this.teamsService.getTeamById(newTeam2.getId()));
+        match.setTournament(this.tournamentsService.getTournamentById(newTournaments.getId()));
 
-       return "redirect:/home/home"; //redirect to home page when success
+        if(this.matchesService.addMatch(match) == null){
+            ModelAndView matchView = new ModelAndView("AddMatches.html");
+            List<Teams> allTeams= teamsService.getAllTeams();
+            List<Tournaments> allTournaments= tournamentsService.getAllTournaments();
+            List<Stadium> allStadiums=stadiumService.getAllStadiums();
+            Matches matches= new Matches();
+            matchView.addObject("Matches", matches).addObject("AllTeams", allTeams).addObject("AllTournaments", allTournaments)
+            .addObject("AllStadiums", allStadiums);
+            return matchView;
+        }
+        ModelAndView homeView = new ModelAndView("home.html");        
+        //return this.matchesService.getAllMatches().ObjToJson();
+
+       return homeView; //redirect to home page when success
     }
  
 }
