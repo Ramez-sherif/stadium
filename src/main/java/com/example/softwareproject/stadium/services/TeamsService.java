@@ -13,9 +13,15 @@ public class TeamsService {
     @Autowired
 private TeamsRepository teamsRepository;
 
-public void addTeam(Teams team){
-Teams teams =new Teams();
-teams.setName(team.getName());
+public Teams addTeam(Teams team){
+
+try{
+       return teamsRepository.save(team);
+   }catch(Exception e)
+   {
+    e.toString();
+    return null;
+  }
 }
 
 public List<Teams> getAllTeams() {
