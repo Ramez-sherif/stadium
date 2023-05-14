@@ -11,7 +11,7 @@
 <body class="bg-gray-200">
     <div class="max-w-xl mx-auto p-8 bg-white shadow-md rounded-md">
         <h2 class="text-2xl font-bold mb-4">Add Category</h2>
-        <form action="#" method="POST">
+        <form  th:action="@{/category/add}" th:object="${category}" method="POST">
             <!--
             <div class="mb-4">
                 <label class="block text-gray-700 font-bold mb-2" for="team1">
@@ -22,9 +22,9 @@
 
             <div class="mb-4">
                 <label class="block text-gray-700 font-bold mb-2" for="name">
-                 Name
+                 Category Name
                 </label>
-                <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Stadium Name">
+                <input th:field="*{name}" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Category Name"/>
                 <!--
                 <select class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="tournament">
                     <option value="">Select Team 1</option>
@@ -37,17 +37,22 @@
 <!--modify here, teams from db in thymeleaf, use function AddTeam, obj->user-->
             <div class="mb-4">
                 <label class="block text-gray-700 font-bold mb-2" for="capacityPercentage">
-                    CapacityPercentage
+                    Capacity Percentage
                 </label>
-                <input th:field="*{capacityPercentage}" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="capacityPercentage" type="number" min="0" max="100" type="number" placeholder=" capacityPercentage %">
-
-                
+                <input
+                 class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="capacityPercentage"                
+                   min="0"
+                    max="100" 
+                    type="number"
+                     placeholder= "capacityPercentage %"
+                     th:field="*{capacityPercentage}"/>
                     </div>
             <div class="mb-4">
                 <label class="block text-gray-700 font-bold mb-2" for="pricePercentage">
                     PricePercentage
                 </label>
-                <input th:field="*{pricePercentage}" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="pricePercentage" min="0" max="100" type="number" placeholder=" pricePercentage %">
+                <input th:field="*{pricePercentage}"  class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="pricePercentage" min="0" max="100" type="number" placeholder=" pricePercentage %"/>
 <!--
                 <select class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="stadium">
                     <option value="">Select a stadium</option>

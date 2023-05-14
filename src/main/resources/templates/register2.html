@@ -9,10 +9,13 @@
   </head>
   <body class="bg-gray-200">
     <!-- modify here for backend -->
-    <form
-      th:action="@{/auth/register}"
-      th:objects="${User}"
-      method="POST"
+   <!--
+
+     <form
+     th:action="@{/auth/register}"
+     th:objects="${User}"
+     method="POST"
+    -->
     >
       <div class="flex  justify-center  items-center h-screen ">
         <div
@@ -24,11 +27,11 @@
               First Name
             </label>
             <input
-              class="appearance-none border  rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="firstname"
-              type="firstname"
+            class="appearance-none border  rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="firstname"
+            type="firstname"
+           
               placeholder="firstname"
-              th:field="*{firstname}"
               required
             />
           </div>
@@ -40,7 +43,7 @@
               id="Email"
               type="Email"
               placeholder="Email"
-              th:field="*{email}"
+            
               required
             />
           </div>
@@ -52,7 +55,7 @@
               id="password"
               type="password"
               placeholder="password"
-              th:field="*{password}"
+           
               
               required
             />

@@ -43,12 +43,12 @@ public class AuthService {
         Map<String,String> json = new HashMap<>();
         User user2 = userRepository.findByEmail(user.getEmail()).orElse(null);
         if(user2 == null)  {
-            json.put("Error","Not Found");     
-            return json;
+   
+            return null;
         }
         if(checkPassword(user.getPassword(), user2.getPassword())) return generateJwtToken(user2);                
-        json.put("Error","Not Found");
-        return json; 
+    
+        return null; 
     }
 
     private Map<String,String> generateJwtToken(User user){

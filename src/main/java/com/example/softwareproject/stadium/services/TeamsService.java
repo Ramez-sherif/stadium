@@ -15,7 +15,7 @@ private TeamsRepository teamsRepository;
 
 public void addTeam(Teams team){
 Teams teams =new Teams();
-teams.setTeamName(team.getTeamName());
+teams.setName(team.getName());
 }
 
 public List<Teams> getAllTeams() {
@@ -37,7 +37,7 @@ public Teams updateTeam(Long id, Teams team) {
     try{
 
         Teams existeam = teamsRepository.findById(id).orElseThrow();
-        existeam.setTeamName(team.getTeamName());
+        existeam.setName(team.getName());
         return teamsRepository.save(existeam);
     }catch(Exception e){
         return null;

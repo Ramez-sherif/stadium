@@ -20,12 +20,12 @@ public class Teams {
         this.id = id;
     }
 
-    public String getTeamName() {
+    public String getName() {
         return this.name;
     }
 
-    public void setTeamName(String teamName) {
-        this.name = teamName;
+    public void setName(String name) {
+        this.name = name;
     }
 
 }

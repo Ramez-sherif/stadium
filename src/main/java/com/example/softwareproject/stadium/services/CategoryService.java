@@ -14,8 +14,12 @@ public class CategoryService {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    public void addcategory(Category c) {
-        categoryRepository.save(c);
+    public Category addcategory(Category c) {
+        try{
+            return categoryRepository.save(c);
+        }catch (Exception e){
+            return null;
+        }
 
     }
 

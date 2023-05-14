@@ -12,9 +12,7 @@
 <body class="bg-gray-200">
     <div class="max-w-xl mx-auto p-8 bg-white shadow-md rounded-md">
         <h2 class="text-2xl font-bold mb-4">Add Match</h2>
-        <form method="POST" 
-        th:action="@{/loc of matches contr }"
-        th:objects="${ Matches}">
+        <form th-action="@{match/add}" th-object="Matches" method="POST">
             <!--
             <div class="mb-4">
                 <label class="block text-gray-700 font-bold mb-2" for="team1">
@@ -27,11 +25,9 @@
                 <label class="block text-gray-700 font-bold mb-2" for="team1">
                     Team 1
                 </label>
-                <select th:field="*{team1}" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="tournament">
-                    <option value="">Select Team 1</option>
-                    <option value="1">Team 1</option>
-                    <option value="2">Team 2</option>
-                    <option value="3">Team 3</option> </select>
+                <select th-field="{team1}" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="team1">
+                    <option th:each="team : ${AllTeams}" th:value="${team}" th:text="${team.name}">
+            </option></select>
                     <!--
 <section class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="tournament">
                     <select th:field="*{team1}" > 
@@ -53,11 +49,9 @@
                     Team 2
                 </label>
                 
-                <select th:field="*{team2}" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="tournament">
-                    <option value="">Select Team 2</option>
-                    <option value="1">Team 1</option>
-                    <option value="2">Team 2</option>
-                    <option value="3">Team 3</option>
+                <select  class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="team2">
+                    <option th:each="team : ${AllTeams}" th:value="${team}" th:text="${team.name}" th:id="${team.name}">
+                    </option>
                     </select>
                 <!--    
                     <section class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="tournament">
@@ -78,14 +72,8 @@
                 <label class="block text-gray-700 font-bold mb-2" for="stadium">
                     Stadium
                 </label>
-                <select th:field="*{stadium}" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="stadium">
-                    <option value="">Select a stadium</option>
-                    <option value="1">Stadium 1</option>
-                    <option value="2">Stadium 2</option>
-                    <option value="3">Stadium 3</option>
-
-                    
-
+                <select th-field="stadium" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="stadium">
+                    <option th:each="stadium : ${AllStadiums}" th:value="${stadium}" th:text="${stadium.name}" th:id="${stadium.name}">
                 </select>
 <!--
                 <section class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="tournament">
@@ -104,11 +92,9 @@
                 <label class="block text-gray-700 font-bold mb-2" for="tournament">
                     Tournament
                 </label>
-                <select th:field="*{tournament}" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="tournament">
-                    <option value="">Select a tournament</option>
-                    <option value="1">Tournament 1</option>
-                    <option value="2">Tournament 2</option>
-                    <option value="3">Tournament 3</option>
+                <select class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="tournament">
+                    <option th:each="stadium : ${AllStadiums}" th:value="${stadium}" th:text="${stadium.name}" th:id="${stadium.name}">
+            </option>
                 </select>
 <!--
                 <section class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="tournament">
