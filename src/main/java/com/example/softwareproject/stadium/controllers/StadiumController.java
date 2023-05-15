@@ -7,9 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
  import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.softwareproject.stadium.models.Category;
 import com.example.softwareproject.stadium.models.Stadium;
 import com.example.softwareproject.stadium.models.StadiumImage;
 import com.example.softwareproject.stadium.services.CategoryService;
@@ -31,8 +33,10 @@ public class StadiumController {
     public ModelAndView addStadium(){
         List<StadiumImage> allStadiumImage = this.stadiumImageService.getAllImgUrl();
         ModelAndView view = new ModelAndView("AddStadium.html");
+        List<Category> categories = this.categoryService.getAllCategories();
         Stadium stadium= new Stadium();
         view.addObject("allStadiumImages", allStadiumImage)
+        .addObject("allCategories", categories)
         .addObject("stadium",stadium );
 
         return view;

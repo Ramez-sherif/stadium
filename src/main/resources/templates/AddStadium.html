@@ -12,24 +12,36 @@
         function check(categoryNumber){
            console.log(categoryNumber);
            var cat4 = document.getElementById("input4");
-           var cat5 = document.getElementById("input5")
+           var cat5 = document.getElementById("input5");
+           var cat4Label = document.getElementById("input4Label");
+           var cat5Label = document.getElementById("input5Label");
+                
            if(categoryNumber == "3"){
-                cat4.classList.add("hidden");
-                cat5.classList.add("hidden");
+                cat4.style.display = "none";
+                cat4Label.style.display = "none";
+                cat5.style.display = "none";
+                cat5Label.style.display = "none";
+                cat4.value = null;
+                cat5.value = null;
            }
            else if(categoryNumber == "4"){
-                cat4.classList.remove("hidden");
-                cat5.classList.add("hidden");
+            cat4.style.display = "block";
+            cat4Label.style.display = "block";
+            cat5.style.display = "none";
+            cat5Label.style.display = "none";
+            cat5.value = null;
            }else if(categoryNumber == "5"){
-                cat4.classList.remove("hidden");
-                cat5.classList.remove("hidden");
+            cat4.style.display = "block";
+            cat4Label.style.display = "block";
+            cat5.style.display = "block";
+            cat5Label.style.display = "block";
            }
         }
         console.log("script");
     </script>  
     <body class="bg-gray-200">
         <div class="max-w-xl mx-auto p-8 bg-white shadow-md rounded-md">
-            <h2 class="text-2xl font-bold mb-4">Add Satdium</h2>
+            <h2 class="text-2xl font-bold mb-4">Add Stadium</h2>
             <form th:action="@{/stadium/add}" th:object="${stadium}" method="POST">
                 <!--
                 <div class="mb-4">
@@ -83,7 +95,7 @@
                     <label class="block text-gray-700 font-bold mb-2" for="categories">
                         categories
                     </label>
-                    <select th-field="*{stadiumImage.id}" th:onchange = "check(this.value)" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="categories">
+                    <select th-field="*{stadiumImage.categoryNumber}" th:onchange = "check(this.value)" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="categories">
                         <option th:each="sImage : ${allStadiumImages}" th:id="${sImage.categoryNumber}"  onClick="check()" th:value="${sImage.categoryNumber}" th:text="${sImage.categoryNumber}"></option>
                     </select>
                 </div>
@@ -117,25 +129,31 @@
                     <input type="hidden" id="temp">
                     <div class="flex flex-wrap -mx-2 mb-4">
                         <div class="w-full md:w-1/3 px-2">
-                            <label for="input1" class="hidden text-gray-700 font-bold mb-2 block md:inline-block md:mb-0 md:mr-2">Category 1 name:</label>
+                            <label id="input1Label" for="input1" class="hidden text-gray-700 font-bold mb-2 block md:inline-block md:mb-0 md:mr-2">Category 1 Price/Capacity%:</label>
                         </div>
                         <div class="w-full md:w-1/3 px-2">
-                            <label for="input2" class="text-gray-700 font-bold mb-2 block md:inline-block md:mb-0 md:mr-2">Category 2 name:</label>
+                            <label  id="input2Label" for="input2" class="text-gray-700 font-bold mb-2 block md:inline-block md:mb-0 md:mr-2">Category 2 Price/Capacity%:</label>
                         </div>
                         <div class="w-full md:w-1/3 px-2">
-                            <label for="input3" class="text-gray-700 font-bold mb-2 block md:inline-block md:mb-0">Category 3 name:</label>
+                            <label  id="input3Label" for="input3" class="text-gray-700 font-bold mb-2 block md:inline-block md:mb-0">Category 3 Price/Capacity%:</label>
                         </div>
                         
                     </div>
                     <div class="flex flex-wrap -mx-2">
                         <div class="w-full md:w-1/3 px-2">
-                            <input type="text" id="input1" name="input1" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <select id="input1"  class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                                <option th:each="cats : ${allCategories}" th:id="${cats.id}" th:value="${cats.id}" th:text="${cats.pricePercentage} + '%/'+ ${cats.capacityPercentage} + '%' "></option>
+                            </select>
                         </div>
                         <div class="w-full md:w-1/3 px-2">
-                            <input type="text" id="input2" name="input2" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" >
+                            <select  id="input2"  class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" >
+                                <option th:each="cats : ${allCategories}" th:id="${cats.id}" th:value="${cats.id}" th:text="${cats.pricePercentage} + '%/'+ ${cats.capacityPercentage} + '%' "></option>
+                            </select>
                         </div>
                         <div class="w-full md:w-1/3 px-2">
-                            <input type="text" id="input3" name="input3" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <select   id="input3" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" >
+                                <option th:each="cats : ${allCategories}" th:id="${cats.id}" th:value="${cats.id}" th:text="${cats.pricePercentage} + '%/'+ ${cats.capacityPercentage} + '%' "></option>
+                            </select>
                         </div>
                         
 
@@ -144,21 +162,25 @@
                         <div class="flex flex-wrap -mx-2 mb-4">
                             
                             <div class="w-full md:w-1/3 px-2">
-                                <label for="input4" class="hidden text-gray-700 font-bold mb-2 block md:inline-block md:mb-0">Category 4 name:</label>
+                                <label  id="input4Label" for="input4" class="hidden text-gray-700 font-bold mb-2 block md:inline-block md:mb-0">Category 4 Price/Capacity%:</label>
                             </div>
                             
                             <div class="w-full md:w-1/3 px-2">
-                                <label for="input5" class="hidden text-gray-700 font-bold mb-2 block md:inline-block md:mb-0">Category 5 name:</label>
+                                <label  id="input5Label" for="input5" class="hidden text-gray-700 font-bold mb-2 block md:inline-block md:mb-0">Category 5 Price/Capacity%:</label>
                             </div>
                         </div>
                         <div class="flex flex-wrap -mx-2">
                             
                             <div class="w-full md:w-1/3 px-2">
-                                <input type="text" style="display:block" id="input4" name="input4" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                                <select  id="input4" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" >
+                                    <option th:each="cats : ${allCategories}" th:id="${cats.id}" th:value="${cats.id}" th:text="${cats.pricePercentage} + '%/'+ ${cats.capacityPercentage} + '%' "></option>
+                                </select>
                             </div>
                             
                             <div class="w-full md:w-1/3 px-2">
-                                <input type="text" id="input5"style="display:block" name="input3" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" >
+                                <select id="input5" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" >
+                                    <option th:each="cat : ${allCategories}" th:id="${cat.id}" th:value="${cat.id}" th:text="${cat.pricePercentage} + '%/'+ ${cat.capacityPercentage} + '%' "></option>
+                                </select>
                             </div>
                             
                         </div>
@@ -174,6 +196,16 @@
             </form>
         </div>
         <script>
+            var cat4 = document.getElementById("input4");
+            var cat5 = document.getElementById("input5");
+            var cat4Label = document.getElementById("input4Label");
+            var cat5Label = document.getElementById("input5Label");
+            cat4.value = null;
+            cat5.value = null;
+            cat4.style.display = "none";
+            cat4Label.style.display = "none";
+            cat5.style.display = "none";
+            cat5Label.style.display = "none";
             // Open and close categories menu
             /*
             const categoriesMenuButton = document.querySelector('#categories-menu-button');
