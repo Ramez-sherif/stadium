@@ -8,10 +8,29 @@
         <script src="https://cdn.tailwindcss.com"></script>
         <title>Add Stadium</title>
     </head>
+    <script> 
+        function check(categoryNumber){
+           console.log(categoryNumber);
+           var cat4 = document.getElementById("input4");
+           var cat5 = document.getElementById("input5")
+           if(categoryNumber == "3"){
+                cat4.classList.add("hidden");
+                cat5.classList.add("hidden");
+           }
+           else if(categoryNumber == "4"){
+                cat4.classList.remove("hidden");
+                cat5.classList.add("hidden");
+           }else if(categoryNumber == "5"){
+                cat4.classList.remove("hidden");
+                cat5.classList.remove("hidden");
+           }
+        }
+        console.log("script");
+    </script>  
     <body class="bg-gray-200">
         <div class="max-w-xl mx-auto p-8 bg-white shadow-md rounded-md">
             <h2 class="text-2xl font-bold mb-4">Add Satdium</h2>
-            <form th:action="@{/stadium/add}" th:object="" method="POST">
+            <form th:action="@{/stadium/add}" th:object="${stadium}" method="POST">
                 <!--
                 <div class="mb-4">
                     <label class="block text-gray-700 font-bold mb-2" for="team1">
@@ -64,8 +83,8 @@
                     <label class="block text-gray-700 font-bold mb-2" for="categories">
                         categories
                     </label>
-                    <select th-field="*{stadiumCategories.category}" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="categories">
-                        <option th:each="category : ${allCategories}" th:value="${category}" th:text="${category}"></option>
+                    <select th-field="*{stadiumImage.id}" th:onchange = "check(this.value)" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="categories">
+                        <option th:each="sImage : ${allStadiumImages}" th:id="${sImage.categoryNumber}"  onClick="check()" th:value="${sImage.categoryNumber}" th:text="${sImage.categoryNumber}"></option>
                     </select>
                 </div>
 
@@ -95,10 +114,10 @@
                         <input class="appearance-none border rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Category 3 Name">
 
                     </div>  -->
-                    
+                    <input type="hidden" id="temp">
                     <div class="flex flex-wrap -mx-2 mb-4">
                         <div class="w-full md:w-1/3 px-2">
-                            <label for="input1" class="text-gray-700 font-bold mb-2 block md:inline-block md:mb-0 md:mr-2">Category 1 name:</label>
+                            <label for="input1" class="hidden text-gray-700 font-bold mb-2 block md:inline-block md:mb-0 md:mr-2">Category 1 name:</label>
                         </div>
                         <div class="w-full md:w-1/3 px-2">
                             <label for="input2" class="text-gray-700 font-bold mb-2 block md:inline-block md:mb-0 md:mr-2">Category 2 name:</label>
@@ -125,41 +144,26 @@
                         <div class="flex flex-wrap -mx-2 mb-4">
                             
                             <div class="w-full md:w-1/3 px-2">
-                                <label for="input4" class="text-gray-700 font-bold mb-2 block md:inline-block md:mb-0">Category 4 name:</label>
+                                <label for="input4" class="hidden text-gray-700 font-bold mb-2 block md:inline-block md:mb-0">Category 4 name:</label>
                             </div>
                             
                             <div class="w-full md:w-1/3 px-2">
-                                <label for="input5" class="text-gray-700 font-bold mb-2 block md:inline-block md:mb-0">Category 5 name:</label>
+                                <label for="input5" class="hidden text-gray-700 font-bold mb-2 block md:inline-block md:mb-0">Category 5 name:</label>
                             </div>
                         </div>
                         <div class="flex flex-wrap -mx-2">
                             
                             <div class="w-full md:w-1/3 px-2">
-                                <input type="text" id="input4" name="input4" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                                <input type="text" style="display:block" id="input4" name="input4" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                             </div>
                             
                             <div class="w-full md:w-1/3 px-2">
-                                <input type="text" id="input5" name="input3" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" >
+                                <input type="text" id="input5"style="display:block" name="input3" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" >
                             </div>
                             
                         </div>
                     
-                    <script>
-                        var cat4 = document.getElementById("input4").value;
-    var cat5 = document.getElementById("input5").value;
-    function DefauktCategory(){ 
-        cat4.classList.add("hidden");
-        cat5.classList.add("hidden");
-    }
-    function onCat4(){ 
-        cat4.classList.remove("hidden");
-    }
-    function onCat5(){ 
-        cat5.classList.remove("hidden");
-    }
-    cat5.classList.add("hidden");
-
-</script>  
+                    
                     <br>
 
                 <div class="flex justify-center">
@@ -171,6 +175,7 @@
         </div>
         <script>
             // Open and close categories menu
+            /*
             const categoriesMenuButton = document.querySelector('#categories-menu-button');
             const categoriesMenu = document.querySelector('#categories-menu');
     
@@ -185,6 +190,7 @@
                     categoriesMenuButton.setAttribute('aria-expanded', 'false');
                 }
             });
+            */
         </script>
     </body>
     </html>
