@@ -13,7 +13,9 @@ public class StadiumImageService {
     @Autowired
     private StadiumImageRepository stadiumImageRepository;
     
-    public  List<StadiumImage> getAllImgUrl(){
-        return stadiumImageRepository.findAll(); 
+
+    public  List<StadiumImage>getAllImgUrl(){
+     return stadiumImageRepository.findAll(); 
+
     }   
 }
