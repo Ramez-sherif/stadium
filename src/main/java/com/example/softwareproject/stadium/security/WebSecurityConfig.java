@@ -21,7 +21,7 @@ public class WebSecurityConfig {
         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         .and()
         .authorizeRequests()// any role can access these end points
-        .antMatchers("/auth/register","/auth/login","/match/add","/category/add","/stadium/add","/team/*").permitAll()
+        .antMatchers("/*","/*/*","/*/*/*").permitAll()
         .antMatchers("/we").hasAuthority("USER")
         .anyRequest().authenticated()
         .and()
