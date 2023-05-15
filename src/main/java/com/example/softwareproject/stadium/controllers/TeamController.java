@@ -21,21 +21,21 @@ public class TeamController {
 @Autowired
 private TeamsService teamsService;
 
-@GetMapping("")
+@GetMapping("/add")
 public ModelAndView AddTeams()
 {   
-    ModelAndView view = new ModelAndView("Teams.html");
+    ModelAndView view = new ModelAndView("AddTeam.html");
     Teams team = new Teams();
     view.addObject("Team", team);
     return view;
 }
 
-@PostMapping("")
+@PostMapping("/add")
 public ModelAndView AddTeams(@ModelAttribute Teams teams)
 {   
     if(teamsService.addTeam(teams) == null)
     {
-        ModelAndView teamView = new ModelAndView("Teams.html");
+        ModelAndView teamView = new ModelAndView("AddTeam.html");
         Teams team = new Teams();
         teamView.addObject("Team", team);
         return teamView;

@@ -20,8 +20,10 @@ public class WebSecurityConfig {
         httpSecurtiy.csrf().disable()
         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         .and()
-        .authorizeRequests()// any role can access these end points
-        .antMatchers("/auth/register","/auth/login","/match/add","/category/add","/stadium/add","/team/*").permitAll()
+        .authorizeRequests()
+        // .antMatchers("/auth/register","/auth/login","/match/add","/category/add","/stadium/add","/team/*","/tournament/*").permitAll()
+         .antMatchers("/*","/*/*").permitAll()
+        // any role can access these end points
         .antMatchers("/we").hasAuthority("USER")
         .anyRequest().authenticated()
         .and()
