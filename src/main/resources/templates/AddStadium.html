@@ -9,6 +9,89 @@
         <title>Add Stadium</title>
     </head>
     <script> 
+         let previousOptionValue;
+         function Valid(selectedElement){
+            let previousOptions = [];
+            const selectElements = document.querySelectorAll('select');
+            selectElements.forEach((selectsElement) => {
+            previousOptions.push(selectsElement.value);
+            });
+            selectElements.forEach((selectElement) => {
+            const otherOptions = selectElement.querySelectorAll('option');
+            otherOptions.forEach((option) => {
+                option.style.display = "block";
+            if(previousOptions.includes(option.value)){
+                option.style.display = "none";
+            }
+            });
+            });
+         }
+
+function Validss(selectedElement) {
+  // Get the selected option value
+  //const selectedOptionId = selectedElement.id;
+    const selectedOptionValue = selectedElement.value;
+  // Loop through all the select elements
+  const selectElements = document.querySelectorAll('select');
+  selectElements.forEach((selectElement) => {
+    if (selectElement !== selectedElement) {
+      // Remove the selected option from the other select element's option list
+      const otherOptions = selectElement.querySelectorAll('option');
+      otherOptions.forEach((option) => {
+        if (option.value === selectedOptionValue) {
+          option.style.display = "none";
+        }
+        });
+      }
+    });
+    
+
+      // Add back the previously selected option to the other select element's option list
+      if (previousOptionValue != null) {
+        //let previousOption = document.getElementById(previousOptionId);
+        const sselectElements = document.querySelectorAll('select');
+        sselectElements.forEach((eselectElement) => {
+        const otherOptions = eselectElement.querySelectorAll('option');
+         otherOptions.forEach((option) => {
+          if (option.value === previousOptionValue) {
+            option.style.display = "block";
+          }
+        });
+    });
+        
+}
+previousOptionValue = selectedOptionValue;
+}
+
+       // const option = document.createElement('option');
+        //option.value = previousOption;
+       // option.text = `Option ${previousOption}`;
+       // selectElement.add(option);
+
+  // Store the selected option as the previous option
+        function Valids(selectedElement) {
+            // Get the selected option value
+            const selectedOptionValue = selectedElement.value;
+
+            // Loop through all the select elements
+            const selectElements = document.querySelectorAll('select');
+            selectElements.forEach((selectElement) => {
+                if (selectElement !== selectedElement) {
+                // Remove the selected option from the other select element's option list
+                const otherOptions = selectElement.querySelectorAll('option');
+                otherOptions.forEach((option) => {
+                    if (option.value === selectedOptionValue) {
+                        option.style.display = "none";      
+                        
+                    }else{
+                        option.style.display = "block";
+                    }
+                });
+
+                }
+            });
+
+        }
         function check(categoryNumber){
            console.log(categoryNumber);
            var cat4 = document.getElementById("input4");
@@ -93,7 +176,7 @@
                 </div>
                 <div class="mb-4">
                     <label class="block text-gray-700 font-bold mb-2" for="categories">
-                        categories
+                        Number of Categories
                     </label>
                     <select th-field="*{stadiumImage.categoryNumber}" th:onchange = "check(this.value)" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="categories">
                         <option th:each="sImage : ${allStadiumImages}" th:id="${sImage.categoryNumber}"  onClick="check()" th:value="${sImage.categoryNumber}" th:text="${sImage.categoryNumber}"></option>
@@ -141,17 +224,17 @@
                     </div>
                     <div class="flex flex-wrap -mx-2">
                         <div class="w-full md:w-1/3 px-2">
-                            <select id="input1"  class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <select id="input1" th:onchange="Valid(this)" name="cat1" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                                 <option th:each="cats : ${allCategories}" th:id="${cats.id}" th:value="${cats.id}" th:text="${cats.pricePercentage} + '%/'+ ${cats.capacityPercentage} + '%' "></option>
                             </select>
                         </div>
                         <div class="w-full md:w-1/3 px-2">
-                            <select  id="input2"  class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" >
+                            <select  id="input2" name="cat2" th:onchange="Valid(this)" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" >
                                 <option th:each="cats : ${allCategories}" th:id="${cats.id}" th:value="${cats.id}" th:text="${cats.pricePercentage} + '%/'+ ${cats.capacityPercentage} + '%' "></option>
                             </select>
                         </div>
                         <div class="w-full md:w-1/3 px-2">
-                            <select   id="input3" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" >
+                            <select   id="input3" name="cat3" th:onchange="Valid(this)" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" >
                                 <option th:each="cats : ${allCategories}" th:id="${cats.id}" th:value="${cats.id}" th:text="${cats.pricePercentage} + '%/'+ ${cats.capacityPercentage} + '%' "></option>
                             </select>
                         </div>
@@ -172,13 +255,13 @@
                         <div class="flex flex-wrap -mx-2">
                             
                             <div class="w-full md:w-1/3 px-2">
-                                <select  id="input4" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" >
+                                <select  id="input4" name="cat4" th:onchange="Valid(this)" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" >
                                     <option th:each="cats : ${allCategories}" th:id="${cats.id}" th:value="${cats.id}" th:text="${cats.pricePercentage} + '%/'+ ${cats.capacityPercentage} + '%' "></option>
                                 </select>
                             </div>
                             
                             <div class="w-full md:w-1/3 px-2">
-                                <select id="input5" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" >
+                                <select id="input5" name="cat5" th:onchange="Valid(this)" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" >
                                     <option th:each="cat : ${allCategories}" th:id="${cat.id}" th:value="${cat.id}" th:text="${cat.pricePercentage} + '%/'+ ${cat.capacityPercentage} + '%' "></option>
                                 </select>
                             </div>
@@ -195,7 +278,13 @@
                 </div>
             </form>
         </div>
-        <script>
+        <script> 
+         var cat1 = document.getElementById("input1");
+            var cat2 = document.getElementById("input2");
+            var cat3 = document.getElementById("input3");
+            cat1.value = null;
+            cat2.value = null;
+            cat3.value = null;
             var cat4 = document.getElementById("input4");
             var cat5 = document.getElementById("input5");
             var cat4Label = document.getElementById("input4Label");
