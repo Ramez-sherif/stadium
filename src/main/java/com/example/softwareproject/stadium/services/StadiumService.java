@@ -22,7 +22,7 @@ public class StadiumService {
      }
 
      public void updateStadium(Long id, Stadium stadium) {
-          stadiumRepository.findById(id).orElseThrow();
+          stadiumRepository.findById(id).orElse(null);
           stadiumRepository.save(stadium);
 
      }
@@ -32,7 +32,7 @@ public class StadiumService {
      }
 
      public Stadium getStadiumById(Long id) {
-          return stadiumRepository.findById(id).orElseThrow();
+          return stadiumRepository.findById(id).orElse(null);
      }
 
      public void deleteStadiumById(Long id) {
