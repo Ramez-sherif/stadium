@@ -30,7 +30,6 @@ public class AuthService {
        String userToJson = "";
         try{
             user.setPassword(encryptPassword(user.getPassword()));
-            user.setRole(findUserRole("Name"));
             this.userRepository.save(user);
             userToJson = stringToJSON(user);
            
@@ -78,5 +77,9 @@ public class AuthService {
     private boolean checkPassword(String mainPassword,String userPassword){
         boolean matches = this.bCryptPasswordEncoder.matches(mainPassword,userPassword);
         return matches;
+    }
+    public Role getRoleByName(String Name){
+        return this.roleRepository.findByName(Name).orElse(null);
+
     }
 }

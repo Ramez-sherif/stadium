@@ -21,10 +21,14 @@ public class WebSecurityConfig {
         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         .and()
         .authorizeRequests()
-        // .antMatchers("/auth/register","/auth/login","/match/add","/category/add","/stadium/add","/team/*","/tournament/*").permitAll()
-         .antMatchers("/*","/*/*").permitAll()
-        // any role can access these end points
-        .antMatchers("/we").hasAuthority("USER")
+        //any role can access these end points
+         .antMatchers("/*","/*/*","/*/*/*").permitAll()
+        //only the role user can access these endpoints
+        .antMatchers("/User").hasAuthority("USER")
+        //only the Admin user can access these endpoints
+        .antMatchers("/Admin" ).hasAuthority("ADMIN")
+         //only the Store Manager user can access these endpoints
+        .antMatchers("/StoreManager").hasAuthority("STOREMANAGER")
         .anyRequest().authenticated()
         .and()
         .addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class);
