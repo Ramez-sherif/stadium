@@ -1,6 +1,7 @@
 package com.example.softwareproject.stadium.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,4 +19,11 @@ public class StadiumImageService {
      return stadiumImageRepository.findAll(); 
 
     }   
+    public  StadiumImage getStadiumById(Long id){
+        return stadiumImageRepository.findById(id).orElse(null);
+       }   
+       
+    //public StadiumImage getStadiumImageByNumber(){
+    //    return this.stadiumImageRepository..
+   // }
 }

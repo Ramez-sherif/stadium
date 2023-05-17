@@ -17,7 +17,7 @@ public class StadiumCategoriesService {
     private StadiumRepository stadiumRepository;
     private CategoryRepository categoryRepository;
 
-    public StadiumCategories addCategoryToStadium(Long stadiumId,Long categoryId)
+    public StadiumCategories addCategoryToStadium(Long stadiumId,String categoryId)
     {
         try{
             

@@ -39,9 +39,8 @@ public class Matches {
     @Column(nullable = false)
     private double price;
 
-
     public Long getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(Long id) {
@@ -49,7 +48,7 @@ public class Matches {
     }
 
     public Teams getTeam1() {
-        return this.team1;
+        return team1;
     }
 
     public void setTeam1(Teams team1) {
@@ -57,7 +56,7 @@ public class Matches {
     }
 
     public Teams getTeam2() {
-        return this.team2;
+        return team2;
     }
 
     public void setTeam2(Teams team2) {
@@ -65,7 +64,7 @@ public class Matches {
     }
 
     public Tournaments getTournament() {
-        return this.tournament;
+        return tournament;
     }
 
     public void setTournament(Tournaments tournament) {
@@ -73,7 +72,7 @@ public class Matches {
     }
 
     public Stadium getStadium() {
-        return this.stadium;
+        return stadium;
     }
 
     public void setStadium(Stadium stadium) {
@@ -81,7 +80,7 @@ public class Matches {
     }
 
     public LocalDateTime getDate() {
-        return this.date;
+        return date;
     }
 
     public void setDate(LocalDateTime date) {
@@ -89,13 +88,15 @@ public class Matches {
     }
 
     public double getPrice() {
-        return this.price;
+        return price;
     }
 
     public void setPrice(double price) {
         this.price = price;
     }
 
+
+  
 }
 
 
