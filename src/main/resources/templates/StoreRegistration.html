@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  <title>Store Registration</title>
+</head>
+<body class="bg-gray-100">
+  <div class="max-w-md mx-auto my-8 p-6 bg-white rounded shadow-md">
+    <h1 class="text-2xl font-bold mb-4">Store Registration</h1>
+    <form th:action="@{/register}" method="post">
+      <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2" for="store-name">Store Name</label>
+        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="store-name" name="storeName" type="text" placeholder="Enter store name" required>
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2" for="manager-name">Manager Name</label>
+        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="manager-name" name="managerName" type="text" placeholder="Enter manager name" required>
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2" for="location">Location</label>
+        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="location" name="location" type="text" placeholder="Enter location" required>
+      </div>
+      <div class="flex items-center justify-between">
+        <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">Register</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
