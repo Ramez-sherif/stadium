@@ -8,10 +8,124 @@
         <script src="https://cdn.tailwindcss.com"></script>
         <title>Add Stadium</title>
     </head>
+    <script> 
+         let previousOptionValue;
+         function Valid(selectedElement){
+            let previousOptions = [];
+            const selectElements = document.querySelectorAll('select');
+            selectElements.forEach((selectsElement) => {
+            previousOptions.push(selectsElement.value);
+            });
+            selectElements.forEach((selectElement) => {
+            const otherOptions = selectElement.querySelectorAll('option');
+            otherOptions.forEach((option) => {
+                option.style.display = "block";
+            if(previousOptions.includes(option.value)){
+                option.style.display = "none";
+            }
+            });
+            });
+         }
+
+function Validss(selectedElement) {
+  // Get the selected option value
+  //const selectedOptionId = selectedElement.id;
+    const selectedOptionValue = selectedElement.value;
+  // Loop through all the select elements
+  const selectElements = document.querySelectorAll('select');
+  selectElements.forEach((selectElement) => {
+    if (selectElement !== selectedElement) {
+      // Remove the selected option from the other select element's option list
+      const otherOptions = selectElement.querySelectorAll('option');
+      otherOptions.forEach((option) => {
+        if (option.value === selectedOptionValue) {
+          option.style.display = "none";
+        }
+        });
+      }
+    });
+    
+
+      // Add back the previously selected option to the other select element's option list
+      if (previousOptionValue != null) {
+        //let previousOption = document.getElementById(previousOptionId);
+        const sselectElements = document.querySelectorAll('select');
+        sselectElements.forEach((eselectElement) => {
+        const otherOptions = eselectElement.querySelectorAll('option');
+         otherOptions.forEach((option) => {
+          if (option.value === previousOptionValue) {
+            option.style.display = "block";
+          }
+        });
+    });
+        
+}
+previousOptionValue = selectedOptionValue;
+}
+
+       // const option = document.createElement('option');
+        //option.value = previousOption;
+       // option.text = `Option ${previousOption}`;
+       // selectElement.add(option);
+
+  // Store the selected option as the previous option
+        function Valids(selectedElement) {
+            // Get the selected option value
+            const selectedOptionValue = selectedElement.value;
+
+            // Loop through all the select elements
+            const selectElements = document.querySelectorAll('select');
+            selectElements.forEach((selectElement) => {
+                if (selectElement !== selectedElement) {
+                // Remove the selected option from the other select element's option list
+                const otherOptions = selectElement.querySelectorAll('option');
+                otherOptions.forEach((option) => {
+                    if (option.value === selectedOptionValue) {
+                        option.style.display = "none";      
+                        
+                    }else{
+                        option.style.display = "block";
+                    }
+                });
+
+                }
+            });
+
+        }
+        function check(categoryNumber){
+           console.log(categoryNumber);
+           var cat4 = document.getElementById("input4");
+           var cat5 = document.getElementById("input5");
+           var cat4Label = document.getElementById("input4Label");
+           var cat5Label = document.getElementById("input5Label");
+                
+           if(categoryNumber == "3"){
+                cat4.style.display = "none";
+                cat4Label.style.display = "none";
+                cat5.style.display = "none";
+                cat5Label.style.display = "none";
+                cat4.value = null;
+                cat5.value = null;
+           }
+           else if(categoryNumber == "4"){
+            cat4.style.display = "block";
+            cat4Label.style.display = "block";
+            cat5.style.display = "none";
+            cat5Label.style.display = "none";
+            cat5.value = null;
+           }else if(categoryNumber == "5"){
+            cat4.style.display = "block";
+            cat4Label.style.display = "block";
+            cat5.style.display = "block";
+            cat5Label.style.display = "block";
+           }
+        }
+        console.log("script");
+    </script>  
     <body class="bg-gray-200">
         <div class="max-w-xl mx-auto p-8 bg-white shadow-md rounded-md">
-            <h2 class="text-2xl font-bold mb-4">Add Satdium</h2>
-            <form th-action="@{/stadium/add}" method="POST">
+            <h2 class="text-2xl font-bold mb-4">Add Stadium</h2>
+            <form th:action="@{/stadium/add}" th:object="${stadium}" method="POST">
                 <!--
                 <div class="mb-4">
                     <label class="block text-gray-700 font-bold mb-2" for="team1">
@@ -24,7 +138,7 @@
                     <label class="block text-gray-700 font-bold mb-2" for="Name">
                      Stadium Name
                     </label>
-                    <input th-field="*{name}"class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Stadium Name">
+                    <input th:field="*{name}"class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Stadium Name">
                     <!--
                     <select class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="tournament">
                         <option value="">Select Team 1</option>
@@ -47,7 +161,7 @@
                     <label class="block text-gray-700 font-bold mb-2" for="capacity">
                         Capacity
                     </label>
-                    <input th-field="*{Capacity}" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="capacity" min="0" type="number" placeholder="Stadium Capacity">
+                    <input th:field="*{Capacity}" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="capacity" min="0" type="number" placeholder="Stadium Capacity">
 <!--
                     <select class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="stadium">
                         <option value="">Select a stadium</option>
@@ -62,10 +176,10 @@
                 </div>
                 <div class="mb-4">
                     <label class="block text-gray-700 font-bold mb-2" for="categories">
-                        categories
+                        Number of Categories
                     </label>
-                    <select th-field="*{stadiumCategories.category}" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="categories">
-                        <option th:each="category : ${allCategories}" th:value="${category}" th:text="${category}"></option>
+                    <select th:field="*{stadiumImage.id}" th:onchange = "check(this.value)" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="categories">
+                        <option th:each="sImage : ${allStadiumImages}" th:id="${sImage.categoryNumber}"  onClick="check()" th:value="${sImage.id}" th:text="${sImage.categoryNumber}"></option>
                     </select>
                 </div>
 
@@ -95,28 +209,35 @@
                         <input class="appearance-none border rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Category 3 Name">
 
                     </div>  -->
-                    
+                    <!--
+                    <input type="hidden" id="temp">
                     <div class="flex flex-wrap -mx-2 mb-4">
                         <div class="w-full md:w-1/3 px-2">
-                            <label for="input1" class="text-gray-700 font-bold mb-2 block md:inline-block md:mb-0 md:mr-2">Category 1 name:</label>
+                            <label id="input1Label" for="input1" class="hidden text-gray-700 font-bold mb-2 block md:inline-block md:mb-0 md:mr-2">Category 1 Price/Capacity%:</label>
                         </div>
                         <div class="w-full md:w-1/3 px-2">
-                            <label for="input2" class="text-gray-700 font-bold mb-2 block md:inline-block md:mb-0 md:mr-2">Category 2 name:</label>
+                            <label  id="input2Label" for="input2" class="text-gray-700 font-bold mb-2 block md:inline-block md:mb-0 md:mr-2">Category 2 Price/Capacity%:</label>
                         </div>
                         <div class="w-full md:w-1/3 px-2">
-                            <label for="input3" class="text-gray-700 font-bold mb-2 block md:inline-block md:mb-0">Category 3 name:</label>
+                            <label  id="input3Label" for="input3" class="text-gray-700 font-bold mb-2 block md:inline-block md:mb-0">Category 3 Price/Capacity%:</label>
                         </div>
                         
                     </div>
                     <div class="flex flex-wrap -mx-2">
                         <div class="w-full md:w-1/3 px-2">
-                            <input type="text" id="input1" name="input1" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <select id="input1" th:onchange="Valid(this)" name="cat1" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                                <option th:each="cats : ${allCategories}" th:id="${cats.id}" th:value="${cats.id}" th:text="${cats.pricePercentage} + '%/'+ ${cats.capacityPercentage} + '%' "></option>
+                            </select>
                         </div>
                         <div class="w-full md:w-1/3 px-2">
-                            <input type="text" id="input2" name="input2" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" >
+                            <select  id="input2" name="cat2" th:onchange="Valid(this)" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" >
+                                <option th:each="cats : ${allCategories}" th:id="${cats.id}" th:value="${cats.id}" th:text="${cats.pricePercentage} + '%/'+ ${cats.capacityPercentage} + '%' "></option>
+                            </select>
                         </div>
                         <div class="w-full md:w-1/3 px-2">
-                            <input type="text" id="input3" name="input3" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <select   id="input3" name="cat3" th:onchange="Valid(this)" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" >
+                                <option th:each="cats : ${allCategories}" th:id="${cats.id}" th:value="${cats.id}" th:text="${cats.pricePercentage} + '%/'+ ${cats.capacityPercentage} + '%' "></option>
+                            </select>
                         </div>
                         
 
@@ -125,41 +246,30 @@
                         <div class="flex flex-wrap -mx-2 mb-4">
                             
                             <div class="w-full md:w-1/3 px-2">
-                                <label for="input4" class="text-gray-700 font-bold mb-2 block md:inline-block md:mb-0">Category 4 name:</label>
+                                <label  id="input4Label" for="input4" class="hidden text-gray-700 font-bold mb-2 block md:inline-block md:mb-0">Category 4 Price/Capacity%:</label>
                             </div>
                             
                             <div class="w-full md:w-1/3 px-2">
-                                <label for="input5" class="text-gray-700 font-bold mb-2 block md:inline-block md:mb-0">Category 5 name:</label>
+                                <label  id="input5Label" for="input5" class="hidden text-gray-700 font-bold mb-2 block md:inline-block md:mb-0">Category 5 Price/Capacity%:</label>
                             </div>
                         </div>
                         <div class="flex flex-wrap -mx-2">
                             
                             <div class="w-full md:w-1/3 px-2">
-                                <input type="text" id="input4" name="input4" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                                <select  id="input4" name="cat4" th:onchange="Valid(this)" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" >
+                                    <option th:each="cats : ${allCategories}" th:id="${cats.id}" th:value="${cats.id}" th:text="${cats.pricePercentage} + '%/'+ ${cats.capacityPercentage} + '%' "></option>
+                                </select>
                             </div>
                             
                             <div class="w-full md:w-1/3 px-2">
-                                <input type="text" id="input5" name="input3" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" >
+                                <select id="input5" name="cat5" th:onchange="Valid(this)" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" >
+                                    <option th:each="cat : ${allCategories}" th:id="${cat.id}" th:value="${cat.id}" th:text="${cat.pricePercentage} + '%/'+ ${cat.capacityPercentage} + '%' "></option>
+                                </select>
                             </div>
                             
                         </div>
+                    -->
                     
-                    <script>
-                        var cat4 = document.getElementById("input4").value;
-    var cat5 = document.getElementById("input5").value;
-    function DefauktCategory(){ 
-        cat4.classList.add("hidden");
-        cat5.classList.add("hidden");
-    }
-    function onCat4(){ 
-        cat4.classList.remove("hidden");
-    }
-    function onCat5(){ 
-        cat5.classList.remove("hidden");
-    }
-    cat5.classList.add("hidden");
-
-</script>  
                     <br>
 
                 <div class="flex justify-center">
@@ -169,8 +279,25 @@
                 </div>
             </form>
         </div>
-        <script>
+        <script> 
+         var cat1 = document.getElementById("input1");
+            var cat2 = document.getElementById("input2");
+            var cat3 = document.getElementById("input3");
+            cat1.value = null;
+            cat2.value = null;
+            cat3.value = null;
+            var cat4 = document.getElementById("input4");
+            var cat5 = document.getElementById("input5");
+            var cat4Label = document.getElementById("input4Label");
+            var cat5Label = document.getElementById("input5Label");
+            cat4.value = null;
+            cat5.value = null;
+            cat4.style.display = "none";
+            cat4Label.style.display = "none";
+            cat5.style.display = "none";
+            cat5Label.style.display = "none";
             // Open and close categories menu
+            /*
             const categoriesMenuButton = document.querySelector('#categories-menu-button');
             const categoriesMenu = document.querySelector('#categories-menu');
     
@@ -185,6 +312,7 @@
                     categoriesMenuButton.setAttribute('aria-expanded', 'false');
                 }
             });
+            */
         </script>
     </body>
     </html>

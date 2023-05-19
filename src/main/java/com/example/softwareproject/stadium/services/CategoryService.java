@@ -26,7 +26,7 @@ public class CategoryService {
         categoryRepository.delete(c);
 
     }
-    public void deleteCategoryById(Long id) {
+    public void deleteCategoryById(String id) {
         categoryRepository.deleteById(id);
 
     }
@@ -35,11 +35,11 @@ public class CategoryService {
         return categoryRepository.findAll();
     }
 
-    public Category GetCategoryById(Long id) {
+    public Category GetCategoryById(String id) {
         return categoryRepository.findById(id).orElse(null);
     }
 
-    public Category updateCategory(Long id, Category c) {
+    public Category updateCategory(String id, Category c) {
         try{
             Category exisCategory = categoryRepository.findById(id).orElseThrow();          
             exisCategory.setName(c.getName());
