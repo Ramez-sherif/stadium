@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>register Page</title>
+    <title>Register Page</title>
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body class="bg-gray-200">
@@ -25,10 +25,24 @@
             </label>
             <input
               class="appearance-none border  rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="firstname"
-              type="firstname"
-              placeholder="firstname"
+              id="firstName"
+              type="text"
+              placeholder="First Name"
               th:field="*{firstName}"
+              required
+            />
+          </div>
+
+          <div class="mb-4">
+            <label class="block text-gray-700 font-bold mb-2 ">
+              Second Name
+            </label>
+            <input
+              class="appearance-none border  rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="secondName"
+              type="text"
+              placeholder="Second Name"
+              th:field="*{secondName}"
               required
             />
           </div>
@@ -38,7 +52,7 @@
             <input
               class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="Email"
-              type="Email"
+              type="email"
               placeholder="Email"
               th:field="*{email}"
               required
@@ -46,7 +60,7 @@
           </div>
 
           <div class="mb-6">
-            <label class="block text-gray-700 font-bold mb-2"> password </label>
+            <label class="block text-gray-700 font-bold mb-2"> Password </label>
             <input
               class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="password"

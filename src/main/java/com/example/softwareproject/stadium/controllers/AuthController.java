@@ -1,41 +1,32 @@
 package com.example.softwareproject.stadium.controllers;
 
 
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.example.softwareproject.stadium.models.Category;
-import com.example.softwareproject.stadium.models.Matches;
 import com.example.softwareproject.stadium.models.Role;
-import com.example.softwareproject.stadium.models.Stadium;
+import com.example.softwareproject.stadium.models.Stores;
 import com.example.softwareproject.stadium.models.User;
-import com.example.softwareproject.stadium.repositories.RoleRepository;
-import com.example.softwareproject.stadium.repositories.UserRepository;
 import com.example.softwareproject.stadium.services.AuthService;
-import com.example.softwareproject.stadium.services.UserService;
-import com.fasterxml.jackson.databind.deser.DataFormatReaders.Match;
+import com.example.softwareproject.stadium.services.StoreService;
 
 @Controller
 @RequestMapping("/auth")
 public class AuthController {
     @Autowired
     private AuthService authService;
+    @Autowired
+    private StoreService storeService;
 
     @GetMapping("/register")
     public ModelAndView register(){
+        
         ModelAndView view = new ModelAndView("register.html");
         User user = new User();
         view.addObject("User", user);
@@ -44,11 +35,22 @@ public class AuthController {
     
     @PostMapping("/register")
     public ModelAndView register(@ModelAttribute User user){
-        ModelAndView view = new ModelAndView("login.html");
-        User user2 = new User();
-        view.addObject("User", user2);
-        this.authService.register(user);
-        return view;
+        Role role = this.authService.getRoleByName("User");
+
+        user.setRole(role);
+        
+        if(role != null && this.authService.register(user) != null){
+            ModelAndView loginView = new ModelAndView("login.html");
+            User loginUser = new User();
+            loginView.addObject("User", loginUser);
+            return loginView;
+           
+        }
+        ModelAndView registerView = new ModelAndView("register.html");
+        User registerUser = new User();
+        registerView.addObject("User", registerUser);
+        return registerView;
+       
     }
     
     @GetMapping("/login")
@@ -70,8 +72,35 @@ public class AuthController {
         return view2;
         
     }
-    @GetMapping("/test")
-    public String test(){
-        return "you can access this test";
+        @GetMapping("/manager/register")
+        public ModelAndView StoreManagerRegister(){
+            ModelAndView view = new ModelAndView("register.html");
+            User user = new User();
+            view.addObject("User", user);
+            return view;    
+        }
+        @PostMapping("/manager/register")
+        public ModelAndView StoreManagerRegister(@ModelAttribute User user,@RequestParam String storeName,String storeLocation){
+            Role role = this.authService.getRoleByName("StoreManager");
+            user.setRole(role);
+            User newManager = this.authService.register(user);
+            
+            if(role != null &&  newManager != null){
+                Stores store = new Stores();
+                store.setLocation(storeLocation);
+                store.setName(storeName);
+                store.setManager(newManager);
+                if(this.storeService.addStore(store) != null){
+                    ModelAndView loginView = new ModelAndView("login.html");
+                    User loginUser = new User();
+                    loginView.addObject("User", loginUser);
+                    return loginView;
+                }            
+            }
+            ModelAndView registerView = new ModelAndView("register.html");
+            User registerUser = new User();
+            registerView.addObject("User", registerUser);
+            return registerView;
+       
     }
 }

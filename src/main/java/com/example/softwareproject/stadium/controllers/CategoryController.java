@@ -33,10 +33,6 @@ public class CategoryController {
         test.setName(category.getName());
         test.setCapacityPercentage(category.getCapacityPercentage());
         test.setPricePercentage(category.getPricePercentage());
-        System.out.println(test.getName());
-        System.out.println(test.getCapacityPercentage());
-        System.out.println(test.getPricePercentage());
-        System.out.println("as;djkfhalkjsdfkajlsdhfkasjhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
         if(categoryService.addcategory(category)== null){
             ModelAndView categoyView = new ModelAndView("category.html");
             return categoyView;

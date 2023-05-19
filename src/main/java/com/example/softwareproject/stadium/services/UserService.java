@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.example.softwareproject.stadium.models.Role;
 import com.example.softwareproject.stadium.models.User;
 import com.example.softwareproject.stadium.repositories.RoleRepository;
 import com.example.softwareproject.stadium.repositories.UserRepository;
@@ -33,4 +34,5 @@ public class UserService {
             //get from database where role name
 
         }
+     
 }
