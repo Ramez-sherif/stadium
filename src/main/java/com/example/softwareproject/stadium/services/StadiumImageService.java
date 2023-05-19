@@ -16,7 +16,8 @@ public class StadiumImageService {
     
 
     public  List<StadiumImage>getAllImgUrl(){
-     return stadiumImageRepository.findAll(); 
+
+     return this.stadiumImageRepository.findAll();
 
     }   
     public  StadiumImage getStadiumById(Long id){

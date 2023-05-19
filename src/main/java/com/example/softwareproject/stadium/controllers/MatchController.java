@@ -75,5 +75,15 @@ public ModelAndView addMatch(){
 
        return homeView; //redirect to home page when success
     }
+
+    @GetMapping("/view")
+    public ModelAndView viewMatches()
+    {
+        ModelAndView view = new ModelAndView("viewMatches.html");
+        List<Matches> allMatches = matchesService.getAllMatches();
+        view.addObject("AllMatches", allMatches);
+        return view;
+
+    }
  
 }
