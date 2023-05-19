@@ -17,8 +17,12 @@ public class StadiumService {
      @Autowired
      private StadiumImageRepository stadiumImageRepository;
 
-     public void addStadium(Stadium stadium) {
-          stadiumRepository.save(stadium);
+     public Stadium addStadium(Stadium stadium) {
+          try{
+               return stadiumRepository.save(stadium);
+          }catch(Exception e){
+               return null;
+          }
      }
 
      public void updateStadium(Long id, Stadium stadium) {

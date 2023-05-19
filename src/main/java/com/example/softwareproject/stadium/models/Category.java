@@ -8,11 +8,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity //to let the spring know that this class will be a table in database
 public class Category {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+        name = "UUID",
+        strategy = "org.hibernate.id.UUIDGenerator"
+    )
+    private String id;
     private String name;
     private double capacityPercentage;
     private double pricePercentage;
@@ -21,11 +27,11 @@ public class Category {
     Set<StadiumCategories> stadiumCategories; 
 
 
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

@@ -39,7 +39,7 @@ public class Stadium {
 */
 
     public Long getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(Long id) {
@@ -47,7 +47,7 @@ public class Stadium {
     }
 
     public String getName() {
-        return this.name;
+        return name;
     }
 
     public void setName(String name) {
@@ -55,20 +55,30 @@ public class Stadium {
     }
 
     public String getCapacity() {
-        return this.Capacity;
+        return Capacity;
     }
 
-    public void setCapacity(String Capacity) {
-        this.Capacity = Capacity;
+    public void setCapacity(String capacity) {
+        Capacity = capacity;
     }
 
-    public Set<StadiumCategories> getCategories() {
-        return this.stadiumCategories;
+    public StadiumImage getStadiumImage() {
+        return stadiumImage;
     }
 
-    public void setCategories(Set<StadiumCategories> stadiumCategories) {
+    public void setStadiumImage(StadiumImage stadiumImage) {
+        this.stadiumImage = stadiumImage;
+    }
+
+    public Set<StadiumCategories> getStadiumCategories() {
+        return stadiumCategories;
+    }
+
+    public void setStadiumCategories(Set<StadiumCategories> stadiumCategories) {
         this.stadiumCategories = stadiumCategories;
     }
+
+   
 
 
     
