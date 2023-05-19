@@ -26,17 +26,17 @@ public class AuthService {
     @Autowired
     private JwtService jwtService;
 
-    public Map<String,String> register(@ModelAttribute User user){
-       String userToJson = "";
+    public User register(@ModelAttribute User user){
+       //String userToJson = "";
         try{
             user.setPassword(encryptPassword(user.getPassword()));
-            this.userRepository.save(user);
-            userToJson = stringToJSON(user);
+            return this.userRepository.save(user);
+            //userToJson = stringToJSON(user);
            
         }catch(Exception e){
             return null;
         }
-        return  generateJwtToken(user);
+        //return  generateJwtToken(user);
     }
     public Map<String,String> login(@ModelAttribute User user){
         Map<String,String> json = new HashMap<>();

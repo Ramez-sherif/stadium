@@ -7,17 +7,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.softwareproject.stadium.models.Role;
+import com.example.softwareproject.stadium.models.Stores;
 import com.example.softwareproject.stadium.models.User;
 import com.example.softwareproject.stadium.services.AuthService;
+import com.example.softwareproject.stadium.services.StoreService;
 
 @Controller
 @RequestMapping("/auth")
 public class AuthController {
     @Autowired
     private AuthService authService;
+    @Autowired
+    private StoreService storeService;
 
     @GetMapping("/register")
     public ModelAndView register(){
@@ -75,16 +80,22 @@ public class AuthController {
             return view;    
         }
         @PostMapping("/manager/register")
-        public ModelAndView StoreManagerRegister(@ModelAttribute User user){
+        public ModelAndView StoreManagerRegister(@ModelAttribute User user,@RequestParam String storeName,String storeLocation){
             Role role = this.authService.getRoleByName("StoreManager");
             user.setRole(role);
+            User newManager = this.authService.register(user);
             
-            if(role != null && this.authService.register(user) != null){
-                ModelAndView loginView = new ModelAndView("login.html");
-                User loginUser = new User();
-                loginView.addObject("User", loginUser);
-                return loginView;
-            
+            if(role != null &&  newManager != null){
+                Stores store = new Stores();
+                store.setLocation(storeLocation);
+                store.setName(storeName);
+                store.setManager(newManager);
+                if(this.storeService.addStore(store) != null){
+                    ModelAndView loginView = new ModelAndView("login.html");
+                    User loginUser = new User();
+                    loginView.addObject("User", loginUser);
+                    return loginView;
+                }            
             }
             ModelAndView registerView = new ModelAndView("register.html");
             User registerUser = new User();
