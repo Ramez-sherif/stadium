@@ -74,13 +74,13 @@ public class AuthController {
     }
         @GetMapping("/manager/register")
         public ModelAndView StoreManagerRegister(){
-            ModelAndView view = new ModelAndView("StoreRegistration.html");
+            ModelAndView view = new ModelAndView("register.html");
             User user = new User();
             view.addObject("User", user);
             return view;    
         }
         @PostMapping("/manager/register")
-        public ModelAndView StoreManagerRegister(@ModelAttribute User user,@RequestParam("storeName") String storeName, @RequestParam("storeLocation") String storeLocation){
+        public ModelAndView StoreManagerRegister(@ModelAttribute User user,@RequestParam String storeName,String storeLocation){
             Role role = this.authService.getRoleByName("StoreManager");
             user.setRole(role);
             User newManager = this.authService.register(user);
@@ -97,7 +97,7 @@ public class AuthController {
                     return loginView;
                 }            
             }
-            ModelAndView registerView = new ModelAndView("StoreRegistration.html");
+            ModelAndView registerView = new ModelAndView("register.html");
             User registerUser = new User();
             registerView.addObject("User", registerUser);
             return registerView;
