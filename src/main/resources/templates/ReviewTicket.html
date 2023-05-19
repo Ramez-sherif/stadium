@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <title>Review Ticket</title>
+</head>
+<body>
+    
+    <div class="grid grid-cols-2 gap-4">
+        <div class="max-w-md mx-auto my-10 p-6 bg-white rounded-lg shadow p-4">
+            <h1 class="text-lg font-bold mb-4 flex items-center "> Review your tickets </h1>
+
+            <div class="max-w-md mx-auto my-10 p-6 bg-white rounded-lg shadow p-4">
+
+            <div class="mb-4">
+                <h2 class=" font-bold mb-2">Ticket Details </h2>
+                <br> <br>
+
+                <label class="block text-gray-700 font-bold mb-2" for="manager-name"> Team Name </label>
+                <p th:field="*{object}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="manager-email" name="" type=""> Ahly </p>
+              </div>
+
+          <p class="mb-4"> text </p>
+          
+        </div>
+        <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Button</button>
+    </div>
+
+
+
+    <div class="grid grid-cols-2 gap-4">
+        <div class="max-w-md mx-auto my-10 p-6 bg-white rounded-lg shadow p-4">
+            <h1 class="text-lg font-bold mb-4 flex items-center"> Review match details </h1>
+
+            <div class="max-w-md mx-auto my-10 p-6 bg-white rounded-lg shadow p-4">
+
+            <div class="mb-4">
+                <label class="block text-gray-700 font-bold mb-2" for="manager-name"> Manager's Email </label>
+                <p th:field="*{email}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="manager-email" name="manageremail" type="email" placeholder="Enter your email" required> lalal </p>
+              </div>
+
+          <h2 class="text-lg font-bold mb-4">Ticket Details </h2>
+          <p class="mb-4"> text </p>
+          
+        </div>
+        <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Button</button>
+    </div>
+
+        <!-- 
+        <div class="max-w-md mx-auto my-10 p-6 bg-white rounded-lg shadow p-">
+          <h2 class="text-lg font-bold mb-4">Match Details</h2>
+          <p class="mb-4"> text </p>
+          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Button</button>
+        </div>
+      </div>  -->
+</body>
+</html>  
+
