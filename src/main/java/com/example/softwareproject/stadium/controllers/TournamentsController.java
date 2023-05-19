@@ -17,7 +17,7 @@ public class TournamentsController {
     @Autowired
     private TournamentsService tournamentsService;
 
-    @GetMapping("")
+    @GetMapping("/add")
     public ModelAndView addTournament(){
         ModelAndView view = new ModelAndView("AddTournament.html");
         Tournaments tournaments= new Tournaments();
@@ -25,7 +25,7 @@ public class TournamentsController {
         return view;
     }
 
-    @PostMapping("")
+    @PostMapping("/add")
     public ModelAndView addTournament(@ModelAttribute Tournaments tournaments){
         
             if(tournamentsService.addTournament(tournaments)== null)
