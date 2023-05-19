@@ -19,7 +19,11 @@ public class MatchesService {
     private MatchesRepository matchesRepository;
 
     public List<Matches> getAllMatches() {
-        return matchesRepository.findAll();
+        List<Matches> allMatches = matchesRepository.findAll();
+        if (allMatches == null){
+            return null;
+        }
+        return allMatches;
     }
 
     public Matches getMatchById(Long id) {

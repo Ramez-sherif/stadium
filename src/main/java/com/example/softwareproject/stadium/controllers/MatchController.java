@@ -2,18 +2,25 @@ package com.example.softwareproject.stadium.controllers;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.softwareproject.stadium.models.Matches;
 import com.example.softwareproject.stadium.models.Stadium;
+import com.example.softwareproject.stadium.models.StadiumImage;
 import com.example.softwareproject.stadium.models.Teams;
 import com.example.softwareproject.stadium.models.Tournaments;
 import com.example.softwareproject.stadium.services.MatchesService;
@@ -84,6 +91,17 @@ public ModelAndView addMatch(){
         view.addObject("AllMatches", allMatches);
         return view;
 
+    }
+    @GetMapping("/getData/{id}")
+    @ResponseBody
+    public Matches getData(@PathVariable long id){
+        Matches matches = matchesService.getMatchById(id);
+        if(matches == null){
+            new Exception("Product not found with id " + id);
+        }
+        
+        return matches;
+       
     }
  
 }
