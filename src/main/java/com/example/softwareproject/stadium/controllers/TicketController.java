@@ -17,9 +17,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.softwareproject.stadium.models.Category;
 import com.example.softwareproject.stadium.models.Matches;
 import com.example.softwareproject.stadium.models.Stadium;
+import com.example.softwareproject.stadium.models.StadiumImage;
 import com.example.softwareproject.stadium.models.Ticket;
 import com.example.softwareproject.stadium.services.MatchesService;
 import com.example.softwareproject.stadium.services.StadiumCategoriesService;
+import com.example.softwareproject.stadium.services.StadiumImageService;
 import com.example.softwareproject.stadium.services.StadiumService;
 import com.example.softwareproject.stadium.services.TicketService;
 import com.fasterxml.jackson.databind.deser.DataFormatReaders.Match;
@@ -35,22 +37,32 @@ public class TicketController {
     private StadiumService stadiumService;
     @Autowired
     private MatchesService matchesService;
-    
+    @Autowired
+    private StadiumImageService stadiumImageService;
+
     @GetMapping("/reserve/{id}")
     public ModelAndView reserve(@PathVariable("id") Long id)
     {
         Matches matches = matchesService.getMatchById(id);
+        
+        Stadium stadium=matches.getStadium();
+        StadiumImage stadiumImage = stadiumImageService.getImgLink(stadium.getId());
 
         List<Category> allCategories =  stadiumCategoriesService.getCategoriesForStadium(  matches.getStadium());
         HashMap<String,Double> priceOfCategory = new HashMap<>();
+
         for(Category c:allCategories){
           double total = c.getPricePercentage() * matches.getPrice()+ matches.getPrice();
           priceOfCategory.put(c.getName(),total);
       
         }
+
         ModelAndView view = new ModelAndView("new.html");
         Ticket ticket = new Ticket();
-        view.addObject("Ticket", ticket).addObject("allCAtegories", allCategories).addObject("priceOfCategory", priceOfCategory);
+        view.addObject("Ticket", ticket)
+        .addObject("allCategories", allCategories)
+        .addObject("priceOfCategory", priceOfCategory)
+        .addObject("stadiumImage", stadiumImage);
         return view;
     }
 
