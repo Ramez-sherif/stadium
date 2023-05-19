@@ -9,30 +9,30 @@
 <body class="bg-gray-100">
   <div class="max-w-md mx-auto my-8 p-6 bg-white rounded shadow-md">
     <h1 class="text-2xl font-bold mb-4">Store Registration</h1>
-    <form th:action="@{/register}" method="post">
+    <form th:action="@{/auth/manager/register}" th:object="${User}" method="post">
       <div class="mb-4">
         <label class="block text-gray-700 font-bold mb-2" for="store-name">Store Name</label>
         <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="store-name" name="storeName" type="text" placeholder="Enter store name" required>
       </div>
       <div class="mb-4">
         <label class="block text-gray-700 font-bold mb-2" for="manager-name">Manager's First Name</label>
-        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="manager-Fname" name="managerFName" type="text" placeholder="Enter your first name" required>
+        <input th:field="*{firstName}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="manager-Fname" name="managerFName" type="text" placeholder="Enter your first name" required>
       </div>
       <div class="mb-4">
-        <label class="block text-gray-700 font-bold mb-2" for="manager-name">Manager's Last Name</label>
-        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="manager-Lname" name="managerLName" type="text" placeholder="Enter your last name" required>
+        <label class="block text-gray-700 font-bold mb-2" for="manager-name">Manager's Second Name</label>
+        <input th:field="*{secondName}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="manager-Lname" name="managerLName" type="text" placeholder="Enter your Second name" required>
       </div>
       <div class="mb-4">
         <label class="block text-gray-700 font-bold mb-2" for="manager-name"> Manager's Email </label>
-        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="manager-email" name="manageremail" type="email" placeholder="Enter your email" required>
+        <input th:field="*{email}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="manager-email" name="manageremail" type="email" placeholder="Enter your email" required>
       </div>
       <div class="mb-4">
         <label class="block text-gray-700 font-bold mb-2" for="manager-name"> Manager's Password </label>
-        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="manager-password" name="managerpassword" type="password" placeholder="Enter your password" required>
+        <input th:field="*{password}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="manager-password" name="managerpassword" type="password" placeholder="Enter your password" required>
       </div>
       <div class="mb-4">
         <label class="block text-gray-700 font-bold mb-2" for="location">Location</label>
-        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="location" name="location" type="text" placeholder="Enter location" required>
+        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="location" name="storeLocation" type="text" placeholder="Enter location" required>
       </div>
       <div class="flex items-center justify-between">
         <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">Register</button>
