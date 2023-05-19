@@ -24,97 +24,129 @@
   </style>
 </head>
 
-<body class="bg-gray-200 flex items-center justify-center h-screen">
+
+
+
+<body class="flex items-center justify-center h-screen bg-gray-200">
+
+  <!-- this is button opens modal passes matcch id to controller-->
+  <a th:href="@{/tickets/reserve(id=8)  }"
+  class="px-4 py-2 font-bold text-gray-500 bg-transparent border border-gray-500 rounded-full modal-open hover:border-indigo-500 hover:text-indigo-500">Open Modal  </a>
+ 
   
-  <button class="modal-open bg-transparent border border-gray-500 hover:border-indigo-500 text-gray-500 hover:text-indigo-500 font-bold py-2 px-4 rounded-full">Open Modal</button>
-  
+
+
+
+
+
   <!--Modal-->
-  <div class="modal opacity-0 pointer-events-none fixed w-full h-full  top-0 left-0 flex items-center justify-center ">
-    <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
+  <div class="fixed top-0 left-0 flex items-center justify-center w-full h-full opacity-0 pointer-events-none modal ">
+    <div class="absolute w-full h-full bg-gray-900 opacity-50 modal-overlay"></div>
     
-    <div class="modal-container bg-white w-11/12 max-h-screen md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
+    <div class="z-50 w-11/12 max-h-screen mx-auto overflow-y-auto bg-white rounded shadow-lg modal-container sm:w-md">
       
-      <!-- <div class="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50">
-        <svg class="fill-current text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+      <div class="absolute top-0 right-0 z-50 flex flex-col items-center mt-4 mr-4 text-sm text-white cursor-pointer modal-close">
+        <svg class="text-white fill-current" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
           <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
         </svg>
         <span class="text-sm">(Esc)</span>
-      </div> -->
+      </div>
 
       <!-- Add margin if you want to see some of the overlay behind the modal-->
-      <img class="modal-content py-1 text-left px-6">
+      <img class="px-6 py-1 text-left modal-content">
         <!--Title-->
-        <div class="flex justify-between items-center pb-3">
+        <div class="flex items-center justify-between pb-3">
           <p class="text-2xl font-bold">Reserve Ticket</p>
-          <div class="modal-close cursor-pointer z-50">
-            <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+          <div class="z-50 cursor-pointer modal-close">
+            <svg class="text-black fill-current" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
               <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
             </svg>
           </div>
         </div>
 
         <!--Body-->
-  
-       <section class=" px-2" >
-        <div class="grid grid-cols-2 grid-rows-2 gap-3">
-            <div class="col-span-2 row-span-1 bg-gray-400 px-4 py-4 rounded ">match </div>
-            <div class="col-span-1 row-span-1 bg-gray-500 px-4 py-4 rounded">Date</div>
-            <div class="col-span-1 row-span-1 bg-gray-500 px-4 py-4 rounded">Stadium</div>
+  <!-- section for the data retrieved from server-->
+       <section class="px-2 " >
+        <div class="grid grid-cols-2 grid-rows-2 gap-3 ">
+            <div class="col-span-2 row-span-1 px-4 py-4 bg-gray-400 rounded ">match </div>
+            <div class="col-span-1 row-span-1 px-4 py-4 bg-gray-500 rounded">Date</div>
+            <div class="col-span-1 row-span-1 px-4 py-4 bg-gray-500 rounded">Stadium</div>
         
         </div >
 
-        <div class="rounded bg-white-300  py-2 object-fill ">
-        <img  src=""></img>
-        </div>
+        <div class="py-2 rounded bg-white-300 ">
+        <img src="stadium.png"></img>
+        </div> 
 
         <!--category information-->
-        <div class ="bg-cyan-900 flex justify-center items-center h-15">
+        <div class ="flex items-center justify-center bg-white-300 h-15 ">
 
-            <table class="table-auto shadow-2xl border-2 border-cyan-200 w-6/12">
+            <table class="w-full border-2 shadow-2xl table-auto border-white-200 ">
                 <thead class="text-white ">
                   <tr>
-                    <th class="py-3 px-6 bg-cyan-800 ">Category</th>
-                    <th class="py-3 px-6 bg-cyan-800 ">price</th>
-                    <th class="py-3 px-6 bg-cyan-800 ">count</th>
+                    <th class="px-6 py-3 bg-gray-700 ">Category</th>
+                    <th class="px-6 py-3 bg-gray-700 ">price</th>
+                    <th class="px-6 py-3 bg-gray-700 ">count</th>
                   </tr>
                 </thead>
-                <tbody class="text-cyan-900 text-center">
-                  <tr class="bg-cyan-200 hover:bg-cyan-100 cursor-pointer duration-300">
-                    <td class="py-3 px-6">premium</td>
-                    <td class="py-3 px-6">500l.e</td>
-                    <td class="py-3 px-6">30</td>
-                  </tr>
-                
-                  <tr class="bg-cyan-200 hover:bg-cyan-100 cursor-pointer duration-300">
-                    <td class="py-3 px-6">premium</td>
-                    <td class="py-3 px-6">500l.e</td>
-                    <td class="py-3 px-6">30</td>
-                  </tr>
-                
-                  <tr class="bg-cyan-300 hover:bg-cyan-100 cursor-pointer duration-300">
-                    <td class="py-3 px-6">premium</td>
-                    <td class="py-3 px-6">500l.e</td>
-                    <td class="py-3 px-6">30</td>
-                  </tr>
-                  <tr class="bg-cyan-400 hover:bg-cyan-100 cursor-pointer duration-300">
-                    <td class="py-3 px-6">premium</td>
-                    <td class="py-3 px-6">500l.e</td>
-                    <td class="py-3 px-6">30</td>
-                  </tr>
-                  <tr class="bg-cyan-400 hover:bg-cyan-100 cursor-pointer duration-300">
-                    <td class="py-3 px-6">premium</td>
-                    <td class="py-3 px-6">500l.e</td>
-                    <td class="py-3 px-6">30</td>
-                  </tr>
-                  <tr class="bg-cyan-400 hover:bg-cyan-100 cursor-pointer duration-300">
-                    <td class="py-3 px-6">premium</td>
-                    <td class="py-3 px-6">500l.e</td>
-                    <td class="py-3 px-6">30</td>
-                  </tr>  <tr class="bg-cyan-400 hover:bg-cyan-100 cursor-pointer duration-300">
-                    <td class="py-3 px-6">premium</td>
-                    <td class="py-3 px-6">500l.e</td>
-                    <td class="py-3 px-6">30</td>
-                  </tr>
+                <tbody class="text-center text-gray-700 ">
+              <!--table row-->    
+              <section>
+                  <tr th:each="category: ${Category}" class="duration-300 cursor-pointer bg-white-600 hover:bg-gray-400">
+                    <td th:text="${category.name}" class="px-6 py-3">premium</td>
+                    <td th:text="${category.total}" class="px-6 py-3">500l.e</td>
+                    <td class="px-6 py-3">
+                      
+                      <button class="px-2 bg-red-300 rounded " onClick="ticket_counter_subtract('tickets-1')">-</button>
+                       <button id="tickets-1" value="0" class="border-none bg-white-600" >
+                          0
+                       </button>
+                      <button class ="px-2 bg-green-300 rounded "onClick="ticket_counter_add('tickets-1')">+</button>
+                    </td> </tr>
+                 
+                  </section>
+                  <section>
+                    <tr th:each="category: ${Category}" class="duration-300 cursor-pointer bg-white-600 hover:bg-gray-400">
+                      <td th:text="${category.name}" class="px-6 py-3">premium</td>
+                      <td th:text="${category.total}" class="px-6 py-3">500l.e</td>
+                      <td class="px-6 py-3">
+                        
+                        <button class="px-2 bg-red-300 rounded " onClick="ticket_counter_subtract('tickets-1')">-</button>
+                         <button id="tickets-1" value="0" class="border-none bg-white-600" >
+                            0
+                         </button>
+                        <button class ="px-2 bg-green-300 rounded "onClick="ticket_counter_add('tickets-1')">+</button>
+                      </td> </tr>
+                   
+                    </section>
+                    <section>
+                      <tr th:each="category: ${Category}" class="duration-300 cursor-pointer bg-white-600 hover:bg-gray-400">
+                        <td th:text="${category.name}" class="px-6 py-3">premium</td>
+                        <td th:text="${category.total}" class="px-6 py-3">500l.e</td>
+                        <td class="px-6 py-3">
+                          
+                          <button class="px-2 bg-red-300 rounded " onClick="ticket_counter_subtract('tickets-1')">-</button>
+                           <button id="tickets-1" value="0" class="border-none bg-white-600" >
+                              0
+                           </button>
+                          <button class ="px-2 bg-green-300 rounded "onClick="ticket_counter_add('tickets-1')">+</button>
+                        </td> </tr>
+                     
+                      </section>   <section>
+                        <tr th:each="category: ${Category}" class="duration-300 cursor-pointer bg-white-600 hover:bg-gray-400">
+                          <td th:text="${category.name}" class="px-6 py-3">premium</td>
+                          <td th:text="${category.total}" class="px-6 py-3">500l.e</td>
+                          <td class="px-6 py-3">
+                            
+                            <button class="px-2 bg-red-300 rounded " onClick="ticket_counter_subtract('tickets-1')">-</button>
+                             <button id="tickets-1" value="0" class="border-none bg-white-600" >
+                                0
+                             </button>
+                            <button class ="px-2 bg-green-300 rounded "onClick="ticket_counter_add('tickets-1')">+</button>
+                          </td> </tr>
+                       
+                        </section>
+               
                   
                 
                 </tbody>
@@ -125,8 +157,8 @@
   
         <!--Footer-->
         <div class="flex justify-end pt-2 ">
-          <button class="px-4 bg-green-300 p-3 rounded-lg  hover:bg-green-600 mr-2 w-full justify-start">Reserve Ticket</button>
-          <button class="modal-close px-4 bg-indigo-500 p-3 rounded-lg text-white hover:bg-indigo-400">Close</button>
+          <button class="justify-start w-full p-3 px-5 ml-2 mr-2 bg-green-300 rounded-lg m-l-2 rounded-l-1 hover:bg-green-600">Reserve Ticket</button>
+          <button class="p-3 px-4 mr-2 text-white bg-indigo-500 rounded modal-close hover:bg-indigo-400">Close</button>
         </div>
        
     
@@ -143,7 +175,36 @@
       })
     }
     
-    const overlay = document.querySelector('.modal-overlay')
+
+    
+    
+    function ticket_counter_add(id) {
+
+    
+      var counter=document.getElementById(id);
+    
+      var num=parseInt(counter.value);
+      num += 1;
+      var post=String(num);
+    
+      counter.innerHTML = post;
+      counter.value=num;
+    
+    }
+    function ticket_counter_subtract(id) {
+     
+      var counter=document.getElementById(id);
+      if(counter.value!=0){
+      var num=parseInt(counter.value);
+      num -= 1;
+      var post=String(num);
+    
+      counter.innerHTML = post;
+      counter.value=num;
+      }
+    }   
+
+     const overlay = document.querySelector('.modal-overlay')
     overlay.addEventListener('click', toggleModal)
     
     var closemodal = document.querySelectorAll('.modal-close')

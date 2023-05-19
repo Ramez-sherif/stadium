@@ -9,5 +9,5 @@ import com.example.softwareproject.stadium.models.StadiumImage;
 
 @Repository
 public interface StadiumImageRepository  extends JpaRepository<StadiumImage,Long>{
-    Optional<StadiumImage> findByCategoryNumber(int num);
+    StadiumImage findByCategoryNumber(int num);
 }
