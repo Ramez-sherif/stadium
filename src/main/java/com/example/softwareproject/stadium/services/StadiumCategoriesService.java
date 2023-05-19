@@ -1,5 +1,8 @@
 package com.example.softwareproject.stadium.services;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,31 +37,15 @@ public class StadiumCategoriesService {
       
         
     }
-}
-/*
- @Service
-public class StadiumCategoriesService {
 
-    @Autowired
-    private StadiumCategoriesRepository stadiumCategoriesRepository;
-
-    @Autowired
-    private StadiumRepository stadiumRepository;
-
-    @Autowired
-    private CategoryRepository categoryRepository;
-
-    public StadiumCategories addCategoryToStadium(Long stadiumId, Long categoryId) {
-        Stadium stadium = stadiumRepository.findById(stadiumId)
-                .orElseThrow(() -> new RuntimeException("Stadium not found"));
-        Category category = categoryRepository.findById(categoryId)
-                .orElseThrow(() -> new RuntimeException("Category not found"));
-
-        StadiumCategories stadiumCategories = new StadiumCategories();
-        stadiumCategories.setStadium(stadium);
-        stadiumCategories.setCategory(category);
-
-        return stadiumCategoriesRepository.save(stadiumCategories);
+    public List<Category> getCategoriesForStadium(Stadium stadium)
+    {
+       // return stadiumCategoriesRepository.findByStadium(stadium);
+         List<StadiumCategories> stadiumCategoriesList = stadiumCategoriesRepository.findByStadium(stadium);
+         List<Category> categoriesList = new ArrayList<>();
+        for (StadiumCategories stadiumCategories : stadiumCategoriesList) {
+            categoriesList.add(stadiumCategories.getCategory());
+        }
+        return categoriesList;
     }
 }
- */
