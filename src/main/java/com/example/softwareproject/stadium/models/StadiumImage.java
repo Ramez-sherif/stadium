@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class StadiumImage {
@@ -12,6 +14,7 @@ public class StadiumImage {
    private Long id; 
    private int categoryNumber;
    private String imgUrl;
+    
 
     public Long getId() {
         return this.id;

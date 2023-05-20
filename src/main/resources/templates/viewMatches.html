@@ -6,31 +6,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Matches Page</title>
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   </head>
   <body class="bg-gray-200">
 
     <h1 class="text-3xl font-bold mb-6 flex justify-center mt-5">Upcoming Matches</h1> 
     
     <div class="container mx-auto my-auto flex items-center px-2 py-4">
-      <div th:each="match : ${matches}" class="bg-white rounded-lg shadow-lg p-6">
+      <div th:each="match : ${AllMatches}" class="bg-white rounded-lg shadow-lg p-6">
         <h2 class="text-xl font-bold mb-2">Team 1 vs Team 2</h2>
-        <h2 class="text-xl font-bold mb-2" th:text="${match.team1} + ' vs ' + ${match.team2}"></h2>
+        <h2 class="text-xl font-bold mb-2" th:text="${match.team1.name} + ' vs ' + ${match.team2.name}"></h2>
         <p class="text-gray-600 mb-2">Tournament Name</p>
-        <p class="text-gray-600 mb-2" th:text="${match.tournament}"></p>
+        <p class="text-gray-600 mb-2" th:text="${match.tournament.name}"></p>
         <p class="text-gray-600 mb-2">Stadium Name</p>
-        <p class="text-gray-600 mb-2" th:text="${match.stadium}"></p>
+        <p class="text-gray-600 mb-2" th:text="${match.stadium.name}"></p>
         <p class="text-gray-600 mb-2">Date and Time</p>
         <p class="text-gray-600 mb-2" th:text="${match.date}"></p>
         <p class="text-gray-600 mb-2">Ticket Price: </p>
         <p class="text-gray-600 mb-2" th:text="'Ticket Price: $' + ${match.price}"></p>
         <br> <br>
-          <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline" type="submit"> Book a ticket </button>
-      </div> </div> 
+      <!--
+        <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline" type="submit"> Book a ticket </button>
+   
+      -->
+      <a  th:href="@{/tickets/reserve(id=${match.id})}"> Reserve </a>
+      </div>
+     </div> 
 <br>
 
 </div>
-</body> </html>
+<script>
+  /*
+  $(function() {
+    $("#get-data").click(function() {
+      $.ajax({
+              url: "/match/getData/1",
+              type: "GET",
+              success: function(data) {
+                  var product = JSON.parse(data);
+                  console.log(product);
+                  //$("#product").text(product.name);
+                },
+                error: function(error) {
+                  // Handle the error.
+              }
+            });
+          });
+        });
+        */
+</script>
+<script>
+  /*
+  getData(1);
+  async function getData(id){
+
+    await fetch("https://localhost:8080/match/getData/" + id)
+    .then(response => response.json())
+    .then(data => console.log(data))
+  }
+  */
+  </script>
+</body>
+
+</html>
 
 
 <!-- 
@@ -101,3 +139,4 @@
             <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline" type="submit"> Book a ticket </button>
         </div>
         </div>
+      -->

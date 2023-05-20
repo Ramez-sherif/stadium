@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -40,8 +41,8 @@ public class TicketController {
     @Autowired
     private StadiumImageService stadiumImageService;
 
-    @GetMapping("/reserve/{id}")
-    public ModelAndView reserve(@PathVariable("id") Long id)
+    @GetMapping("/reserve")
+    public ModelAndView reserve(@RequestParam("id") Long id)
     {
         Matches matches = matchesService.getMatchById(id);
         
@@ -57,7 +58,7 @@ public class TicketController {
       
         }
 
-        ModelAndView view = new ModelAndView("new.html");
+        ModelAndView view = new ModelAndView("Ticket.html");
         Ticket ticket = new Ticket();
         view.addObject("Ticket", ticket)
         .addObject("allCategories", allCategories)

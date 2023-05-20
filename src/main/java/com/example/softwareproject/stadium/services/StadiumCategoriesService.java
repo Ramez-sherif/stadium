@@ -17,21 +17,24 @@ import com.example.softwareproject.stadium.repositories.StadiumRepository;
 public class StadiumCategoriesService {
     @Autowired
     private StadiumCategoriesRepository stadiumCategoriesRepository;
+    @Autowired
     private StadiumRepository stadiumRepository;
+    @Autowired
     private CategoryRepository categoryRepository;
 
     public StadiumCategories addCategoryToStadium(Long stadiumId,String categoryId)
     {
         try{
             
-            StadiumCategories stadiumCategories= new StadiumCategories();
-            Stadium stadium=stadiumRepository.findById(stadiumId).orElseThrow();
-            Category category=categoryRepository.findById(categoryId).orElseThrow();                   
+            StadiumCategories stadiumCategories= new StadiumCategories();            
+            Stadium stadium=stadiumRepository.findById(stadiumId).orElse(null);
+            Category category=categoryRepository.findById(categoryId).orElse(null);
             stadiumCategories.setStadium(stadium);
             stadiumCategories.setCategory(category);
             return stadiumCategoriesRepository.save(stadiumCategories);
         }
         catch(Exception e){
+            System.out.println(e);
             return null;
         }
       
