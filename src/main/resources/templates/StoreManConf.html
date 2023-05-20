@@ -9,8 +9,9 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="mx-auto my-auto p-6 bg-white rounded-lg shadow p-4"> 
-    <table class="table-auto">
+    <div class="container mx-auto my-auto p-6 bg-white rounded-lg shadow p-4"> 
+      <h1 class="text-2xl font-bold mb-4 text-center my-10"> Store Confirmation </h1>
+    <table class="mx-auto my-10 text-center">
         <thead>
           <tr>
             <th class="px-4 py-2">Reservation Date</th>
@@ -22,23 +23,26 @@
             <th class="px-4 py-2">Confirmation</th>
           </tr>
         </thead>
+        <form th:action="@{/ticket/confirm}" method="POST">
         <tbody>
-          <tr th:each="ticket : ${tickets}">
-            <td class="border px-4 py-2" th:text="${ticket.reservationDate}"></td>
-            <td class="border px-4 py-2" th:text="${ticket.category}"></td>
-            <td class="border px-4 py-2" th:text="${ticket.stadium}"></td>
-            <td class="border px-4 py-2" th:text="${ticket.price}"></td>
-            <td class="border px-4 py-2" th:text="${ticket.match}"></td>
-            <td class="border px-4 py-2" th:text="${ticket.user}"></td>
-            <td class="border px-4 py-2">
-              <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 rounded"
-                th:attr="data-ticket-id=${ticket.id}"
+            
+            <tr th:each="ticket : ${tickets}">
+              <td class="border px-4 py-2" th:text="${ticket.user.name}"></td>
+              <td class="border px-4 py-2" th:text="${ticket.reservationDate}"></td>
+              <td class="border px-4 py-2" th:text="${ticket.category.name}"></td>
+              <td class="border px-4 py-2" th:text="${ticket.stadium.name}"></td>
+              <td class="border px-4 py-2" th:text="${ticket.price}"></td>
+              <td class="border px-4 py-2" th:text="${ticket.match.name}"></td>
+              <td class="border px-4 py-2">
+                <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 rounded"
+                th:id="ticket.id"
                 onclick="confirmTicket(this.getAttribute('data-ticket-id'))">
                 Confirm
               </button>
             </td>
           </tr>
         </tbody>
+      </form>
       </table> </div>
 </body>
 </html>
