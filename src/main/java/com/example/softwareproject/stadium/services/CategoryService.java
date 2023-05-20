@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.softwareproject.stadium.models.Category;
+import com.example.softwareproject.stadium.models.Stadium;
+import com.example.softwareproject.stadium.models.StadiumImage;
 import com.example.softwareproject.stadium.repositories.CategoryRepository;
 
 @Service
@@ -33,6 +35,13 @@ public class CategoryService {
 
     public List<Category> getAllCategories() {
         return categoryRepository.findAll();
+    }
+    public List<Category> getCategoriesByStadium(Long stadiumImageId) {
+        List<Category> categories = categoryRepository.findByStadiumImageId(stadiumImageId);
+        if(categories == null){
+            return null;
+        }
+        return categories;
     }
 
     public Category GetCategoryById(String id) {
