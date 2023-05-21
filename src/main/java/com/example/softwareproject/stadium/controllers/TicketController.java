@@ -86,7 +86,7 @@ public class TicketController {
     public ModelAndView view(@AuthenticationPrincipal UserDetails userDetails)
     {
       List<Ticket> tickets = this.ticketService.getTicketsByManager(userDetails);
-      ModelAndView ticketView = new ModelAndView("ViewTickets.html");
+      ModelAndView ticketView = new ModelAndView("StoreManConf.html");
       ticketView.addObject("allTickets", tickets);
       return ticketView;
     }
