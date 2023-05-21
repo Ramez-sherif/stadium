@@ -58,11 +58,12 @@ public class TicketService {
     public List<Ticket> getTicketsByManagerStatic(String email){
         List<Ticket> emptyTickets = new ArrayList<Ticket>();
         Ticket no_ticket = new Ticket();
+        no_ticket.setReservationDate(null);
         no_ticket.setUser(null);
         no_ticket.setCategory(null);
         no_ticket.setConfirmation(null);
         no_ticket.setMatch(null);
-        no_ticket.setPrice(0);
+        no_ticket.setPrice(null);
         no_ticket.setStadium(null);
         no_ticket.setStore(null);
         emptyTickets.add(no_ticket);
@@ -77,12 +78,8 @@ public class TicketService {
             
             return emptyTickets;
         } 
-        List<Ticket> tickets = this.ticketRepository.findByStoreId(store.getId());
-        for (Ticket ticket : tickets) {
-            if(ticket.getConfirmation() != null && ticket.getConfirmation() != false){
-                tickets.remove(ticket);
-            }
-        }
+        List<Ticket> tickets = this.ticketRepository.findByConfirmationAndStoreId(true,store.getId());
+       
         if(tickets.size() == 0){
             return emptyTickets;
         }
