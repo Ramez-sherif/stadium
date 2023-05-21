@@ -5,7 +5,14 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
@@ -16,7 +23,9 @@ import com.example.softwareproject.stadium.repositories.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
-public class AuthService {
+public class AuthService implements AuthenticationProvider{
+    @Autowired
+    private UserSecurityService userSecurityService;
     @Autowired
     private RoleRepository roleRepository;
     @Autowired
@@ -81,5 +90,23 @@ public class AuthService {
     public Role getRoleByName(String Name){
         return this.roleRepository.findByName(Name).orElse(null);
 
+    }
+    @Override
+    public Authentication authenticate(Authentication authentication) throws AuthenticationException{
+        //System.out.println(authentication);
+        String email = authentication.getName();
+        String password = authentication.getCredentials().toString();
+        UserDetails userDetails = this.userSecurityService.loadUserByUsername(email);
+        if(userDetails == null){
+            throw new UsernameNotFoundException("Invalid Username");    
+        }
+        if(!checkPassword(password, userDetails.getPassword())){
+            throw new UsernameNotFoundException("Invalid password");    
+        }
+        return new UsernamePasswordAuthenticationToken(userDetails.getUsername(),userDetails.getPassword(),userDetails.getAuthorities());
+    }
+    @Override
+    public boolean supports(Class<?> authentication) {
+       return authentication.equals(UsernamePasswordAuthenticationToken.class);
     }
 }

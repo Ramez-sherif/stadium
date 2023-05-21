@@ -1,6 +1,7 @@
 package com.example.softwareproject.stadium.models;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,11 +25,7 @@ public class PaymentHistory {
     private Ticket ticket;
 
     @Column(nullable = false)
-    private Date paymentDate;
-
-    @ManyToOne
-    @JoinColumn(name = "store_id", nullable = false)
-    private Stores store;
+    private LocalDateTime paymentDate;
 
 
     public Long getId() {
@@ -47,20 +44,12 @@ public class PaymentHistory {
         this.ticket = ticket;
     }
 
-    public Date getPaymentDate() {
+    public LocalDateTime getPaymentDate() {
         return this.paymentDate;
     }
 
-    public void setPaymentDate(Date paymentDate) {
+    public void setPaymentDate(LocalDateTime paymentDate) {
         this.paymentDate = paymentDate;
-    }
-
-    public Stores getStore() {
-        return this.store;
-    }
-
-    public void setStore(Stores store) {
-        this.store = store;
     }
 
 }
