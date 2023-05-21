@@ -37,8 +37,14 @@ public class Ticket {
     @JoinColumn(name = "stadium_id", nullable = false)
     private Stadium stadium;
 
+    @ManyToOne
+    @JoinColumn(name = "store_id", nullable = false)
+    private Stores store;
+    
     @Column(nullable = false)
     private double price;
+
+ 
 
     public Long getId() {
         return this.id;
@@ -106,6 +112,14 @@ public class Ticket {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+    
+    public Stores getStore() {
+        return store;
+    }
+    
+    public void setStore(Stores store) {
+        this.store = store;
     }
 
     

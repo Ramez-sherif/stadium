@@ -18,21 +18,8 @@ public class UserService {
     
     @Autowired
     private RoleRepository roleRepository;
-
-        //functions
-        public User login(User user){
-            //if user with e,ail and passwrod exists 
-            //login or return that user
-            //else returm mull
-            ////if(userRepository.)
-            return null;
-        }
-        public User register(){
-            return null;
-        }
-        public void function(User user){
-            //get from database where role name
-
-        }
-     
+    public void confirmTickets(long ticketId){
+        return;
+    }
+       
 }

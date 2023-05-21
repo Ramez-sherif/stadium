@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -80,5 +82,12 @@ public class TicketController {
       ModelAndView home= new ModelAndView("home.html");
       return home;
     }
-
+    @GetMapping("/view")
+    public ModelAndView view(@AuthenticationPrincipal UserDetails userDetails)
+    {
+      List<Ticket> tickets = this.ticketService.getTicketsByManager(userDetails);
+      ModelAndView ticketView = new ModelAndView("ViewTickets.html");
+      ticketView.addObject("allTickets", tickets);
+      return ticketView;
+    }
 }
