@@ -23,7 +23,7 @@ public class Ticket {
     @JoinColumn(name="match_id", nullable=false)
     private Matches match;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Date reservationDate;
 
     @ManyToOne
@@ -43,7 +43,7 @@ public class Ticket {
     private Stores store;
     
     @Column(nullable = false)
-    private double price;
+    private Double price;
 
  
 
@@ -107,11 +107,11 @@ public class Ticket {
         this.stadium = stadium;
     }
 
-    public double getPrice() {
+    public Double getPrice() {
         return this.price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
     
