@@ -23,20 +23,19 @@
             <th class="px-4 py-2">Confirmation</th>
           </tr>
         </thead>
-        <form th:action="@{/ticket/confirm}" method="POST">
+        <form th:each="ticket : ${allTickets}" th:action="@{/tickets/confirm}" method="POST">
         <tbody>
             
-            <tr th:each="ticket : ${tickets}">
-              <td class="border px-4 py-2" th:text="${ticket.user.name}"></td>
+            <tr >
               <td class="border px-4 py-2" th:text="${ticket.reservationDate}"></td>
               <td class="border px-4 py-2" th:text="${ticket.category.name}"></td>
               <td class="border px-4 py-2" th:text="${ticket.stadium.name}"></td>
               <td class="border px-4 py-2" th:text="${ticket.price}"></td>
-              <td class="border px-4 py-2" th:text="${ticket.match.name}"></td>
+              <td class="border px-4 py-2" th:text="${ticket.match.team1.name} + ' VS ' + ${ticket.match.team2.name}"></td>
+              <td class="border px-4 py-2" th:text="${ticket.user.firstName}"></td>
+              <input type="hidden" name="id" th:value="${ticket.id}">
               <td class="border px-4 py-2">
-                <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 rounded"
-                th:id="ticket.id"
-                onclick="confirmTicket(this.getAttribute('data-ticket-id'))">
+                <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 rounded" th:id="ticket.id">
                 Confirm
               </button>
             </td>

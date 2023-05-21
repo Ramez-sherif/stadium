@@ -29,16 +29,10 @@ public class PaymentHistoryService {
     @Autowired
     private StoresRepository storesRepository;
 
-    public PaymentHistory ConfrimTicket(Long id,UserDetails userDetails){
+    public PaymentHistory ConfrimTicket(Long id){
         Ticket ticket = this.ticketRepository.findById(id).orElse(null);
         if(ticket == null) return null;
         ticket.setConfirmation(true);
-        String email = userDetails.getUsername();
-        User user = this.userRepository.findByEmail(email).orElse(null);
-        if(user == null) return null;
-        String userId = user.getId();
-        Stores store = this.storesRepository.findByManagerId(userId).orElse(null);
-        if(store == null) return null;
         PaymentHistory paymentHistory = new PaymentHistory();
         paymentHistory.setTicket(ticket);        
         paymentHistory.setPaymentDate(LocalDateTime.now());

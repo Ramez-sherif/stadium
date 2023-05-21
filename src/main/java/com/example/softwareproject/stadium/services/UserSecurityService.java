@@ -18,8 +18,8 @@ public class UserSecurityService implements UserDetailsService {
         
         User user = this.userRepository.findByEmail(username).orElse(null);
         if(user == null){
-            System.out.println(username);
-            System.out.println("fuckkkkkkk");
+            System.out.println("username" + username);
+            System.out.println("user is null");
             return null;
         }
         return user;
