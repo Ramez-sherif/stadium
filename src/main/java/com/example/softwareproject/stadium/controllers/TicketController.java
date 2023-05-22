@@ -65,12 +65,13 @@ public class TicketController {
         Ticket ticket = new Ticket();
         view.addObject("Ticket", ticket)
         .addObject("priceOfCategory", priceOfCategory)
+        .addObject("allCategories", allCategories)
         .addObject("stadiumImage", stadiumImage).addObject("matches", matches);
         return view;
     }
 
     @PostMapping("/reserve")
-    public ModelAndView reserve(@RequestParam Map<String, String> myMapp)
+    public ModelAndView reserve(@RequestParam Map<String, String> myMapp,Matches matches)
     {
      
         Map<String, String> myMap = new HashMap<>();

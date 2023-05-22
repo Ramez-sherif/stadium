@@ -44,30 +44,29 @@ h2 {
         <h1 th:text="${matches.team1.name} + ' vs ' + ${matches.team2.name}"></h1>
         <h2 th:text="${matches.date}"></h2>
         <h2 th:text="${matches.stadium.name}">Stadium </h2>
-        <table id="categoryPrice">
+       <table id="categoryPrice">
             <tr>
               <th>Category</th>
               <th>Price</th>
               <th>Quantity</th>
             </tr>
-            <tr th:each="entry : ${priceOfCategory}">
-              <div th:with="myMap = new java.util.HashMap()">
-              <td th:with="Category='${entry.key}'" th:text="${entry.key}"></td>
-
+         <form method="post" th:object="${ReserveTicket}" th:action="@{/auth/home}">
+           <tr th:each="entry : ${allCategories}">  
+              <td  th:text="${entry.name}"></td>
+              <input type="hidden" th:value="${entry.name}" th:field="*{category}"/>
               <td th:text="${entry.value}"></td>
-              <td>
+
+               <td>
                   <button class="px-2 bg-red-300 rounded " onClick="ticket_counter_subtract('tickets-1')">-</button>
-                  <button th:with="quantitiy='${entry.value}'" th:text="${myMap.put(Category, quantitiy)}" id="tickets-1" value="0" class="border-none bg-white-600" >
-                    0
-                  </button>
-                <button class ="px-2 bg-green-300 rounded "onClick="ticket_counter_add('tickets-1')">+</button>
-                <input type="submit" placeholder="reserve">
-      
-              </td>
-                          <!--matches,categ,Quantity--> 
-        
+                  <input   id="tickets-1" value="0" class="border-none bg-white-600" disabled />
+                  <button class ="px-2 bg-green-300 rounded "onClick="ticket_counter_add('tickets-1')">+</button>
+                  <input type="hidden"th:value="0"/>
+                  <button type="submit" placeholder="reserve">reserve</button>
+                       
+                </td>    
             </tr>
-          </table>
+          </form>           <!--matches,categ,Quantity--> 
+        </table>
           
         
   
@@ -85,9 +84,6 @@ if (num>4)
 {
     num=0;
 }
-var post=String(num);
-
-counter.innerHTML = post;
 counter.value=num;
 
 }
@@ -97,9 +93,6 @@ var counter=document.getElementById(id);
 if(counter.value!=0){
 var num=parseInt(counter.value);
 num -= 1;
-var post=String(num);
-
-counter.innerHTML = post;
 counter.value=num;
 }
 }   
