@@ -1,0 +1,135 @@
+<!-- Ticket.html -->
+<!DOCTYPE html>
+<style>
+    #categoryPrice {
+      font-family: Arial, Helvetica, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    #categoryPrice td, #categoryPrice th {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+    
+    #categoryPrice tr:nth-child(even){background-color: #f2f2f2;}
+    
+    #categoryPrice tr:hover {background-color: #ddd;}
+    
+    #categoryPrice th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: left;
+      background-color: #04AA6D;
+      color: white;
+    }
+    h1 {
+  text-align: center;
+  text-transform: uppercase;
+  color: #d01717;
+}
+h2 {
+  text-align: center;
+  text-transform: uppercase;
+  color: #080606;
+}
+    </style>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Ticket Details</title>
+</head>
+<body>
+    <div class="card">
+        <h1 th:text="${matches.team1.name} + ' vs ' + ${matches.team2.name}"></h1>
+        <h2 th:text="${matches.date}"></h2>
+        <h2 th:text="${matches.stadium.name}">Stadium </h2>
+        <table id="categoryPrice">
+            <tr>
+              <th>Category</th>
+              <th>Price</th>
+              <th>Quantity</th>
+            </tr>
+            <tr th:each="entry : ${priceOfCategory}">
+              <div th:with="myMap = new java.util.HashMap()">
+              <td th:with="Category='${entry.key}'" th:text="${entry.key}"></td>
+
+              <td th:text="${entry.value}"></td>
+              <td>
+                  <button class="px-2 bg-red-300 rounded " onClick="ticket_counter_subtract('tickets-1')">-</button>
+                  <button th:with="quantitiy='${entry.value}'" th:text="${myMap.put(Category, quantitiy)}" id="tickets-1" value="0" class="border-none bg-white-600" >
+                    0
+                  </button>
+                <button class ="px-2 bg-green-300 rounded "onClick="ticket_counter_add('tickets-1')">+</button>
+                <input type="submit" placeholder="reserve">
+      
+              </td>
+                          <!--matches,categ,Quantity--> 
+        
+            </tr>
+          </table>
+          
+        
+  
+      </div>
+
+</body>
+<script>
+    function ticket_counter_add(id) {
+
+var counter=document.getElementById(id);
+
+var num=parseInt(counter.value);
+num += 1;
+if (num>4)
+{
+    num=0;
+}
+var post=String(num);
+
+counter.innerHTML = post;
+counter.value=num;
+
+}
+function ticket_counter_subtract(id) {
+
+var counter=document.getElementById(id);
+if(counter.value!=0){
+var num=parseInt(counter.value);
+num -= 1;
+var post=String(num);
+
+counter.innerHTML = post;
+counter.value=num;
+}
+}   
+
+</script>
+</html> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
