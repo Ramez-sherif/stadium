@@ -2,6 +2,8 @@ package com.example.softwareproject.stadium.controllers;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -51,6 +53,7 @@ public class TicketController {
     public ModelAndView reserve(@RequestParam("id") Long id)
     {
         Matches matches = matchesService.getMatchById(id);
+        System.out.println(matches);
         
         Stadium stadium=matches.getStadium();
         StadiumImage stadiumImage = stadiumImageService.getImgLink(stadium.getId());
@@ -64,24 +67,23 @@ public class TicketController {
       
         }
 
-        ModelAndView view = new ModelAndView("Ticket.html");
+        ModelAndView view = new ModelAndView("ticketpage.html");
         Ticket ticket = new Ticket();
         view.addObject("Ticket", ticket)
-        .addObject("allCategories", allCategories)
         .addObject("priceOfCategory", priceOfCategory)
-        .addObject("stadiumImage", stadiumImage);
+        .addObject("allCategories", allCategories)
+        .addObject("stadiumImage", stadiumImage).addObject("matches", matches);
         return view;
     }
 
     @PostMapping("/reserve")
-    public ModelAndView reserve(@ModelAttribute Ticket ticket)
+    public ModelAndView reserve(@RequestParam Map<String, String> myMapp,Matches matches)
     {
-        if( ticketService.addTicket(ticket)== null)
-        {
-            ModelAndView reserveView = new ModelAndView("reserveTicket.html");
-        
-            reserveView.addObject("Ticket", ticket);
-            return reserveView;
+     
+        Map<String, String> myMap = new HashMap<>();
+        for (Entry<String, String> key :myMapp.entrySet()) {
+          String name=key.getKey();
+          String price=key.getValue();
         }
         
       ModelAndView home= new ModelAndView("home.html");
