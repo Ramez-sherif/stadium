@@ -68,7 +68,7 @@ public class AuthController {
             view.addObject("User", user2);
             return view;
         }
-        ModelAndView view2 = new ModelAndView("home.html");
+        ModelAndView view2 = new ModelAndView("newHome.html");
         return view2;
         
     }
