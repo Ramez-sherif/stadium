@@ -1,6 +1,7 @@
 package com.example.softwareproject.stadium.models;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,7 +25,7 @@ public class Ticket {
     private Matches match;
 
     @Column(nullable = true)
-    private Date reservationDate;
+    private LocalDateTime reservationDate;
 
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
@@ -75,11 +76,11 @@ public class Ticket {
         this.match = match;
     }
 
-    public Date getReservationDate() {
+    public LocalDateTime getReservationDate() {
         return this.reservationDate;
     }
 
-    public void setReservationDate(Date reservationDate) {
+    public void setReservationDate(LocalDateTime reservationDate) {
         this.reservationDate = reservationDate;
     }
 

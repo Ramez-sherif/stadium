@@ -14,12 +14,12 @@ import com.example.softwareproject.stadium.repositories.UserRepository;
 public class UserService {
 
     @Autowired
-    private UserRepository userRepository;
-    
+    private UserRepository userRepository; 
     @Autowired
     private RoleRepository roleRepository;
-    public void confirmTickets(long ticketId){
-        return;
+    public User getUserByEmail(String email){
+        
+        return this.userRepository.findByEmail(email).orElse(null);
     }
        
 }
