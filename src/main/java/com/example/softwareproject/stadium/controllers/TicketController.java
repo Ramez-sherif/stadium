@@ -1,5 +1,6 @@
 package com.example.softwareproject.stadium.controllers;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +32,7 @@ import com.example.softwareproject.stadium.services.StadiumCategoriesService;
 import com.example.softwareproject.stadium.services.StadiumImageService;
 import com.example.softwareproject.stadium.services.StadiumService;
 import com.example.softwareproject.stadium.services.TicketService;
+import com.example.softwareproject.stadium.viewModels.ReserveTicket;
 import com.fasterxml.jackson.databind.deser.DataFormatReaders.Match;
 
 @Controller
@@ -52,9 +54,9 @@ public class TicketController {
     @GetMapping("/reserve")
     public ModelAndView reserve(@RequestParam("id") Long id)
     {
+      
         Matches matches = matchesService.getMatchById(id);
-        System.out.println(matches);
-        
+
         Stadium stadium=matches.getStadium();
         StadiumImage stadiumImage = stadiumImageService.getImgLink(stadium.getId());
 
@@ -64,9 +66,8 @@ public class TicketController {
         for(Category c:allCategories){
           double total = c.getPricePercentage() * matches.getPrice()+ matches.getPrice();
           priceOfCategory.put(c.getName(),total);
-      
-        }
 
+        }
         ModelAndView view = new ModelAndView("ticketpage.html");
         Ticket ticket = new Ticket();
         view.addObject("Ticket", ticket)
@@ -74,17 +75,44 @@ public class TicketController {
         .addObject("allCategories", allCategories)
         .addObject("stadiumImage", stadiumImage).addObject("matches", matches);
         return view;
+        /* 
+        
+        List<ReserveTicket> reserveTickets = new ArrayList<ReserveTicket>();
+        for(Category category : allCategories){
+          
+          ReserveTicket reserveTicket = new ReserveTicket();
+          double total = category.getPricePercentage() * matches.getPrice()+ matches.getPrice();
+          reserveTicket.setPrice(total);
+          reserveTicket.setCategory(category);
+          reserveTicket.setQuantity(0);
+          reserveTickets.add(reserveTicket);
+        }
+        ModelAndView view = new ModelAndView("ticketpage.html");
+        
+        view.addObject("reserveTickets", reserveTickets)
+        .addObject("allCategories", allCategories)
+        .addObject("stadiumImage", stadiumImage)
+        .addObject("matches", matches);
+        return view;
+        */
+         
     }
 
     @PostMapping("/reserve")
-    public ModelAndView reserve(@RequestParam Map<String, String> myMapp,Matches matches)
+    public ModelAndView reserve(@RequestParam Map<String, String> myMapp,@ModelAttribute Matches matches)
     {
-     
-        Map<String, String> myMap = new HashMap<>();
-        for (Entry<String, String> key :myMapp.entrySet()) {
-          String name=key.getKey();
-          String price=key.getValue();
-        }
+      //for (ReserveTicket reserveTicket : reserveTickets) {
+        //System.out.println(reserveTicket.getCategory().getName());        
+      //}
+      
+      //Map<String, String> myMap = new HashMap<>();
+      for (Entry<String, String> key :myMapp.entrySet()) {
+        System.out.println("Key: " + key.getKey()); 
+        System.out.println("Value:" + key.getValue()); 
+        
+      }
+      System.out.println("Match Id = " +  matches.getId());
+      
         
       ModelAndView home= new ModelAndView("home.html");
       return home;

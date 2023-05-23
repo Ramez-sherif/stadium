@@ -50,52 +50,67 @@ h2 {
               <th>Price</th>
               <th>Quantity</th>
             </tr>
-         <form method="post" th:object="${ReserveTicket}" th:action="@{/auth/home}">
-           <tr th:each="entry : ${allCategories}">  
-              <td  th:text="${entry.name}"></td>
-              <input type="hidden" th:value="${entry.name}" th:field="*{category}"/>
-              <td th:text="${entry.value}"></td>
-
-               <td>
-                  <button class="px-2 bg-red-300 rounded " onClick="ticket_counter_subtract('tickets-1')">-</button>
-                  <input   id="tickets-1" value="0" class="border-none bg-white-600" disabled />
-                  <button class ="px-2 bg-green-300 rounded "onClick="ticket_counter_add('tickets-1')">+</button>
-                  <input type="hidden"th:value="0"/>
+           
+            <form  method="post" th:object="${matches}" th:action="@{/tickets/reserve}">
+              <tr th:each="entry : ${priceOfCategory}">
+                 <td  th:text="${entry.key}" ></td>
+                 <td th:text="${entry.value}"></td>
+   
+                  <td>
+                     <button type ="button" class="px-2 bg-red-300 rounded " onClick="ticket_counter_subtract('tickets-1')">-</button>
+                     <button  type ="button" class ="px-2 bg-green-300 rounded "onClick="ticket_counter_add('tickets-1')">+</button>
+                     <input  id="tickets-1" value="1" th:name="${entry.key}" class="border-none bg-white-600" readonly/>
+                     
+                    </td>
+                  </tr>
+                  <input type="hidden" th:value="${matches.id}" th:field="*{id}" >
                   <button type="submit" placeholder="reserve">reserve</button>
-                       
-                </td>    
-            </tr>
-          </form>           <!--matches,categ,Quantity--> 
+                </form>
+              
+              <!--
+   matches,categ,Quantity
+
+   <form method="post" th:object="${reserveTickets}" th:action="@{/tickets/reserve}">
+     <tr th:each="entry,iterStat  : ${reserveTickets}">  
+       <td  th:text="${entry.category.name}"></td>
+       <td th:text="${entry.price}"></td>
+       <td>
+         <button class="px-2 bg-red-300 rounded " onClick="ticket_counter_subtract('tickets-1')">-</button>
+         <input   id="tickets-1" th:value="${entry.quantity}" th:field="${reserveTickets[__${iterStat.index}__].quantity}" class="border-none bg-white-600" disabled />
+         <button class ="px-2 bg-green-300 rounded "onClick="ticket_counter_add('tickets-1')">+</button>
+         
+        </td>    
+      </tr>
+      <button type="submit" placeholder="reserve">reserve</button>
+    </form>         
+  -->
+         
         </table>
           
-        
+      
   
       </div>
 
 </body>
 <script>
-    function ticket_counter_add(id) {
+  function ticket_counter_add(id) {
 
-var counter=document.getElementById(id);
+    var counter=document.getElementById(id);
+    var num=parseInt(counter.value);
+    num += 1;
+    if (num > 4) num = 0;
+    counter.value=num;
 
-var num=parseInt(counter.value);
-num += 1;
-if (num>4)
-{
-    num=0;
-}
-counter.value=num;
+  }
+  function ticket_counter_subtract(id) {
 
-}
-function ticket_counter_subtract(id) {
-
-var counter=document.getElementById(id);
-if(counter.value!=0){
-var num=parseInt(counter.value);
-num -= 1;
-counter.value=num;
-}
-}   
+    var counter=document.getElementById(id);
+    if(counter.value != 0 ){
+      var num=parseInt(counter.value);
+      num -= 1;
+      counter.value=num;
+    }
+  }   
 
 </script>
 </html> 
