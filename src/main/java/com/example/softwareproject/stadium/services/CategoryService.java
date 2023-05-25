@@ -60,5 +60,7 @@ public class CategoryService {
         }
         
     }
-
+    public List<Category> GetCategoryByName(String name) {
+        return categoryRepository.findByName(name);
+    }
 }

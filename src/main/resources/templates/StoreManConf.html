@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <title>Store Confirmation </title>
+</head>
+<body>
+    <div class="container mx-auto my-auto p-6 bg-white rounded-lg shadow p-4"> 
+      <h1 class="text-2xl font-bold mb-4 text-center my-10"> Store Confirmation </h1>
+    <table class="mx-auto my-10 text-center">
+        <thead>
+          <tr>
+            <th class="px-4 py-2">Reservation Date</th>
+            <th class="px-4 py-2">Category</th>
+            <th class="px-4 py-2">Stadium</th>
+            <th class="px-4 py-2">Price</th>
+            <th class="px-4 py-2">Match</th>
+            <th class="px-4 py-2">User</th>
+            <th class="px-4 py-2">Confirmation</th>
+          </tr>
+        </thead>
+        <form th:each="ticket : ${allTickets}" th:action="@{/tickets/confirm}" method="POST">
+        <tbody>
+            
+            <tr>
+              
+              <td th:if="${ticket.reservationDate == null}" class="border px-4 py-2" >No data found</td>
+              <td th:if="${ticket.category == null}" class="border px-4 py-2" >No data found</td>
+              <td th:if="${ticket.stadium == null}" class="border px-4 py-2" >No data found</td>
+              <td th:if="${ticket.price == null}" class="border px-4 py-2" >No data found</td>
+              <td th:if="${ticket.match == null}" class="border px-4 py-2" >No data found</td>
+              <td th:if="${ticket.user == null}" class="border px-4 py-2" >No data found</td>
+
+              <td th:if="${ticket.user == null}" class="border px-4 py-2">
+              <button type ="submit" class="bg-gray-500 text-white font-bold py-1 px-2 rounded" disabled>
+                Not Found
+              </button>
+            </td>
+
+              <td th:if="${ticket.reservationDate != null}" class="border px-4 py-2" th:text="${ticket.reservationDate}"></td>
+              <td th:if="${ticket.category != null}" class="border px-4 py-2" th:text="${ticket.category.name}"></td>
+              <td th:if="${ticket.stadium != null}" class="border px-4 py-2" th:text="${ticket.stadium.name}"></td>
+              <td th:if="${ticket.price != null}" class="border px-4 py-2" th:text="${ticket.price}"></td>
+              <td th:if="${ticket.match != null}" class="border px-4 py-2" th:text="${ticket.match.team1.name} + ' VS ' + ${ticket.match.team2.name}"></td>
+              <td th:if="${ticket.user != null}" class="border px-4 py-2" th:text="${ticket.user.firstName}"></td>
+              
+             
+              <td th:if="${ticket.user != null}" class="border px-4 py-2">
+                <button type ="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 rounded" th:id="ticket.id">
+                  Confirm
+                </button>
+              </td>
+            </tr>
+            <input type="hidden" name="id" th:value="${ticket.id}">
+        </tbody>
+      </form>
+      </table> </div>
+</body>
+</html>

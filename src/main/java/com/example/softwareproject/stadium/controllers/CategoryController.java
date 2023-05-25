@@ -42,7 +42,7 @@ public class CategoryController {
         test.setCapacityPercentage(category.getCapacityPercentage());
         test.setPricePercentage(category.getPricePercentage());
         if(categoryService.addcategory(category)== null){
-            ModelAndView categoyView = new ModelAndView("category.html");
+            ModelAndView categoyView = new ModelAndView("AddCategory.html");
             return categoyView;
         }
         ModelAndView homeView = new ModelAndView("home.html");

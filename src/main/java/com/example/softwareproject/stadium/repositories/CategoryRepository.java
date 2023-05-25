@@ -11,4 +11,5 @@ import com.example.softwareproject.stadium.models.StadiumImage;
 @Repository
 public interface CategoryRepository extends JpaRepository<Category,String> {
     List<Category> findByStadiumImageId(Long stadiumImageId);
+    List<Category> findByName(String name);
 }
