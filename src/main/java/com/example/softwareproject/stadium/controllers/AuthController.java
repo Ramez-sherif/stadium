@@ -91,9 +91,12 @@ public class AuthController {
         }
         @GetMapping("/home")
         public ModelAndView home(){
-            ModelAndView home = new ModelAndView("home.html");
-            return home;
-        }
+
+        ModelAndView view2 = new ModelAndView("newHome.html");
+        return view2;
+        
+    }
+
         @GetMapping("/manager/register")
         public ModelAndView StoreManagerRegister(){
             ModelAndView view = new ModelAndView("StoreRegistration.html");
