@@ -93,48 +93,65 @@ public class TicketController {
     {
       String email = userDetails.getUsername();
       User user = this.userService.getUserByEmail(email);
-      //Matches tickeMatch = this.matchesService.getMatchById(matches.getId());
-     // Stadium stadium =  this.stadiumService.getStadiumById(matches.getStadium().getId());
+      if(user == null){
+        System.out.println("user is null");
+        ModelAndView home= new ModelAndView("newHome.html");
+        return home;
+      }
+
       Matches thisMatch = this.matchesService.getMatchById(matches.getId());
       Stadium thisStadium = this.stadiumService.getStadiumById(thisMatch.getStadium().getId());
+
       for (Entry<String, String> key :myMapp.entrySet()) {
         Category thisCategory = this.categoryService.GetCategoryById(key.getKey());
-        for(int i =0; i < Integer.parseInt(key.getValue()) ;i++){
+        if(thisCategory == null) continue;
+        System.out.println(thisCategory.getName());
+        System.out.println("Key: " + key.getKey()); 
+        System.out.println("Value:" + key.getValue()); 
+
+        Integer size = 0;
+        try{
+          size = Integer.parseInt(key.getValue());
+        }catch(Exception e){
+          size = 0;
+        }
+
+        for(int i =0; i < size ;i++){          
           Ticket ticket = new Ticket();
           ticket.setCategory(thisCategory);
           ticket.setMatch(thisMatch);
           ticket.setReservationDate(LocalDateTime.now());
           ticket.setConfirmation(false);
-          double total = thisCategory.getPricePercentage() * matches.getPrice()+ matches.getPrice();
+          double total = thisCategory.getPricePercentage() * thisMatch.getPrice()+ thisMatch.getPrice();
           ticket.setPrice(total);
           ticket.setStadium(thisStadium);
           ticket.setStore(null);
-          ticket.setUser(null);
-          
+          ticket.setUser(user);
+          if(this.ticketService.addTicket(ticket) == null){
+            System.out.println("couldn't add ticket");
+          }
         }
-
+        System.out.println("real size = "+ size);
 
     
         
 
        
-        System.out.println("Key: " + key.getKey()); 
-        System.out.println("Value:" + key.getValue()); 
+      
         
       }
       
       System.out.println("Match Id = " +  matches.getId());
       
         
-      ModelAndView home= new ModelAndView("home.html");
+      ModelAndView home= new ModelAndView("newHome.html");
       return home;
     }
     @GetMapping("/view")
-    public ModelAndView view()
+    public ModelAndView view(@AuthenticationPrincipal UserDetails userDetails)
     {
-      String email = "r@gmail.com";
       //List<Ticket> tickets = this.ticketService.getTicketsByManager(userDetails);
-      List<Ticket> tickets = this.ticketService.getTicketsByManagerStatic(email);
+      List<Ticket> tickets = this.ticketService.getTicketsByManager(userDetails);
       if(tickets.size() == 0){
         System.out.println("empty");
         ModelAndView ticketView = new ModelAndView("home.html");
@@ -150,9 +167,7 @@ public class TicketController {
     @PostMapping("/confirm")
     public String confirmTicket(@RequestParam("id") Long id)
     {
-      if(this.paymentHistoryService.ConfrimTicket(id) == null){
-        return "redirect:/tickets/view";
-      }
-      return "redirect:/auth/home";
+      this.paymentHistoryService.ConfrimTicket(id);
+      return "redirect:/tickets/view";
     }
 }

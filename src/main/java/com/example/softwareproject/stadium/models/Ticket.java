@@ -32,7 +32,7 @@ public class Ticket {
     private Category category;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = true)
     private User user;
 
     @ManyToOne
@@ -40,7 +40,7 @@ public class Ticket {
     private Stadium stadium;
 
     @ManyToOne
-    @JoinColumn(name = "store_id", nullable = false)
+    @JoinColumn(name = "store_id", nullable = true)
     private Stores store;
     
     @Column(nullable = false)
