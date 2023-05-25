@@ -36,7 +36,7 @@ public class TournamentsController {
                 return view;
             }
         
-        ModelAndView homeView = new ModelAndView("home.html");
+        ModelAndView homeView = new ModelAndView("newHome.html");
         return homeView;
     }
 

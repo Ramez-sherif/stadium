@@ -52,7 +52,7 @@ public ModelAndView AddTeams(@ModelAttribute Teams teams,@RequestParam("images")
     String upload = "teams/" + teams.getId();
     this.fileUploadService.saveFile(upload, filename, multipartFile);
 
-   ModelAndView homeView = new ModelAndView("home.html");
+   ModelAndView homeView = new ModelAndView("newHome.html");
      return homeView;
 
 }

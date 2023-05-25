@@ -74,7 +74,7 @@ public class TicketController {
         HashMap<Category,Double> priceOfCategory = new HashMap<>();
 
         for(Category c:allCategories){
-          double total = c.getPricePercentage() * matches.getPrice()+ matches.getPrice();
+          double total = (c.getPricePercentage() * matches.getPrice())/100+ matches.getPrice();
           priceOfCategory.put(c,total);
 
         }
@@ -89,19 +89,20 @@ public class TicketController {
     }
 
     @PostMapping("/reserve")
-    public ModelAndView reserve(@RequestParam Map<String, String> myMapp,@ModelAttribute Matches matches,@AuthenticationPrincipal UserDetails userDetails)
+    public String reserve(@RequestParam Map<String, String> myMapp,@ModelAttribute Matches matches,@AuthenticationPrincipal UserDetails userDetails)
     {
       String email = userDetails.getUsername();
       User user = this.userService.getUserByEmail(email);
       if(user == null){
         System.out.println("user is null");
-        ModelAndView home= new ModelAndView("newHome.html");
-        return home;
+        return "refirect:/Home";
       }
 
       Matches thisMatch = this.matchesService.getMatchById(matches.getId());
       Stadium thisStadium = this.stadiumService.getStadiumById(thisMatch.getStadium().getId());
-
+      if(this.ticketService.getTicketsByUser(userDetails).size() > 4){
+        return "redirect:/tickets/reserve?id=" + matches.getId();
+      }
       for (Entry<String, String> key :myMapp.entrySet()) {
         Category thisCategory = this.categoryService.GetCategoryById(key.getKey());
         if(thisCategory == null) continue;
@@ -122,7 +123,7 @@ public class TicketController {
           ticket.setMatch(thisMatch);
           ticket.setReservationDate(LocalDateTime.now());
           ticket.setConfirmation(false);
-          double total = thisCategory.getPricePercentage() * thisMatch.getPrice()+ thisMatch.getPrice();
+          double total = ((thisCategory.getPricePercentage() * thisMatch.getPrice())/100) + thisMatch.getPrice();
           ticket.setPrice(total);
           ticket.setStadium(thisStadium);
           ticket.setStore(null);
@@ -132,20 +133,12 @@ public class TicketController {
           }
         }
         System.out.println("real size = "+ size);
-
-    
-        
-
-       
-      
-        
       }
       
       System.out.println("Match Id = " +  matches.getId());
       
         
-      ModelAndView home= new ModelAndView("newHome.html");
-      return home;
+      return "redirect:/Home";
     }
     @GetMapping("/view")
     public ModelAndView view(@AuthenticationPrincipal UserDetails userDetails)
