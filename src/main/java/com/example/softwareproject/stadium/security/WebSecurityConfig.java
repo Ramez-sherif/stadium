@@ -33,7 +33,7 @@ public class WebSecurityConfig {
         .authorizeRequests()
         //any role can access these end points
         //.antMatchers("/auth/login","/auth/login/save","/auth/logout").permitAll()
-       .antMatchers("/*","/*/*","/*/*/*").permitAll()
+        .antMatchers("/auth/register").permitAll()
         //only the role user can access these endpoints
         .antMatchers("/User").hasAuthority("USER")
         //only the Admin user can access these endpoints
@@ -41,20 +41,20 @@ public class WebSecurityConfig {
          //only the Store Manager user can access these endpoints
         .antMatchers("/StoreManager").hasAuthority("STOREMANAGER")
         .anyRequest().authenticated()
-        // .and()
-        // .formLogin()
-        // .loginPage("/auth/login")
-        // .loginProcessingUrl("/auth/login/save")
-        // .defaultSuccessUrl("/auth/register")
-        // .permitAll()
-        // .usernameParameter("email")
-        // .and()
-        // .logout()
-        // .permitAll()
-        // .logoutRequestMatcher(new AntPathRequestMatcher("/auth/logout"))
-        // .logoutSuccessUrl("/auth/login");
-        .and()   
-        .addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class);
+        .and()
+        .formLogin()
+        .loginPage("/auth/login")
+        .loginProcessingUrl("/auth/login/save")
+        .defaultSuccessUrl("/Home")
+        .permitAll()
+        .usernameParameter("email")
+        .and()
+        .logout()
+        .permitAll()
+        .logoutRequestMatcher(new AntPathRequestMatcher("/auth/logout"))
+        .logoutSuccessUrl("/auth/login");
+        // .and()   
+        // .addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return httpSecurtiy.build();
     }  
 }

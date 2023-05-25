@@ -35,23 +35,24 @@ public class TicketService {
             return ticketRepository.save(ticket);
         }catch(Exception e)
         {
-         e.toString();
+         System.out.println(e.toString());
          return null;
        }
     }
     public List<Ticket> getTicketsByManager(UserDetails userDetails){
+        List<Ticket> emptyTickets = new ArrayList<Ticket>();
+        Ticket no_ticket = new Ticket();
+        emptyTickets.add(no_ticket);
+
+
         String email = userDetails.getUsername();
         User user = this.userRepository.findByEmail(email).orElse(null);
-        if(user == null) return null;
+        if(user == null)  return emptyTickets;;
         Stores store = this.storesRepository.findByManagerId(user.getId()).orElse(null);
-        if(store == null) return null;
-        List<Ticket> tickets = this.ticketRepository.findByStoreId(store.getId());
-        for (Ticket ticket : tickets) {
-            if(ticket.getConfirmation() == null || ticket.getConfirmation() == false){
-                tickets.remove(ticket);
-            }
-        }
-        if(tickets.size() == 0) return null;
+        if(store == null)  return emptyTickets;;
+        List<Ticket> tickets = this.ticketRepository.findByConfirmationAndStoreId(false,store.getId());
+    
+        if(tickets.size() == 0) return emptyTickets;
         return tickets;
 
     }
