@@ -1,6 +1,7 @@
 package com.example.softwareproject.stadium.models;
 
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -27,7 +28,7 @@ public class Stadium {
     private StadiumImage stadiumImage;
 
     @OneToMany(mappedBy = "stadium")
-    Set<StadiumCategories> stadiumCategories; 
+    List<StadiumCategories> stadiumCategories; 
 /* 
     @ManyToMany
     @JoinTable(
@@ -70,11 +71,11 @@ public class Stadium {
         this.stadiumImage = stadiumImage;
     }
 
-    public Set<StadiumCategories> getStadiumCategories() {
+    public List<StadiumCategories> getStadiumCategories() {
         return stadiumCategories;
     }
 
-    public void setStadiumCategories(Set<StadiumCategories> stadiumCategories) {
+    public void setStadiumCategories(List<StadiumCategories> stadiumCategories) {
         this.stadiumCategories = stadiumCategories;
     }
 

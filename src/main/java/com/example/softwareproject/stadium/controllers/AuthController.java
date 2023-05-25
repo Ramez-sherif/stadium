@@ -69,7 +69,7 @@ public class AuthController {
     }
     @PostMapping("/login/save")
     public String login(@ModelAttribute User user){
-        System.out.println("heeeeeeeeeeeeeeeeeeeeeeeereeeeeeeeeeeeee "  + user.getPassword() + "Email " + user.getEmail());        
+        //System.out.println("heeeeeeeeeeeeeeeeeeeeeeeereeeeeeeeeeeeee "  + user.getPassword() + "Email " + user.getEmail());        
         Authentication authentication = new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword(),user.getAuthorities());
         Authentication authenticated = this.authService.authenticate(authentication);
         SecurityContextHolder.getContext().setAuthentication(authenticated);
@@ -112,7 +112,7 @@ public class AuthController {
                 store.setLocation(storeLocation);
                 store.setName(storeName);
                 store.setManager(newManager);
-                System.out.println(store.getLocation() + "store " + store.getName() + " " + store.getManager().getEmail());
+               // System.out.println(store.getLocation() + "store " + store.getName() + " " + store.getManager().getEmail());
                 if(this.storeService.addStore(store) != null){
                     ModelAndView loginView = new ModelAndView("login.html");
                     User loginUser = new User();

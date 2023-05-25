@@ -58,14 +58,14 @@ public class TicketService {
     public List<Ticket> getTicketsByManagerStatic(String email){
         List<Ticket> emptyTickets = new ArrayList<Ticket>();
         Ticket no_ticket = new Ticket();
-        no_ticket.setReservationDate(null);
-        no_ticket.setUser(null);
-        no_ticket.setCategory(null);
-        no_ticket.setConfirmation(null);
-        no_ticket.setMatch(null);
-        no_ticket.setPrice(null);
-        no_ticket.setStadium(null);
-        no_ticket.setStore(null);
+        // no_ticket.setReservationDate(null);
+        // no_ticket.setUser(null);
+        // no_ticket.setCategory(null);
+        // no_ticket.setConfirmation(null);
+        // no_ticket.setMatch(null);
+        // no_ticket.setPrice(null);
+        // no_ticket.setStadium(null);
+        // no_ticket.setStore(null);
         emptyTickets.add(no_ticket);
         User user = this.userRepository.findByEmail(email).orElse(null);
         if(user == null) {
