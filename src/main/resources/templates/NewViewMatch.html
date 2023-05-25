@@ -1226,15 +1226,15 @@ a.button:hover {
                         <div class="widget-vs">
                             <div class="d-flex align-items-center justify-content-around justify-content-between w-100">
                                 <div class="team-1 text-center">
-                                    <img th:if="${match.team1.imageUrl != null}"  th:src="@{'/' + ${match.team1.imageUrl}}" alt="Team Image">
+                                    <img th:if="${match.team1.image != null}"  th:src="@{'/photos/teams/' + ${match.team1.id} + '/' +${match.team1.image} }" alt="Team Image">
                                     <h3 th:text="${match.team1.name}"></h3>
                                 </div>
                                 <div>
                                     <span class="vs"><span>VS</span></span>
                                 </div>
                                 <div class="team-2 text-center">
-                                    <img th:if="${match.team2.imageUrl != null}" th:src="@{'/' + ${match.team2.imageUrl}}" alt="Team Image">
-
+                                    <img th:if="${match.team2.image != null}" th:src="@{'/photos/teams/' + ${match.team2.id} + '/' +${match.team2.image} }" alt="Team Image">
+                                    
                                     <h3 th:text="${match.team2.name}"></h3>
                                 </div>
                             </div>

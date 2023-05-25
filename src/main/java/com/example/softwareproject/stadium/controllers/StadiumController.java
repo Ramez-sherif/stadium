@@ -57,17 +57,18 @@ public class StadiumController {
     public ModelAndView addStadium(@ModelAttribute Stadium stadium){
         
        
-        StadiumImage SI = stadium.getStadiumImage();
-        if(SI.getId() != null){           
-            List<Category> stadiumCategories = this.categoryService.getCategoriesByStadium(SI.getId());
+        StadiumImage stadiumImage = stadium.getStadiumImage();
+        System.out.println("SID = "+ stadiumImage.getId());
+        if(stadiumImage.getId() != null){           
+            List<Category> stadiumCategories = this.categoryService.getCategoriesByStadium(stadiumImage.getId());
             if(stadiumCategories.size() != 0){
-                stadium.setStadiumImage(this.stadiumImageService.getStadiumById(SI.getId()));
+                stadium.setStadiumImage(this.stadiumImageService.getStadiumById(stadiumImage.getId()));
                 Stadium new_stadium = this.stadiumService.addStadium(stadium);
                 if(new_stadium != null){
                     for(Category category : stadiumCategories) {
                         this.stadiumCategoriesService.addCategoryToStadium(new_stadium.getId(), category.getId());
                     }
-                    ModelAndView homeView = new ModelAndView("home.html");
+                    ModelAndView homeView = new ModelAndView("newHome.html");
                     return homeView;
                 }
             }

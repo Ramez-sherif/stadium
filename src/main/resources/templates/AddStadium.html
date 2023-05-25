@@ -178,8 +178,8 @@ previousOptionValue = selectedOptionValue;
                     <label class="block text-gray-700 font-bold mb-2" for="categories">
                         Number of Categories
                     </label>
-                    <select th:field="*{stadiumImage.id}" th:onchange = "check(this.value)" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="categories">
-                        <option th:each="sImage : ${allStadiumImages}" th:id="${sImage.categoryNumber}"  onClick="check()" th:value="${sImage.id}" th:text="${sImage.categoryNumber}"></option>
+                    <select th:field="*{stadiumImage.id}" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="categories">
+                        <option th:each="sImage : ${allStadiumImages}" th:id="${sImage.categoryNumber}"   th:value="${sImage.id}" th:text="${sImage.categoryNumber}"></option>
                     </select>
                 </div>
 
@@ -280,6 +280,7 @@ previousOptionValue = selectedOptionValue;
             </form>
         </div>
         <script> 
+        /*
          var cat1 = document.getElementById("input1");
             var cat2 = document.getElementById("input2");
             var cat3 = document.getElementById("input3");
@@ -297,6 +298,7 @@ previousOptionValue = selectedOptionValue;
             cat5.style.display = "none";
             cat5Label.style.display = "none";
             // Open and close categories menu
+            */
             /*
             const categoriesMenuButton = document.querySelector('#categories-menu-button');
             const categoriesMenu = document.querySelector('#categories-menu');
