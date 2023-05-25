@@ -6,23 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Document</title>
-</head><body class="bg-gray-200 ">
+</head>
+<body class="bg-gray-200 ">
     <div class=" max-w-xl  mx-auto p-8 bg-white shadow-md rounded-md ">
-        <h2 class="text-2xl font-bold mb-4 " >Add team</h2>
+        <h2 class="text-2xl font-bold mb-4 " >Add Sections</h2>
 
 
-        <form th:action="@{/team/add}" th:object="${Team}" method="POST" enctype="multipart/form-data">           
+        <form th:action="@{/stadium/section}" th:object="${section}" method="POST" enctype="multipart/form-data">           
             <div class="mb-4 ">
                 <label class="block text-gray-700 font-bold mb-2">
-                   Team name
+                   Number of sections
                 </label>
-                <input type="text" th:field="*{name}"  name="team" id="team"class="appearance-none border rounded w-full  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"  >
+                <input type="number" th:field="*{categoryNumber}"  name="team" id="team"class="appearance-none border rounded w-full  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"  >
             </div>
             <div class="mb-4 ">
                 <label class="block text-gray-700 font-bold mb-2">
-                   Team Image
+                   Stadium Chart Image
                 </label>
-                <input type="hidden" th:field="*{image}">
+                <input type="hidden" th:field="*{imgUrl}">
                 <input type="file" name="images" class="appearance-none border rounded w-full  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" accept="image/png, image/jpg" >
             </div>
             <div class="flex justify-center">

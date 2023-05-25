@@ -13,7 +13,8 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class FileUploadService {
     public void saveFile(String uploadDir,String fileName,MultipartFile multipartFile) throws IOException{
-        Path uploadPath = Paths.get(uploadDir);
+        Path currentAbsoulutePath = Paths.get(".").toAbsolutePath();
+        Path uploadPath = Paths.get(currentAbsoulutePath + "/src/main/resources/static/photos/" + uploadDir);
 
         if(!Files.exists(uploadPath)){
             Files.createDirectories(uploadPath);

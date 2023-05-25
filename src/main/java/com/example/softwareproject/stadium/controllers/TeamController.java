@@ -38,12 +38,10 @@ public ModelAndView AddTeams()
 }
 
 @PostMapping("/add")
-public ModelAndView AddTeams(@ModelAttribute Teams teams,@RequestParam("image") MultipartFile multipartFile) throws IOException
+public ModelAndView AddTeams(@ModelAttribute Teams teams,@RequestParam("images") MultipartFile multipartFile) throws IOException
 {   
     String filename = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-    //teams.setImage(filename);
-    
-
+    teams.setImage(filename);
     if(teamsService.addTeam(teams) == null)
     {
         ModelAndView teamView = new ModelAndView("AddTeam.html");
