@@ -76,9 +76,8 @@ public class TicketController {
         for(Category c:allCategories){
           double total = (c.getPricePercentage() * matches.getPrice())/100+ matches.getPrice();
           priceOfCategory.put(c,total);
-
         }
-        ModelAndView view = new ModelAndView("ticketpage.html");
+        ModelAndView view = new ModelAndView("Reserve-Ticket.html");
         Ticket ticket = new Ticket();
         view.addObject("Ticket", ticket)
         .addObject("priceOfCategory", priceOfCategory)
