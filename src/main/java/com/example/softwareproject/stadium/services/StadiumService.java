@@ -21,6 +21,7 @@ public class StadiumService {
           try{
                return stadiumRepository.save(stadium);
           }catch(Exception e){
+               System.out.println(e);
                return null;
           }
      }

@@ -1,6 +1,7 @@
 package com.example.softwareproject.stadium.models;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,29 +17,36 @@ public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private boolean confirmation;
+    @Column(nullable = true)
+    private Boolean confirmation;
 
     @ManyToOne
     @JoinColumn(name="match_id", nullable=false)
     private Matches match;
 
-    @Column(nullable = false)
-    private Date reservationDate;
+    @Column(nullable = true)
+    private LocalDateTime reservationDate;
 
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = true)
     private User user;
 
     @ManyToOne
     @JoinColumn(name = "stadium_id", nullable = false)
     private Stadium stadium;
 
+    @ManyToOne
+    @JoinColumn(name = "store_id", nullable = true)
+    private Stores store;
+    
     @Column(nullable = false)
-    private double price;
+    private Double price;
+
+ 
 
     public Long getId() {
         return this.id;
@@ -52,11 +60,11 @@ public class Ticket {
         return this.confirmation;
     }
 
-    public boolean getConfirmation() {
+    public Boolean getConfirmation() {
         return this.confirmation;
     }
 
-    public void setConfirmation(boolean confirmation) {
+    public void setConfirmation(Boolean confirmation) {
         this.confirmation = confirmation;
     }
 
@@ -68,11 +76,11 @@ public class Ticket {
         this.match = match;
     }
 
-    public Date getReservationDate() {
+    public LocalDateTime getReservationDate() {
         return this.reservationDate;
     }
 
-    public void setReservationDate(Date reservationDate) {
+    public void setReservationDate(LocalDateTime reservationDate) {
         this.reservationDate = reservationDate;
     }
 
@@ -100,12 +108,20 @@ public class Ticket {
         this.stadium = stadium;
     }
 
-    public double getPrice() {
+    public Double getPrice() {
         return this.price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
+    }
+    
+    public Stores getStore() {
+        return store;
+    }
+    
+    public void setStore(Stores store) {
+        this.store = store;
     }
 
     

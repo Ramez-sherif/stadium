@@ -13,23 +13,26 @@ import com.example.softwareproject.stadium.repositories.StadiumRepository;
 
 @Service
 public class StadiumImageService {
+    
     @Autowired
     private StadiumImageRepository stadiumImageRepository;
     @Autowired
     private StadiumRepository stadiumRepository;
 
-    public List<StadiumImage> getAllImgUrl() {
-
-        return this.stadiumImageRepository.findAll();
-
+    public StadiumImage addStadiumImage(StadiumImage stadiumImage){
+        try{
+            return this.stadiumImageRepository.save(stadiumImage);
+        }catch(Exception e){
+            return null;
+        }        
     }
-
+    public List<StadiumImage> getAllImgUrl() {
+        return this.stadiumImageRepository.findAll();
+    }
     public StadiumImage getStadiumById(Long id) {
         return stadiumImageRepository.findById(id).orElse(null);
     }
-
     public StadiumImage getImgLink(long id) {
-
         Stadium stadium = stadiumRepository.findById(id).orElse(null);
         if (stadium== null) return null;
         return stadium.getStadiumImage();

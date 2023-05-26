@@ -23,7 +23,13 @@ public class StoreService {
     }
 
     public Stores addStore(Stores store) {
-        return storesRepository.save(store);
+        try{
+
+            return storesRepository.save(store);
+        }catch (Exception e){
+            System.out.println(e);
+            return null;
+        }
     }
     
     public void deleteStore(Stores c) {

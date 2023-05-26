@@ -77,7 +77,7 @@ public ModelAndView addMatch(){
             .addObject("AllStadiums", allStadiums);
             return matchView;
         }
-        ModelAndView homeView = new ModelAndView("home.html");        
+        ModelAndView homeView = new ModelAndView("newHome.html");        
         //return this.matchesService.getAllMatches().ObjToJson();
 
        return homeView; //redirect to home page when success
@@ -86,7 +86,7 @@ public ModelAndView addMatch(){
     @GetMapping("/view")
     public ModelAndView viewMatches()
     {
-        ModelAndView view = new ModelAndView("viewMatches.html");
+        ModelAndView view = new ModelAndView("newViewMatch.html");
         List<Matches> allMatches = matchesService.getAllMatches();
         view.addObject("AllMatches", allMatches);
         return view;
