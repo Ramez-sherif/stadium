@@ -61,7 +61,7 @@ public class TicketController {
       
         }
 
-        ModelAndView view = new ModelAndView("ticketpage.html");
+        ModelAndView view = new ModelAndView("Reserve-Ticket.html");
         Ticket ticket = new Ticket();
         view.addObject("Ticket", ticket)
         .addObject("priceOfCategory", priceOfCategory)
