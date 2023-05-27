@@ -48,7 +48,7 @@ public class TicketService {
         String email = userDetails.getUsername();
         User user = this.userRepository.findByEmail(email).orElse(null);
         if(user == null)  return emptyTickets;  
-        List<Ticket> tickets = this.ticketRepository.findByConfirmationAndUserId("Reserved",user.getId());
+        List<Ticket> tickets = this.ticketRepository.findByConfirmationAndUserId(0,user.getId());
     
         if(tickets.size() == 0) return emptyTickets;
         return tickets;
@@ -65,7 +65,7 @@ public class TicketService {
         if(user == null)  return emptyTickets;;
         Stores store = this.storesRepository.findByManagerId(user.getId()).orElse(null);
         if(store == null)  return emptyTickets;;
-        List<Ticket> tickets = this.ticketRepository.findByConfirmationAndStoreId("Reserved",store.getId());
+        List<Ticket> tickets = this.ticketRepository.findByConfirmationAndStoreId(0,store.getId());
     
         if(tickets.size() == 0) return emptyTickets;
         return tickets;
@@ -94,7 +94,7 @@ public class TicketService {
             
             return emptyTickets;
         } 
-        List<Ticket> tickets = this.ticketRepository.findByConfirmationAndStoreId("Payed",store.getId());
+        List<Ticket> tickets = this.ticketRepository.findByConfirmationAndStoreId(1,store.getId());
        
         if(tickets.size() == 0){
             return emptyTickets;

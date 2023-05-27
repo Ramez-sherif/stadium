@@ -19,7 +19,7 @@
 
     <div class="overflow-x-auto scroll-smooth">
       <div class="text-2xl text-center bg-gray-800 text-white">
-        ticket history
+        Ticket History
       </div>
       <div
         class="min-w-screen min-h-screen bg-gray-800 flex items-start justify-center bg-gray-800 font-sans overflow-hidden"
@@ -35,84 +35,54 @@
                   <th class="py-3 px-6 text-left rounded-tl-2xl bg-green-600">
                     Away
                   </th>
-                  <th class="py-3 px-6 text-center">stadium</th>
-                  <th class="py-3 px-6 text-center">ticket id</th>
-                  <th class="py-3 px-6 text-center">category</th>
-                  <th class="py-3 px-6 text-center">date</th>
-                  <th class="py-3 px-6 text-center">price</th>
-                  <th class="py-3 px-6 text-center">store</th>
+                  <th class="py-3 px-6 text-center">Stadium</th>
+                  <th class="py-3 px-6 text-center">Category</th>
+                  <th class="py-3 px-6 text-center">Match Date</th>
+                  <th class="py-3 px-6 text-center">Price</th>
+                  <th class="py-3 px-6 text-center">Store</th>
+                  <th class="py-3 px-6 text-center">Status</th>
                 </tr>
               </thead>
 
-              <tbody
-                class="text-white text-sm font-light bg-gray-700 border-4 border-gray-700"
-              >
+              <tbody th:each="ticket : ${ticketHistory}" class="text-white text-sm font-light bg-gray-700 border-4 border-gray-700">
                 <tr class="border-b-4 py-2 border-gray-900 hover:bg-gray-800">
                   <td class="py-3 px-3 border-l-2 border-gray-800 text-center">
-                    <img
-                      class="w-10 h-10 scale-125 rounded-full ml-10 bg-gray-600 mb-2 bg-white rounded-full"
-                      src="src/../../static/ahly.png"
-                    />
-                    <div class="text-2xl mt-5 antialiased">ahly</div>
+                    <img  class="w-10 h-10 scale-125 rounded-full ml-10 bg-gray-600 mb-2 bg-white rounded-full" th:src="@{'/photos/teams/'+ ${ticket.match.team1.id} + '/' + ${ticket.match.team1.image}}" />
+                    <p th:text="${ticket.match.team1.name}" class="text-2xl mt-5 antialiased"></p>
                   </td>
                   <td class="py-3 px-3 border-l-2 border-gray-800 text-center">
-                    <img
-                      class="w-10 h-10 scale-125 rounded-full ml-10 bg-gray-600 mb-2 bg-white rounded-full"
-                      src="src/../../static/zamalek.png"
-                    />
-                    <div class="text-2xl mt-5 antialiased">zamalek</div>
+                    <img class="w-10 h-10 scale-125 rounded-full ml-10 bg-gray-600 mb-2 bg-white rounded-full" th:src="@{'/photos/teams/' + ${ticket.match.team2.id} + '/' + ${ticket.match.team2.image}}"/>
+                    <p th:text="${ticket.match.team2.name}" class="text-2xl mt-5 antialiased"></p>
                   </td>
 
                   <td class="py-3 px-3 border-l-2 border-gray-800 text-center">
-                    <img
-                      class="w-10 h-10 scale-125 rounded-full ml-10 bg-gray-600 mb-2"
-                      src="src/../../static/stadium_icon.png"
-                    />
+                    <img class="w-10 h-10 scale-125 rounded-full ml-10 bg-gray-600 mb-2" th:src="@{/stadium_icon.png}"/>
 
-                    <div class="text-xl mt-5">cairo stadium</div>
-                  </td>
-
-                  <td class="py-3 px-3 border-gray-800 text-center">
-                    <img
-                      class="w-10 h0 scale-125 rounded-full ml-10 mb-2"
-                      src="src/../../static/ticket_icon.png"
-                    />
-                    <div class="text-md mt-5">34523452asdfsdfs</div>
+                    <p th:text="${ticket.stadium.name}" class="text-xl mt-5"></p>
                   </td>
 
                   <td class="py-3 px-3 border-gray-800">
-                    <img
-                      class="w-10 h-10 scale-150 rounded-full ml-10 mb-2"
-                      src="src/../../static/categpry_icon.png"
-                    />
-                    <div
-                      class="bg-yellow-200 text-center text-black rounded text-2xl mt-5"
-                    >
-                      cat-1
-                    </div>
+                    <img class="w-10 h-10 scale-150 rounded-full ml-10 mb-2" th:src="@{'/photos/stadiums/' + ${ticket.stadium.stadiumImage.id} + '/' + ${ticket.stadium.stadiumImage.imgUrl}}"/>
+                    <p th:text="${ticket.category.name}" class="bg-yellow-200 text-center text-black rounded text-2xl mt-5"></p>
                   </td>
 
                   <td class="py-3 px-3 border-gray-800">
-                    <img
-                      class="w-10 h0 scale-90 rounded ml-10 mb-2"
-                      src="src/../../static/date_icon.png"
-                    />
-                    <div class="text-center text-2xl mt-5">23-5-2021</div>
+                    <img class="w-10 h0 scale-90 rounded ml-10 mb-2" th:src="@{/date_icon.png}"/>
+                    <p th:text="${ticket.reservationDate}"class="text-center text-2xl mt-5"></p>
                   </td>
                   <td class="py-3 px-3 border-gray-800">
-                    <img
-                      class="w-10 h0 scale-125 rounded ml-10 mb-2"
-                      src="src/../../static/money_icon.png"
-                    />
-                    <div class="text-center text-2xl mt-5">300</div>
+                    <img class="w-10 h0 scale-125 rounded ml-10 mb-2" th:src="@{/money_icon.png}"/>
+                    <p th:text="${ticket.price}" class="text-center text-2xl mt-5"></p>
                   </td>
 
                   <td class="py-3 px-3 border-gray-800">
-                    <img
-                      class="w-10 h0 scale-100 ml-10 mb-2"
-                      src="src/../../static/store_icon.png"
-                    />
-                    <div class="text-center text-2xl mt-5">virgin</div>
+                    <img class="w-10 h0 scale-100 ml-10 mb-2" th:src="@{/store_icon.png}"/>
+                    <p th:text="${ticket.store.name}" class="text-center text-2xl mt-5"></p>
+                  </td>
+                  <td>
+                    <p th:if="${ticket.confirmation == 0}" class="text-center text-2xl mt-5" th:text = "UnPaid"></p>
+                    <p th:if="${ticket.confirmation == 1}" class="text-center text-2xl mt-5" th:text = "Paid"></p>
+                    <p th:if="${ticket.confirmation == 2}" class="text-center text-2xl mt-5" th:text = "Cancelled"></p>
                   </td>
                 </tr>
               </tbody>
