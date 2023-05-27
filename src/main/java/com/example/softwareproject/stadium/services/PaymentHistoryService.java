@@ -2,8 +2,9 @@ package com.example.softwareproject.stadium.services;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -40,5 +41,14 @@ public class PaymentHistoryService {
             return null;
         }
         return paymentHistory;
+    }
+    public List<Ticket> getAllPurchasedTicketByUser(UserDetails userDetails){
+        List<PaymentHistory> paymentHistory = this.paymentHistoryRepository.findAll();
+        List<Ticket> tickets = new ArrayList<Ticket>();
+        for (PaymentHistory history : paymentHistory) {
+            Ticket ticket = this.ticketRepository.findById(history.getTicket().getId()).orElse(null);
+            tickets.add(ticket);
+        }
+        return tickets;
     }
 }
