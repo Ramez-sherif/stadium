@@ -165,4 +165,20 @@ public class TicketController {
       this.paymentHistoryService.ConfrimTicket(id);
       return "redirect:/tickets/view";
     }
+    
+    
+    @GetMapping("/paymentHistory")
+    public ModelAndView paymentHistory(@AuthenticationPrincipal UserDetails userDetails)
+    {
+      //List<Ticket> tickets = this.ticketService.getTicketsByManager(userDetails);
+      List<Ticket> purchasedTickets =this.paymentHistoryService.getAllPurchasedTicketByUser(userDetails);
+      
+      if(purchasedTickets.size() == 0){
+        Ticket ticket = new Ticket();
+        purchasedTickets.add(ticket);
+      }      
+      ModelAndView ticketView = new ModelAndView("PaymentHistory.html");
+      ticketView.addObject("allPurchasedTickets", purchasedTickets);
+      return ticketView;
+    }
 }
