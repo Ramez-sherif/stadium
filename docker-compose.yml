@@ -1,0 +1,23 @@
+version: "3.8"
+services:
+  server:
+    build: .
+
+    restart: always
+    ports:
+      - 8080:8080
+    depends_on:
+      - mysqldb
+
+
+
+  mysqldb:
+    image: "mysql"
+    restart: always
+    ports:
+      - 3307:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: stadium
+      MYSQL_DATABASE: stadiumdb
+      MYSQL_USER: stadium
+      MYSQL_PASSWORD: stadium
