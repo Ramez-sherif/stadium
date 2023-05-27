@@ -108,7 +108,7 @@ public class TicketController {
       User user = this.userService.getUserByEmail(email);
       if(user == null){
         System.out.println("user is null");
-        return "refirect:/Home";
+        return "refirect:/matches/view";
       }
 
       Matches thisMatch = this.matchesService.getMatchById(matches.getId());
@@ -130,13 +130,14 @@ public class TicketController {
           ticket.setCategory(thisCategory);
           ticket.setMatch(thisMatch);
           ticket.setReservationDate(LocalDateTime.now());
-          ticket.setConfirmation("Reserve");
+          ticket.setConfirmation(0);
           double total = ((thisCategory.getPricePercentage() * thisMatch.getPrice())/100) + thisMatch.getPrice();
           ticket.setPrice(total);
           ticket.setStadium(thisStadium);
           ticket.setStore(store);
           ticket.setUser(user);
           if(this.ticketService.addTicket(ticket) == null){
+            return "redirect:/tickets/reserve?id=" + matches.getId();
           }
         }
       }
@@ -171,14 +172,16 @@ public class TicketController {
     public ModelAndView paymentHistory(@AuthenticationPrincipal UserDetails userDetails)
     {
       //List<Ticket> tickets = this.ticketService.getTicketsByManager(userDetails);
-      List<Ticket> purchasedTickets =this.paymentHistoryService.getAllPurchasedTicketByUser(userDetails);
+      //List<Ticket> purchasedTickets =this.paymentHistoryService.getAllPurchasedTicketByUser(userDetails);
+      List<Ticket> purchasedTickets = this.ticketService.getTicketsByUser(userDetails);
       
       if(purchasedTickets.size() == 0){
         Ticket ticket = new Ticket();
         purchasedTickets.add(ticket);
       }      
-      ModelAndView ticketView = new ModelAndView("PaymentHistory.html");
-      ticketView.addObject("allPurchasedTickets", purchasedTickets);
+      ModelAndView ticketView = new ModelAndView("TicketHistory.html");
+      ticketView.addObject("ticketHistory", purchasedTickets);
       return ticketView;
     }
+
 }

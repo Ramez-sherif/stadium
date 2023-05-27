@@ -38,11 +38,11 @@ public class reportsController {
 
         for (Ticket ticket : allTickets)
         {
-            if(ticket.getConfirmation().equalsIgnoreCase("payed"))
+            if(ticket.getConfirmation()==1)
             {
                 payedList.add(ticket);         
             }
-            else if(ticket.getConfirmation().equalsIgnoreCase("Reserve"))
+            else if(ticket.getConfirmation()==0)
             {
                 reservedList.add(ticket);
             }

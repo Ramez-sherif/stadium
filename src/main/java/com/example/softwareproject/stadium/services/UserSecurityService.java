@@ -14,7 +14,7 @@ public class UserSecurityService implements UserDetailsService {
     private UserRepository userRepository;
     
     @Override
-    public UserDetails loadUserByUsername(String username) {
+    public User loadUserByUsername(String username) {
         
         User user = this.userRepository.findByEmail(username).orElse(null);
         if(user == null){

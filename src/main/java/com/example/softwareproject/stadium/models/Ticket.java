@@ -18,7 +18,7 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = true)
-    private String  confirmation;
+    private int  confirmation;
 
     @ManyToOne
     @JoinColumn(name="match_id", nullable=false)
@@ -55,11 +55,11 @@ public class Ticket {
     public void setId(Long id) {
         this.id = id;
     }
-    public String getConfirmation() {
+    public int getConfirmation() {
         return this.confirmation;
     }
 
-    public void setConfirmation(String confirmation) {
+    public void setConfirmation(int confirmation) {
         this.confirmation = confirmation;
     }
 
