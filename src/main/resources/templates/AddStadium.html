@@ -1,154 +1,235 @@
-
-    <!DOCTYPE html>
-    <html lang="en" xmlns:th="http:thymeleaf.org">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="https://cdn.tailwindcss.com"></script>
-        <title>Add Stadium</title>
-    </head>
-    <script> 
-         let previousOptionValue;
-         function Valid(selectedElement){
-            let previousOptions = [];
-            const selectElements = document.querySelectorAll('select');
-            selectElements.forEach((selectsElement) => {
-            previousOptions.push(selectsElement.value);
-            });
-            selectElements.forEach((selectElement) => {
-            const otherOptions = selectElement.querySelectorAll('option');
-            otherOptions.forEach((option) => {
-                option.style.display = "block";
-            if(previousOptions.includes(option.value)){
-                option.style.display = "none";
-            }
-            });
-            });
-         }
-
-function Validss(selectedElement) {
-  // Get the selected option value
-  //const selectedOptionId = selectedElement.id;
-    const selectedOptionValue = selectedElement.value;
-  // Loop through all the select elements
-  const selectElements = document.querySelectorAll('select');
-  selectElements.forEach((selectElement) => {
-    if (selectElement !== selectedElement) {
-      // Remove the selected option from the other select element's option list
-      const otherOptions = selectElement.querySelectorAll('option');
-      otherOptions.forEach((option) => {
-        if (option.value === selectedOptionValue) {
-          option.style.display = "none";
-        }
-        });
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http:thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Add Stadium</title>
+    <!--nav bar-->
+    <style>
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: none;
       }
-    });
-    
+      .overlay.visible {
+        display: block;
+      }
+    </style>
+    <div id="overlay" class="overlay"></div>
+    <div class="flex justify-end mt-4 mr-4 mb-20">
+      <a
+        th:href="@{/stores}"
+        class="opacity-100 hover:bg-green-500 text-white font-bold py-2 px-4 rounded mr-4 my-4 inline-flex items-center"
+        >Stores
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill-current
+          w-4
+          h-4
+          mr-2
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-6 h-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"
+          />
+        </svg>
+      </a>
+      <a
+        th:href="@{/match/view}"
+        class="opacity-100 hover:bg-green-500 text-white font-bold py-2 px-4 rounded mr-2 my-4 inline-flex items-center"
+        >Matches
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-6 h-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M14.25 6.087c0-.355.186-.676.401-.959.221-.29.349-.634.349-1.003 0-1.036-1.007-1.875-2.25-1.875s-2.25.84-2.25 1.875c0 .369.128.713.349 1.003.215.283.401.604.401.959v0a.64.64 0 01-.657.643 48.39 48.39 0 01-4.163-.3c.186 1.613.293 3.25.315 4.907a.656.656 0 01-.658.663v0c-.355 0-.676-.186-.959-.401a1.647 1.647 0 00-1.003-.349c-1.036 0-1.875 1.007-1.875 2.25s.84 2.25 1.875 2.25c.369 0 .713-.128 1.003-.349.283-.215.604-.401.959-.401v0c.31 0 .555.26.532.57a48.039 48.039 0 01-.642 5.056c1.518.19 3.058.309 4.616.354a.64.64 0 00.657-.643v0c0-.355-.186-.676-.401-.959a1.647 1.647 0 01-.349-1.003c0-1.035 1.008-1.875 2.25-1.875 1.243 0 2.25.84 2.25 1.875 0 .369-.128.713-.349 1.003-.215.283-.4.604-.4.959v0c0 .333.277.599.61.58a48.1 48.1 0 005.427-.63 48.05 48.05 0 00.582-4.717.532.532 0 00-.533-.57v0c-.355 0-.676.186-.959.401-.29.221-.634.349-1.003.349-1.035 0-1.875-1.007-1.875-2.25s.84-2.25 1.875-2.25c.37 0 .713.128 1.003.349.283.215.604.401.96.401v0a.656.656 0 00.658-.663 48.422 48.422 0 00-.37-5.36c-1.886.342-3.81.574-5.766.689a.578.578 0 01-.61-.58v0z"
+          />
+        </svg>
+      </a>
+      <a
+        th:href="@{/tournaments}"
+        class="opacity-100 hover:bg-green-500 text-white font-bold py-2 px-4 rounded my-4 inline-flex items-center"
+        >Tournaments
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-6 h-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 007.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 002.748 1.35m8.272-6.842V4.5c0 2.108-.966 3.99-2.48 5.228m2.48-5.492a46.32 46.32 0 012.916.52 6.003 6.003 0 01-5.395 4.972m0 0a6.726 6.726 0 01-2.749 1.35m0 0a6.772 6.772 0 01-3.044 0"
+          />
+        </svg>
+      </a>
+    </div>
+    <!--navbar-->
+  </head>
+  <script>
+    let previousOptionValue;
+    function Valid(selectedElement) {
+      let previousOptions = [];
+      const selectElements = document.querySelectorAll("select");
+      selectElements.forEach((selectsElement) => {
+        previousOptions.push(selectsElement.value);
+      });
+      selectElements.forEach((selectElement) => {
+        const otherOptions = selectElement.querySelectorAll("option");
+        otherOptions.forEach((option) => {
+          option.style.display = "block";
+          if (previousOptions.includes(option.value)) {
+            option.style.display = "none";
+          }
+        });
+      });
+    }
+
+    function Validss(selectedElement) {
+      // Get the selected option value
+      //const selectedOptionId = selectedElement.id;
+      const selectedOptionValue = selectedElement.value;
+      // Loop through all the select elements
+      const selectElements = document.querySelectorAll("select");
+      selectElements.forEach((selectElement) => {
+        if (selectElement !== selectedElement) {
+          // Remove the selected option from the other select element's option list
+          const otherOptions = selectElement.querySelectorAll("option");
+          otherOptions.forEach((option) => {
+            if (option.value === selectedOptionValue) {
+              option.style.display = "none";
+            }
+          });
+        }
+      });
 
       // Add back the previously selected option to the other select element's option list
       if (previousOptionValue != null) {
         //let previousOption = document.getElementById(previousOptionId);
-        const sselectElements = document.querySelectorAll('select');
+        const sselectElements = document.querySelectorAll("select");
         sselectElements.forEach((eselectElement) => {
-        const otherOptions = eselectElement.querySelectorAll('option');
-         otherOptions.forEach((option) => {
-          if (option.value === previousOptionValue) {
-            option.style.display = "block";
-          }
+          const otherOptions = eselectElement.querySelectorAll("option");
+          otherOptions.forEach((option) => {
+            if (option.value === previousOptionValue) {
+              option.style.display = "block";
+            }
+          });
         });
-    });
-        
-}
-previousOptionValue = selectedOptionValue;
-}
+      }
+      previousOptionValue = selectedOptionValue;
+    }
 
-       // const option = document.createElement('option');
-        //option.value = previousOption;
-       // option.text = `Option ${previousOption}`;
-       // selectElement.add(option);
+    // const option = document.createElement('option');
+    //option.value = previousOption;
+    // option.text = `Option ${previousOption}`;
+    // selectElement.add(option);
 
-  // Store the selected option as the previous option
-        function Valids(selectedElement) {
-            // Get the selected option value
-            const selectedOptionValue = selectedElement.value;
+    // Store the selected option as the previous option
+    function Valids(selectedElement) {
+      // Get the selected option value
+      const selectedOptionValue = selectedElement.value;
 
-            // Loop through all the select elements
-            const selectElements = document.querySelectorAll('select');
-            selectElements.forEach((selectElement) => {
-                if (selectElement !== selectedElement) {
-                // Remove the selected option from the other select element's option list
-                const otherOptions = selectElement.querySelectorAll('option');
-                otherOptions.forEach((option) => {
-                    if (option.value === selectedOptionValue) {
-                        option.style.display = "none";      
-                        
-                    }else{
-                        option.style.display = "block";
-                    }
-                });
-
-                }
-            });
-
+      // Loop through all the select elements
+      const selectElements = document.querySelectorAll("select");
+      selectElements.forEach((selectElement) => {
+        if (selectElement !== selectedElement) {
+          // Remove the selected option from the other select element's option list
+          const otherOptions = selectElement.querySelectorAll("option");
+          otherOptions.forEach((option) => {
+            if (option.value === selectedOptionValue) {
+              option.style.display = "none";
+            } else {
+              option.style.display = "block";
+            }
+          });
         }
-        function check(categoryNumber){
-           console.log(categoryNumber);
-           var cat4 = document.getElementById("input4");
-           var cat5 = document.getElementById("input5");
-           var cat4Label = document.getElementById("input4Label");
-           var cat5Label = document.getElementById("input5Label");
-                
-           if(categoryNumber == "3"){
-                cat4.style.display = "none";
-                cat4Label.style.display = "none";
-                cat5.style.display = "none";
-                cat5Label.style.display = "none";
-                cat4.value = null;
-                cat5.value = null;
-           }
-           else if(categoryNumber == "4"){
-            cat4.style.display = "block";
-            cat4Label.style.display = "block";
-            cat5.style.display = "none";
-            cat5Label.style.display = "none";
-            cat5.value = null;
-           }else if(categoryNumber == "5"){
-            cat4.style.display = "block";
-            cat4Label.style.display = "block";
-            cat5.style.display = "block";
-            cat5Label.style.display = "block";
-           }
-        }
-        console.log("script");
-    </script>  
-    <body class="bg-gray-200">
-        <div class="max-w-xl mx-auto p-8 bg-white shadow-md rounded-md">
-            <h2 class="text-2xl font-bold mb-4">Add Stadium</h2>
-            <form th:action="@{/stadium/add}" th:object="${stadium}" method="POST">
-                <!--
+      });
+    }
+    function check(categoryNumber) {
+      console.log(categoryNumber);
+      var cat4 = document.getElementById("input4");
+      var cat5 = document.getElementById("input5");
+      var cat4Label = document.getElementById("input4Label");
+      var cat5Label = document.getElementById("input5Label");
+
+      if (categoryNumber == "3") {
+        cat4.style.display = "none";
+        cat4Label.style.display = "none";
+        cat5.style.display = "none";
+        cat5Label.style.display = "none";
+        cat4.value = null;
+        cat5.value = null;
+      } else if (categoryNumber == "4") {
+        cat4.style.display = "block";
+        cat4Label.style.display = "block";
+        cat5.style.display = "none";
+        cat5Label.style.display = "none";
+        cat5.value = null;
+      } else if (categoryNumber == "5") {
+        cat4.style.display = "block";
+        cat4Label.style.display = "block";
+        cat5.style.display = "block";
+        cat5Label.style.display = "block";
+      }
+    }
+    console.log("script");
+  </script>
+  <body
+    class="font-[Poppins] bg-sky-300 bg-cover bg-center h-screen"
+    style="background-image: url('wallpaper2.jpg')"
+  >
+    <div class="max-w-xl mx-auto p-8 bg-white shadow-md rounded-md">
+      <h2 class="text-2xl font-bold mb-4">Add Stadium</h2>
+      <form th:action="@{/stadium/add}" th:object="${stadium}" method="POST">
+        <!--
                 <div class="mb-4">
                     <label class="block text-gray-700 font-bold mb-2" for="team1">
                         Team 1
                     </label>
                     <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="team1" type="text" placeholder="Team 1">
                 </div>  -->
-    
-                <div class="mb-4">
-                    <label class="block text-gray-700 font-bold mb-2" for="Name">
-                     Stadium Name
-                    </label>
-                    <input th:field="*{name}"class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Stadium Name">
-                    <!--
+
+        <div class="mb-4">
+          <label class="block text-gray-700 font-bold mb-2" for="Name">
+            Stadium Name
+          </label>
+          <input
+            th:field="*{name}"
+            class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="name"
+            type="text"
+            placeholder="Stadium Name"
+          />
+          <!--
                     <select class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="tournament">
                         <option value="">Select Team 1</option>
                         <option value="1">Team 1</option>
                         <option value="2">Team 2</option>
                         <option value="3">Team 3</option>
                     </select> -->
-                </div>
-    
-    <!--modify here, teams from db in thymeleaf, use function AddTeam, obj->user
+        </div>
+
+        <!--modify here, teams from db in thymeleaf, use function AddTeam, obj->user
                 <div class="mb-4">
                     <label class="block text-gray-700 font-bold mb-2" for="location">
                         Location
@@ -157,33 +238,45 @@ previousOptionValue = selectedOptionValue;
 
                     
                         </div> -->
-                <div class="mb-4">
-                    <label class="block text-gray-700 font-bold mb-2" for="capacity">
-                        Capacity
-                    </label>
-                    <input th:field="*{Capacity}" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="capacity" min="0" type="number" placeholder="Stadium Capacity">
-<!--
+        <div class="mb-4">
+          <label class="block text-gray-700 font-bold mb-2" for="capacity">
+            Capacity
+          </label>
+          <input
+            th:field="*{Capacity}"
+            class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="capacity"
+            min="0"
+            type="number"
+            placeholder="Stadium Capacity"
+          />
+          <!--
                     <select class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="stadium">
                         <option value="">Select a stadium</option>
                         <option value="1">Stadium 1</option>
                         <option value="2">Stadium 2</option>
                         <option value="3">Stadium 3</option>
                     </select> -->
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 font-bold mb-2" for="categories">
+            Number of Categories
+          </label>
+          <select
+            th:field="*{stadiumImage.id}"
+            class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="categories"
+          >
+            <option
+              th:each="sImage : ${allStadiumImages}"
+              th:id="${sImage.categoryNumber}"
+              th:value="${sImage.id}"
+              th:text="${sImage.categoryNumber}"
+            ></option>
+          </select>
+        </div>
 
-
-
-
-                </div>
-                <div class="mb-4">
-                    <label class="block text-gray-700 font-bold mb-2" for="categories">
-                        Number of Categories
-                    </label>
-                    <select th:field="*{stadiumImage.id}" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="categories">
-                        <option th:each="sImage : ${allStadiumImages}" th:id="${sImage.categoryNumber}"   th:value="${sImage.id}" th:text="${sImage.categoryNumber}"></option>
-                    </select>
-                </div>
-
-                <!-- 
+        <!-- 
                 <div class="mb-4">
                     <label class="block text-gray-700 font-bold mb-2" for="Category 1 Name">
                     Category 1 Name
@@ -209,7 +302,7 @@ previousOptionValue = selectedOptionValue;
                         <input class="appearance-none border rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Category 3 Name">
 
                     </div>  -->
-                    <!--
+        <!--
                     <input type="hidden" id="temp">
                     <div class="flex flex-wrap -mx-2 mb-4">
                         <div class="w-full md:w-1/3 px-2">
@@ -269,18 +362,21 @@ previousOptionValue = selectedOptionValue;
                             
                         </div>
                     -->
-                    
-                    <br>
 
-                <div class="flex justify-center">
-                    <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline" type="submit">
-                        Add Stadium
-                    </button>
-                </div>
-            </form>
+        <br />
+
+        <div class="flex justify-center">
+          <button
+            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline"
+            type="submit"
+          >
+            Add Stadium
+          </button>
         </div>
-        <script> 
-        /*
+      </form>
+    </div>
+    <script>
+      /*
          var cat1 = document.getElementById("input1");
             var cat2 = document.getElementById("input2");
             var cat3 = document.getElementById("input3");
@@ -299,7 +395,7 @@ previousOptionValue = selectedOptionValue;
             cat5Label.style.display = "none";
             // Open and close categories menu
             */
-            /*
+      /*
             const categoriesMenuButton = document.querySelector('#categories-menu-button');
             const categoriesMenu = document.querySelector('#categories-menu');
     
@@ -315,6 +411,6 @@ previousOptionValue = selectedOptionValue;
                 }
             });
             */
-        </script>
-    </body>
-    </html>
+    </script>
+  </body>
+</html>
