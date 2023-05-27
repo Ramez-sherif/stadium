@@ -121,7 +121,7 @@ public class TicketController {
           ticket.setCategory(thisCategory);
           ticket.setMatch(thisMatch);
           ticket.setReservationDate(LocalDateTime.now());
-          ticket.setConfirmation(false);
+          ticket.setConfirmation("Reserve");
           double total = ((thisCategory.getPricePercentage() * thisMatch.getPrice())/100) + thisMatch.getPrice();
           ticket.setPrice(total);
           ticket.setStadium(thisStadium);
