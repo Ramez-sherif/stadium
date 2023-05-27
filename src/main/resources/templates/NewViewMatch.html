@@ -1194,26 +1194,25 @@ a.button:hover {
                         <div class="widget-vs">
                             <div class="d-flex align-items-center justify-content-around justify-content-between w-100">
                                 <div class="team-1 text-center">
-                                    <img src="images/logo_1.png" alt="Image">
-                                    <h3>Football League</h3>
+                                    <img th:if="${nextMatch != null}" th:src="@{'/photos/teams/' + ${nextMatch.team1.id}  + '/' + ${nextMatch.team1.image}}" alt="Image">
+                                    <h3  th:if="${nextMatch != null}" th:text="${nextMatch.team1.name}"></h3>
                                 </div>
                                 <div>
                                     <span class="vs"><span>VS</span></span>
                                 </div>
                                 <div class="team-2 text-center">
-                                    <img src="images/logo_2.png" alt="Image">
-                                    <h3>Soccer</h3>
+                                    <img th:if="${nextMatch != null}" th:src="@{'/photos/teams/' + ${nextMatch.team2.id}  + '/' +  ${nextMatch.team2.image}}" alt="Image">
+                                    <h3 th:if="${nextMatch != null}" th:text="${nextMatch.team2.name}"></h3>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="text-center widget-vs-contents mb-4">
-                        <h4>World Cup League</h4>
+                        <h4 th:if="${nextMatch != null}" th:text="${nextMatch.tournament.name}"></h4>
                         <p class="mb-5">
-                            <span class="d-block">December 20th, 2020</span>
-                            <span class="d-block">9:30 AM GMT+0</span>
-                            <strong class="text-primary">New Euro Arena</strong>
+                            <span class="d-block" th:text="${nextMatch.stadium.name}"></span>
+                            <strong th:text="${nextMatch.date}" class="text-primary"></strong>
                             
                         </p>
                     </div>
