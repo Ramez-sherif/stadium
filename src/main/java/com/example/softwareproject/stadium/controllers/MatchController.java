@@ -1,5 +1,6 @@
 package com.example.softwareproject.stadium.controllers;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +28,7 @@ import com.example.softwareproject.stadium.services.MatchesService;
 import com.example.softwareproject.stadium.services.StadiumService;
 import com.example.softwareproject.stadium.services.TeamsService;
 import com.example.softwareproject.stadium.services.TournamentsService;
+
 
 @RequestMapping("/match")
 @Controller
@@ -88,7 +90,21 @@ public ModelAndView addMatch(){
     {
         ModelAndView view = new ModelAndView("newViewMatch.html");
         List<Matches> allMatches = matchesService.getAllMatches();
-        view.addObject("AllMatches", allMatches);
+        LocalDateTime targetDate = LocalDateTime.now();
+        Duration minDuration = null;
+        Matches nextMatch = null;
+        for (Matches matches : allMatches) {
+            if (matches.getDate().isBefore(targetDate)) {
+                continue; // skip over dates before the current date and time
+              }
+            Duration duration = Duration.between(targetDate, matches.getDate());
+            if(minDuration == null || duration.compareTo(minDuration) < 0){
+                minDuration = duration;
+                nextMatch = matches;
+            }
+        }
+        view.addObject("AllMatches", allMatches)
+        .addObject("nextMatch", nextMatch);
         return view;
 
     }

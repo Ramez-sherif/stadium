@@ -96,13 +96,16 @@ public class AuthService implements AuthenticationProvider{
         //System.out.println(authentication);
         String email = authentication.getName();
         String password = authentication.getCredentials().toString();
-        UserDetails userDetails = this.userSecurityService.loadUserByUsername(email);
-        if(userDetails == null){
-            throw new UsernameNotFoundException("Invalid Username");    
+        User user = this.userSecurityService.loadUserByUsername(email);
+        if(user == null){
+            //throw new UsernameNotFoundException("Invalid Username");   
+            return null; 
         }
-        if(!checkPassword(password, userDetails.getPassword())){
-            throw new UsernameNotFoundException("Invalid password");    
+        if(!checkPassword(password, user.getPassword())){
+            //throw new UsernameNotFoundException("Invalid password"); 
+            return null;   
         }
+        UserDetails userDetails = user;
         return new UsernamePasswordAuthenticationToken(userDetails.getUsername(),userDetails.getPassword(),userDetails.getAuthorities());
     }
     @Override

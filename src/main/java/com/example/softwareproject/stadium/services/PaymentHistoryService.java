@@ -33,7 +33,7 @@ public class PaymentHistoryService {
     public PaymentHistory ConfrimTicket(Long id){
         Ticket ticket = this.ticketRepository.findById(id).orElse(null);
         if(ticket == null) return null;
-        ticket.setConfirmation("Payed");
+        ticket.setConfirmation(1);
         PaymentHistory paymentHistory = new PaymentHistory();
         paymentHistory.setTicket(ticket);        
         paymentHistory.setPaymentDate(LocalDateTime.now());

@@ -11,8 +11,8 @@ import com.example.softwareproject.stadium.models.Ticket;
 @Repository
 public interface TicketRepository extends JpaRepository<Ticket,Long> {
     List<Ticket> findByStoreId(Long id);
-    List<Ticket> findByConfirmationAndStoreId(String confirmation,Long id);
-    List<Ticket> findByConfirmationAndUserId(String confirmation,String id);
+    List<Ticket> findByConfirmationAndStoreId(int confirmation,Long id);
+    List<Ticket> findByConfirmationAndUserId(int confirmation,String id);
     List<Ticket> findByMatchId(Long id);
 
 }

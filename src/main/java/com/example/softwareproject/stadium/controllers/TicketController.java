@@ -99,7 +99,9 @@ public class TicketController {
         .addObject("stadiumImage", stadiumImage).addObject("matches", matches);
     return view;
 
+
   }
+
 
   @PostMapping("/reserve")
   public String reserve(@RequestParam Map<String, String> myMapp, @ModelAttribute Matches matches,
@@ -127,18 +129,19 @@ public class TicketController {
       } catch (Exception e) {
         size = 0;
       }
-      for (int i = 0; i < size; i++) {
-        Ticket ticket = new Ticket();
-        ticket.setCategory(thisCategory);
-        ticket.setMatch(thisMatch);
-        ticket.setReservationDate(LocalDateTime.now());
-        ticket.setConfirmation("Reserve");
-        double total = ((thisCategory.getPricePercentage() * thisMatch.getPrice()) / 100) + thisMatch.getPrice();
-        ticket.setPrice(total);
-        ticket.setStadium(thisStadium);
-        ticket.setStore(store);
-        ticket.setUser(user);
-        if (this.ticketService.addTicket(ticket) == null) {
+        for(int i =0; i < size ;i++){          
+          Ticket ticket = new Ticket();
+          ticket.setCategory(thisCategory);
+          ticket.setMatch(thisMatch);
+          ticket.setReservationDate(LocalDateTime.now());
+          ticket.setConfirmation(0);
+          double total = ((thisCategory.getPricePercentage() * thisMatch.getPrice())/100) + thisMatch.getPrice();
+          ticket.setPrice(total);
+          ticket.setStadium(thisStadium);
+          ticket.setStore(store);
+          ticket.setUser(user);
+          if(this.ticketService.addTicket(ticket) == null){
+            return "redirect:/tickets/reserve?id=" + matches.getId();
         }
       }
     }
@@ -160,23 +163,29 @@ public class TicketController {
     return ticketView;
   }
 
-  @PostMapping("/confirm")
-  public String confirmTicket(@RequestParam("id") Long id) {
-    this.paymentHistoryService.ConfrimTicket(id);
-    return "redirect:/tickets/view";
-  }
 
-  @GetMapping("/paymentHistory")
-  public ModelAndView paymentHistory(@AuthenticationPrincipal UserDetails userDetails) {
-    // List<Ticket> tickets = this.ticketService.getTicketsByManager(userDetails);
-    List<Ticket> purchasedTickets = this.paymentHistoryService.getAllPurchasedTicketByUser(userDetails);
-
-    if (purchasedTickets.size() == 0) {
-      Ticket ticket = new Ticket();
-      purchasedTickets.add(ticket);
+    @PostMapping("/confirm")
+    public String confirmTicket(@RequestParam("id") Long id)
+    {
+      this.paymentHistoryService.ConfrimTicket(id);
+      return "redirect:/tickets/view";
     }
-    ModelAndView ticketView = new ModelAndView("PaymentHistory.html");
-    ticketView.addObject("allPurchasedTickets", purchasedTickets);
-    return ticketView;
-  }
+    
+    
+    @GetMapping("/paymentHistory")
+    public ModelAndView paymentHistory(@AuthenticationPrincipal UserDetails userDetails)
+    {
+      //List<Ticket> tickets = this.ticketService.getTicketsByManager(userDetails);
+      //List<Ticket> purchasedTickets =this.paymentHistoryService.getAllPurchasedTicketByUser(userDetails);
+      List<Ticket> purchasedTickets = this.ticketService.getTicketsByUser(userDetails);
+      
+      if(purchasedTickets.size() == 0){
+        Ticket ticket = new Ticket();
+        purchasedTickets.add(ticket);
+      }      
+      ModelAndView ticketView = new ModelAndView("TicketHistory.html");
+      ticketView.addObject("ticketHistory", purchasedTickets);
+      return ticketView;
+    }
+
 }
