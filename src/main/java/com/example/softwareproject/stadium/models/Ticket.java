@@ -18,7 +18,7 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = true)
-    private Boolean confirmation;
+    private int  confirmation;
 
     @ManyToOne
     @JoinColumn(name="match_id", nullable=false)
@@ -32,7 +32,7 @@ public class Ticket {
     private Category category;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = true)
     private User user;
 
     @ManyToOne
@@ -40,7 +40,7 @@ public class Ticket {
     private Stadium stadium;
 
     @ManyToOne
-    @JoinColumn(name = "store_id", nullable = false)
+    @JoinColumn(name = "store_id", nullable = true)
     private Stores store;
     
     @Column(nullable = false)
@@ -55,16 +55,11 @@ public class Ticket {
     public void setId(Long id) {
         this.id = id;
     }
-
-    public boolean isConfirmation() {
+    public int getConfirmation() {
         return this.confirmation;
     }
 
-    public Boolean getConfirmation() {
-        return this.confirmation;
-    }
-
-    public void setConfirmation(Boolean confirmation) {
+    public void setConfirmation(int confirmation) {
         this.confirmation = confirmation;
     }
 

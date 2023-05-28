@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Sliding Page</title>
+  <!-- Include Tailwind CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.7/tailwind.min.css">
+</head>
+<body>
+  <header class="bg-gray-800 text-white py-4">
+    <div class="container mx-auto px-4">
+      <h1 class="text-3xl font-bold">Sliding Page</h1>
+    </div>
+  </header>
+  <div class="container mx-auto px-4 py-8">
+    <button class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline" onclick="toggleContent()">
+      View More
+    </button>
+    <div id="content" class="hidden">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget mauris euismod, facilisis quam vel, sollicitudin tellus. Donec fermentum, velit sit amet vestibulum fringilla, enim diam tincidunt lorem, in placerat risus eros nec purus. Praesent vitae urna vel arcu congue malesuada. Fusce dignissim eros vel massa gravida, vel posuere enim imperdiet. Nunc vel mi ac massa porta tristique. Integer dictum, enim vel dictum, enim nisi feugiat orci, vitae vehicula nulla nulla quis dolor. Nulla facilisi.</p>
+      <p>Phasellus quis nisl vulputate, vehicula sapien eu, congue tortor. Sed euismod, lectus sed vehicula molestie, urna nunc vehicula risus, vel bibendum eros lacus a magna. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Ut euismod, quam eu consequat elementum, sem enim iaculis mauris, et lobortis massa diam at libero. Morbi malesuada purus in odio scelerisque, eget pellentesque nunc bibendum. Sed ut augue vitae dui pulvinar dignissim. Nam lorem massa, blandit id tortor quis, blandit consectetur sem. Morbi sed aliquam lectus. Duis ultrices, eros quis malesuada molestie, sapien arcu luctus enim, at feugiat turpis tortor nonenim. Etiam scelerisque est ut quam lacinia malesuada. Proin rutrum est sed hendrerit tincidunt. Donec pretium diam ac mattis convallis.</p>
+    </div>
+  </div>
+  <footer class="bg-gray-800 text-white py-4">
+    <div class="container mx-auto px-4">
+      <p>&copy; 2023 Sliding Page</p>
+    </div>
+  </footer>
+  <script>
+    function toggleContent() {
+      var content = document.getElementById("content");
+      if (content.style.display === "none") {
+        content.style.display = "block";
+      } else {
+        content.style.display = "none";
+      }
+    }
+  </script>
+</body>
+</html>

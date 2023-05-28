@@ -45,7 +45,7 @@ public class CategoryController {
             ModelAndView categoyView = new ModelAndView("AddCategory.html");
             return categoyView;
         }
-        ModelAndView homeView = new ModelAndView("home.html");
+        ModelAndView homeView = new ModelAndView("newHome.html");
         return homeView;
     }
     

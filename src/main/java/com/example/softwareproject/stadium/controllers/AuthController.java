@@ -34,19 +34,19 @@ public class AuthController {
     @GetMapping("/register")
     public ModelAndView register(){
         
-        ModelAndView view = new ModelAndView("register.html");
-        User user = new User();
-        view.addObject("User", user);
-        return view;    
+        ModelAndView registerView = new ModelAndView("register.html");
+        User newUser = new User();
+        registerView.addObject("User", newUser);
+        return registerView;    
     }
     
     @PostMapping("/register")
-    public ModelAndView register(@ModelAttribute User user){
-        Role role = this.authService.getRoleByName("User");
+    public ModelAndView register(@ModelAttribute User newUser){
+        Role userRole = this.authService.getRoleByName("User");
 
-        user.setRole(role);
+        newUser.setRole(userRole);
         
-        if(role != null && this.authService.register(user) != null){
+        if(userRole != null && this.authService.register(newUser) != null){
             ModelAndView loginView = new ModelAndView("login.html");
             User loginUser = new User();
             loginView.addObject("User", loginUser);
@@ -54,8 +54,7 @@ public class AuthController {
            
         }
         ModelAndView registerView = new ModelAndView("register.html");
-        User registerUser = new User();
-        registerView.addObject("User", registerUser);
+        registerView.addObject("User", newUser);
         return registerView;
        
     }
@@ -65,6 +64,15 @@ public class AuthController {
         ModelAndView view = new ModelAndView("login.html");
         User user = new User();
         view.addObject("User", user);
+        return view;    
+    }
+    @GetMapping("/login/error")
+    public ModelAndView loginError(){
+        String message = "Invalid Username or password";
+        ModelAndView view = new ModelAndView("login.html");
+        User user = new User();
+        view.addObject("User", user)
+        .addObject("message", message);
         return view;    
     }
     @PostMapping("/login/save")
