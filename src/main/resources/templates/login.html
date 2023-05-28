@@ -7,7 +7,10 @@
     <title>Login Page</title>
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body class="bg-gray-200">
+    <body
+    class="font-[Poppins] bg-sky-300 bg-cover bg-center h-screen bg-gray-200"
+    style="background-image: url('wallpaper2.jpg')"
+  >
     <!-- modify here for backend -->
 
     <form th:action="@{/auth/login/save}" th:object="${User}" method="POST">

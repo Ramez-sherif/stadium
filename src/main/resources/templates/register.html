@@ -12,10 +12,13 @@
       color:red;
     }
   </style>
-  <body class="bg-gray-200">
+    <body
+    class="font-[Poppins] bg-sky-300 bg-cover bg-center h-screen bg-gray-200 bg-gray-200"
+    style="background-image: url('wallpaper2.jpg')"
+  >
     <!-- modify here for backend -->
     <form th:action="@{/auth/register}" th:object="${User}" method="POST" id="myForm">
-      <div class="flex  justify-center  items-center h-screen ">
+      <div class="flex  justify-center  items-center h-screen opacity-90 ">
         <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col w-full md:w-2/3 lg:w-1/3">
           <!--data entry-->
           <div class="mb-4">
