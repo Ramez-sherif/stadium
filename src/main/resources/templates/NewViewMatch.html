@@ -1,235 +1,1262 @@
-<style> 
-    html {
+<style>
+  body {
+      line-height: 1.7;
+      color: gray;
+      font-weight: 300;
+      background-color: #222831;
+      font-size: 16px;
+  }
+
+  body {
+      margin: 0;
+      font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #212529;
+      text-align: left;
+      background-color: #fff;
+  }
+
+  *,
+  *::before,
+  *::after {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+  }
+
+  user agent stylesheet body {
+      display: block;
+      margin: 8px;
+  }
+
+  :root {
+      --blue: #007bff;
+      --indigo: #0d0cb5;
+      --purple: #7971ea;
+      --pink: #e83e8c;
+      --red: #f23a2e;
+      --orange: #ef6c57;
+      --yellow: #f89d13;
+      --green: #8bc34a;
+      --teal: #48d494;
+      --cyan: #17a2b8;
+      --white: #fff;
+      --gray: #6c757d;
+      --gray-dark: #343a40;
+      --primary: #ee1e46;
+      --secondary: #6c757d;
+      --success: #8bc34a;
+      --info: #17a2b8;
+      --warning: #f89d13;
+      --danger: #f23a2e;
+      --light: #f8f9fa;
+      --dark: #343a40;
+      --breakpoint-xs: 0;
+      --breakpoint-sm: 576px;
+      --breakpoint-md: 768px;
+      --breakpoint-lg: 992px;
+      --breakpoint-xl: 1200px;
+      --font-family-sans-serif: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+      --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  }
+
+  html {
+      font-family: sans-serif;
+      line-height: 1.15;
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
       -ms-overflow-style: scrollbar;
-    }
-    .container {
-      max-width: 800px;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
+
+  *,
+  *::before,
+  *::after {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+  }
+
+  *,
+  *::before,
+  *::after {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+  }
+
+  ::selection {
+      background: #000;
+      color: #fff;
+  }
+
+  *,
+  *::before,
+  *::after {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+  }
+
+  user agent stylesheet div {
+      display: block;
+  }
+
+  body {
+      margin: 0;
+      font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #212529;
+      text-align: left;
+      background-color: #fff;
+  }
+
+  .site-mobile-menu {
+      width: 300px;
+      position: fixed;
+      right: 0;
+      z-index: 2000;
+      padding-top: 20px;
+      background: #fff;
+      height: calc(100vh);
+      -webkit-transform: translateX(110%);
+      -ms-transform: translateX(110%);
+      transform: translateX(110%);
+      -webkit-box-shadow: -10px 0 20px -10px rgba(0, 0, 0, 0.1);
+      box-shadow: -10px 0 20px -10px rgba(0, 0, 0, 0.1);
+      -webkit-transition: .3s all ease-in-out;
+      -o-transition: .3s all ease-in-out;
+      transition: .3s all ease-in-out;
+  }
+
+  *,
+  *::before,
+  *::after {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+  }
+
+  user agent stylesheet div {
+      display: block;
+  }
+
+  body {
+      line-height: 1.7;
+      color: gray;
+      font-weight: 300;
+      background-color: #222831;
+      font-size: 16px;
+  }
+
+  body {
+      margin: 0;
+      font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #212529;
+      text-align: left;
+      background-color: #fff;
+  }
+
+  :root {
+      --blue: #007bff;
+      --indigo: #0d0cb5;
+      --purple: #7971ea;
+      --pink: #e83e8c;
+      --red: #f23a2e;
+      --orange: #ef6c57;
+      --yellow: #f89d13;
+      --green: #8bc34a;
+      --teal: #48d494;
+      --cyan: #17a2b8;
+      --white: #fff;
+      --gray: #6c757d;
+      --gray-dark: #343a40;
+      --primary: #ee1e46;
+      --secondary: #6c757d;
+      --success: #8bc34a;
+      --info: #17a2b8;
+      --warning: #f89d13;
+      --danger: #f23a2e;
+      --light: #f8f9fa;
+      --dark: #343a40;
+      --breakpoint-xs: 0;
+      --breakpoint-sm: 576px;
+      --breakpoint-md: 768px;
+      --breakpoint-lg: 992px;
+      --breakpoint-xl: 1200px;
+      --font-family-sans-serif: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+      --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  }
+
+  html {
+      font-family: sans-serif;
+      line-height: 1.15;
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+      -ms-overflow-style: scrollbar;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
+
+  *,
+  *::before,
+  *::after {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+  }
+
+  *,
+  *::before,
+  *::after {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+  }
+
+  ::selection {
+      background: #000;
+      color: #fff;
+  }
+
+  .site-navbar {
+      margin-bottom: 0px;
+      z-index: 1999;
+      position: absolute;
+      width: 100%;
+  }
+
+  .py-4 {
+      padding-bottom: 1.5rem !important;
+  }
+
+  .py-4 {
+      padding-top: 1.5rem !important;
+  }
+
+  article,
+  figcaption,
+  figure,
+  footer,
+  header,
+  main,
+  nav {
+      display: block;
+  }
+
+  *,
+  *::before,
+  *::after {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+  }
+
+  user agent stylesheet header {
+      display: block;
+  }
+
+  element.style {
+      background-image: url(wallpaper2.jpg);
+  }
+
+  .hero,
+  .hero>.container>.row {
+      height: 100vh;
+      min-height: 500px;
+  }
+
+  .hero {
+      background-size: cover;
+      background-position: center center;
+  }
+
+  *,
+  *::before,
+  *::after {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+  }
+
+  user agent stylesheet div {
+      display: block;
+  }
+
+  .container {
+      width: 100%;
       padding-right: 15px;
       padding-left: 15px;
       margin-right: auto;
       margin-left: auto;
-    }
-  </style>
-  
-  <!DOCTYPE html>
-  <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <script src="https://cdn.tailwindcss.com"></script>
-      <link
-        href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
-        rel="stylesheet"
-      />
-      <link
-        href="https://unpkg.com/tailwindcss@%5E2/dist/tailwind.min.css"
-        rel="stylesheet"
-      />
-      <title class="text-center flex items-center justify-center">View Matches</title>
-    </head>
-  
-    <body
-      class="font-[Poppins] bg-cover bg-center "
-      style="background-image: url('wallpaper2.jpg')"
-    >
-      <!--body heading -->
-  
-      <div class="snap-y snap-mandatory h-screen w-screen overflow-scroll ">
-        <div class="container flex items-center">
-          
-            <div class=" mx-auto text-center">
-  
-              <div id="overlay" class="overlay mt-10"></div>
-              <div class=" absolute right-20 margin-bottom: -100px; ">
-                <a
-                  th:href="@{/Ticket}"
-                  class="opacity-100 hover:bg-green-500 text-white font-bold py-2 px-4 rounded mr-4 my-4 inline-flex items-center"
-                  >Ticket History
-          
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    class="w-6 h-6"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M14.25 6.087c0-.355.186-.676.401-.959.221-.29.349-.634.349-1.003 0-1.036-1.007-1.875-2.25-1.875s-2.25.84-2.25 1.875c0 .369.128.713.349 1.003.215.283.401.604.401.959v0a.64.64 0 01-.657.643 48.39 48.39 0 01-4.163-.3c.186 1.613.293 3.25.315 4.907a.656.656 0 01-.658.663v0c-.355 0-.676-.186-.959-.401a1.647 1.647 0 00-1.003-.349c-1.036 0-1.875 1.007-1.875 2.25s.84 2.25 1.875 2.25c.369 0 .713-.128 1.003-.349.283-.215.604-.401.959-.401v0c.31 0 .555.26.532.57a48.039 48.039 0 01-.642 5.056c1.518.19 3.058.309 4.616.354a.64.64 0 00.657-.643v0c0-.355-.186-.676-.401-.959a1.647 1.647 0 01-.349-1.003c0-1.035 1.008-1.875 2.25-1.875 1.243 0 2.25.84 2.25 1.875 0 .369-.128.713-.349 1.003-.215.283-.4.604-.4.959v0c0 .333.277.599.61.58a48.1 48.1 0 005.427-.63 48.05 48.05 0 00.582-4.717.532.532 0 00-.533-.57v0c-.355 0-.676.186-.959.401-.29.221-.634.349-1.003.349-1.035 0-1.875-1.007-1.875-2.25s.84-2.25 1.875-2.25c.37 0 .713.128 1.003.349.283.215.604.401.96.401v0a.656.656 0 00.658-.663 48.422 48.422 0 00-.37-5.36c-1.886.342-3.81.574-5.766.689a.578.578 0 01-.61-.58v0z"
-                    />
-                  </svg>
-                </a>
-                <a
-                  th:href="@{/match/view}"
-                  class="opacity-100 hover:bg-green-500 text-white font-bold py-2 px-4 rounded mr-2 my-4 inline-flex items-center"
-                  >Matches
-          
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    class="w-6 h-6"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 007.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 002.748 1.35m8.272-6.842V4.5c0 2.108-.966 3.99-2.48 5.228m2.48-5.492a46.32 46.32 0 012.916.52 6.003 6.003 0 01-5.395 4.972m0 0a6.726 6.726 0 01-2.749 1.35m0 0a6.772 6.772 0 01-3.044 0"
-                    />
-                  </svg>
-                </a>
-                <a
-                  th:href="@{/auth/logout}"
-                  class="opacity-100 hover:bg-green-500 text-white font-bold py-2 px-4 rounded my-4 inline-flex items-center"
-                  >Logout
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill-current
-                    w-4
-                    h-4
-                    mr-2
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    class="w-6 h-6"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"
-                    />
-                  </svg>
-                </a>
-              </div>
-  
-  
-              <h1 class="text-white text-6xl mb-20 flex items-center text-center mt-40">View Matches</h1>
-          <p class="text-white text-2xl antialiased mt-20 flex items-center ">
-View the latest Matches!          </p>
-  
-  
-          </div>
-  
-        </div>
-      </div>
-      <!--nav bar-->
-  
-      
-      <!--navbar-->
-      <!--  body content px=56  -->
-  
+  }
 
-      <div class="site-section bg-gray-700">
-        <div class="container">
-            <div class="row mb-5">
-                <div class="col-lg-12">
-                    <div class="widget-next-match">
-                        <div class="widget-title">
-                            <h3>Next Match</h3>
-                        </div>
-                        <div class="widget-body mb-3">
-                            <div class="widget-vs">
-                                <div class="d-flex align-items-center justify-content-around justify-content-between w-100">
-                                    <div class="team-1 text-center">
-                                        <img th:if="${nextMatch != null}" th:src="@{'/photos/teams/' + ${nextMatch.team1.id}  + '/' + ${nextMatch.team1.image}}" alt="Image">
-                                        <h3  th:if="${nextMatch != null}" th:text="${nextMatch.team1.name}"></h3>
-                                    </div>
-                                    <div>
-                                        <span class="vs"><span>VS</span></span>
-                                    </div>
-                                    <div class="team-2 text-center">
-                                        <img th:if="${nextMatch != null}" th:src="@{'/photos/teams/' + ${nextMatch.team2.id}  + '/' +  ${nextMatch.team2.image}}" alt="Image">
-                                        <h3 th:if="${nextMatch != null}" th:text="${nextMatch.team2.name}"></h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-    
-                        <div class="text-center widget-vs-contents mb-4">
-                            <h4 th:if="${nextMatch != null}" th:text="${nextMatch.tournament.name}"></h4>
-                            <p class="mb-5">
-                                <span class="d-block" th:text="${nextMatch.stadium.name}"></span>
-                                <strong th:text="${nextMatch.date}" class="text-primary"></strong>
-                                
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12 title-section">
-                    <h2 class="heading">Upcoming Match</h2>
-                </div>
-                <div th:each="match : ${AllMatches}" class="col-lg-6 mb-4">
-                    <div   class="bg-light p-4 rounded">
-                        <div class="widget-body">
-                            <div class="widget-vs">
-                                <div class="d-flex align-items-center justify-content-around justify-content-between w-100">
-                                    <div class="team-1 text-center">
-                                        <img th:if="${match.team1.image != null}"  th:src="@{'/photos/teams/' + ${match.team1.id} + '/' +${match.team1.image} }" alt="Team Image">
-                                        <h3 th:text="${match.team1.name}"></h3>
-                                    </div>
-                                    <div>
-                                        <span class="vs"><span>VS</span></span>
-                                    </div>
-                                    <div class="team-2 text-center">
-                                        <img th:if="${match.team2.image != null}" th:src="@{'/photos/teams/' + ${match.team2.id} + '/' +${match.team2.image} }" alt="Team Image">
-                                        
-                                        <h3 th:text="${match.team2.name}"></h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-center widget-vs-contents mb-4">
-                            <h4  th:text="${match.tournament.name}"></h4>
-                            <h4  th:text="${match.stadium.name}"></h4>
-                            <h4  th:text="${match.date}"></h4>
-                            <a th:href="@{/tickets/reserve(id=${match.id})}" class="button">Reserve</a>
-                            
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-    </div>
-    
-    
-    </div>
-    
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/jquery-migrate-3.0.1.min.js"></script>
-    <script src="js/jquery-ui.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/jquery.stellar.min.js"></script>
-    <script src="js/jquery.countdown.min.js"></script>
-    <script src="js/bootstrap-datepicker.min.js"></script>
-    <script src="js/jquery.easing.1.3.js"></script>
-    <script src="js/aos.js"></script>
-    <script src="js/jquery.fancybox.min.js"></script>
-    <script src="js/jquery.sticky.js"></script>
-    <script src="js/jquery.mb.YTPlayer.min.js"></script>
-    <script src="js/main.js"></script>
-    
-    <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-    
-        gtag('config', 'UA-23581568-13');
-    </script>
-    <script defer=""
-        src="https://static.cloudflareinsights.com/beacon.min.js/v52afc6f149f6479b8c77fa569edb01181681764108816"
-        integrity="sha512-jGCTpDpBAYDGNYR5ztKt4BQPGef1P0giN6ZGVUi835kFF88FOmmn8jBQWNgrNd8g/Yu421NdgWhwQoaOPFflDw=="
-        data-cf-beacon="{&quot;rayId&quot;:&quot;7cb5fa0e788d0772&quot;,&quot;token&quot;:&quot;cd0b4b3a733644fc843ef0b185f98241&quot;,&quot;version&quot;:&quot;2023.4.0&quot;,&quot;si&quot;:100}"
-        crossorigin="anonymous"></script>
-    </body>
-  </html>
-  
+  *,
+  *::before,
+  *::after {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+  }
+
+  user agent stylesheet div {
+      display: block;
+  }
+
+  .row {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+      margin-right: -15px;
+      margin-left: -15px;
+  }
+
+  *,
+  *::before,
+  *::after {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+  }
+
+  user agent stylesheet div {
+      display: block;
+  }
+
+  .bg-dark {
+      background: #1a1e25 !important;
+  }
+
+  .site-section {
+      padding: 2.5em 0;
+  }
+
+  .bg-dark {
+      background-color: #343a40 !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+  }
+
+  div {
+      display: block;
+  }
+
+  .mb-5 {
+      margin-bottom: 3rem !important;
+  }
+
+  .row {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+      margin-right: -15px;
+      margin-left: -15px;
+  }
+
+  *,
+  *::before,
+  *::after {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+  }
+
+   div {
+      display: block;
+  }
+
+  .row {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+      margin-right: -15px;
+      margin-left: -15px;
+  }
+
+  *,
+  *::before,
+  *::after {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+  }
+
+  user agent stylesheet div {
+      display: block;
+  }
+
+  body {
+      line-height: 1.7;
+      color: gray;
+      font-weight: 300;
+      background-color: #222831;
+      font-size: 16px;
+  }
+
+  .title-section {
+      margin-bottom: 30px;
+  }
+
+  .col-12 {
+      -webkit-box-flex: 0;
+      -ms-flex: 0 0 100%;
+      flex: 0 0 100%;
+      max-width: 100%;
+  }
+
+  .col-6,
+  .col-12,
+  .col,
+  .col-md-4,
+  .col-md-8,
+  .col-md-12,
+  .col-lg-3,
+  .col-lg-4,
+  .col-lg-5,
+  .col-lg-6,
+  .col-lg-7,
+  .col-lg-9,
+  .col-lg-12 {
+      position: relative;
+      width: 100%;
+      min-height: 1px;
+      padding-right: 15px;
+      padding-left: 15px;
+  }
+
+  *,
+  *::before,
+  *::after {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+  }
+
+  user agent stylesheet div {
+      display: block;
+  }
+
+  .mb-4 {
+      margin-bottom: 1.5rem !important;
+  }
+
+  .col-6,
+  .col-12,
+  .col,
+  .col-md-4,
+  .col-md-8,
+  .col-md-12,
+  .col-lg-3,
+  .col-lg-4,
+  .col-lg-5,
+  .col-lg-6,
+  .col-lg-7,
+  .col-lg-9,
+  .col-lg-12 {
+      position: relative;
+      width: 100%;
+      min-height: 1px;
+      padding-right: 15px;
+      padding-left: 15px;
+  }
+
+  *,
+  *::before,
+  *::after {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+  }
+
+  user agent stylesheet div {
+      display: block;
+  }
+
+  .bg-light {
+      background: rgba(255, 255, 255, 0.05) !important;
+  }
+
+  .p-4 {
+      padding: 1.5rem !important;
+  }
+
+  .rounded {
+      border-radius: 0.25rem !important;
+  }
+
+  .bg-light {
+      background-color: #1e2429 !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+  }
+
+  user agent stylesheet div {
+      display: block;
+  }
+
+  .widget-body {
+      padding: 20px;
+  }
+
+  *,
+  *::before,
+  *::after {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+  }
+
+  user agent stylesheet div {
+      display: block;
+  }
+
+  .widget-vs {
+      width: 100%;
+  }
+
+  *,
+  *::before,
+  *::after {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+  }
+
+  user agent stylesheet div {
+      display: block;
+  }
+
+  .w-100 {
+      width: 100% !important;
+  }
+
+  .align-items-center {
+      -webkit-box-align: center !important;
+      -ms-flex-align: center !important;
+      align-items: center !important;
+  }
+
+  .justify-content-around {
+      -ms-flex-pack: distribute !important;
+      justify-content: space-around !important;
+  }
+
+  .justify-content-between {
+      -webkit-box-pack: justify !important;
+      -ms-flex-pack: justify !important;
+      justify-content: space-between !important;
+  }
+
+  .d-flex {
+      display: -webkit-box !important;
+      display: -ms-flexbox !important;
+      display: flex !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+  }
+
+  user agent stylesheet div {
+      display: block;
+  }
+
+  .text-center {
+      text-align: center !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+  }
+
+  user agent stylesheet div {
+      display: block;
+  }
+
+  .widget-vs-contents {
+      padding-bottom: 0px;
+  }
+
+  .text-center {
+      text-align: center !important;
+  }
+
+  .mb-4 {
+      margin-bottom: 1.5rem !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+  }
+
+  user agent stylesheet div {
+      display: block;
+  }
+
+  .mb-4 {
+      margin-bottom: 1.5rem !important;
+  }
+
+  .col-6,
+  .col-12,
+  .col,
+  .col-md-4,
+  .col-md-8,
+  .col-md-12,
+  .col-lg-3,
+  .col-lg-4,
+  .col-lg-5,
+  .col-lg-6,
+  .col-lg-7,
+  .col-lg-9,
+  .col-lg-12 {
+      position: relative;
+      width: 100%;
+      min-height: 1px;
+      padding-right: 15px;
+      padding-left: 15px;
+  }
+
+  *,
+  *::before,
+  *::after {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+  }
+
+  user agent stylesheet div {
+      display: block;
+  }
+
+  .p-4 {
+      padding: 1.5rem !important;
+  }
+
+  .rounded {
+      border-radius: 0.25rem !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+  }
+
+  user agent stylesheet div {
+      display: block;
+  }
+
+  .widget-vs img {
+      max-width: 120px;
+  }
+
+  img {
+      
+      vertical-align: middle;
+      border-style: none;
+  }
+      
+
+
+  *,
+  *::before,
+  *::after {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+  }
+
+img {
+      overflow-clip-margin: content-box;
+      overflow: clip;
+  }
+  img[src$='.png'] {
+      max-width: 120px;
+}
+
+  .text-center {
+      text-align: center !important;
+  }
+
+  .mb-5 {
+      margin-bottom: 3rem !important;
+  }
+
+  p {
+      margin-top: 0;
+      margin-bottom: 1rem;
+  }
+
+  *,
+  *::before,
+  *::after {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+  }
+
+ p {
+      display: block;
+      margin-block-start: 1em;
+      margin-block-end: 1em;
+      margin-inline-start: 0px;
+      margin-inline-end: 0px;
+  }
+
+  .p-4 {
+      padding: 1.5rem !important;
+  }
+
+  .rounded {
+      border-radius: 0.25rem !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+  }
+
+  user agent stylesheet div {
+      display: block;
+  }
+
+  .widget-body {
+      padding: 20px;
+  }
+
+  *,
+  *::before,
+  *::after {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+  }
+
+  user agent stylesheet div {
+      display: block;
+  }
+
+  .widget-vs {
+      width: 100%;
+  }
+
+  *,
+  *::before,
+  *::after {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+  }
+
+  user agent stylesheet div {
+      display: block;
+  }
+
+  .widget-vs-contents {
+      padding-bottom: 0px;
+  }
+
+  .text-center {
+      text-align: center !important;
+  }
+
+  .mb-4 {
+      margin-bottom: 1.5rem !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+  }
+
+  user agent stylesheet div {
+      display: block;
+  }
+
+  .col-lg-6 {
+      -webkit-box-flex: 0;
+      -ms-flex: 0 0 50%;
+      flex: 0 0 50%;
+      max-width: 50%;
+  }
+
+  .col-6,
+  .col-12,
+  .col,
+  .col-md-4,
+  .col-md-8,
+  .col-md-12,
+  .col-lg-3,
+  .col-lg-4,
+  .col-lg-5,
+  .col-lg-6,
+  .col-lg-7,
+  .col-lg-9,
+  .col-lg-12 {
+      position: relative;
+      width: 100%;
+      min-height: 1px;
+      padding-right: 15px;
+      padding-left: 15px;
+  }
+
+  *,
+  *::before,
+  *::after {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+  }
+
+  .bg-light {
+      background: rgba(255, 255, 255, 0.05) !important;
+  }
+
+  .p-4 {
+      padding: 1.5rem !important;
+  }
+
+  .rounded {
+      border-radius: 0.25rem !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+  }
+
+  user agent stylesheet div {
+      display: block;
+  }
+
+  .widget-body {
+      padding: 20px;
+  }
+
+  *,
+  *::before,
+  *::after {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+  }
+
+  user agent stylesheet div {
+      display: block;
+  }
+
+  .widget-vs-contents {
+      padding-bottom: 0px;
+  }
+
+  .text-center {
+      text-align: center !important;
+  }
+
+  .mb-4 {
+      margin-bottom: 1.5rem !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+  }
+
+  user agent stylesheet div {
+      display: block;
+  }
+
+  .mb-4 {
+      margin-bottom: 1.5rem !important;
+  }
+
+  .col-lg-6 {
+      -webkit-box-flex: 0;
+      -ms-flex: 0 0 50%;
+      flex: 0 0 50%;
+      max-width: 50%;
+  }
+
+  .col-6,
+  .col-12,
+  .col,
+  .col-md-4,
+  .col-md-8,
+  .col-md-12,
+  .col-lg-3,
+  .col-lg-4,
+  .col-lg-5,
+  .col-lg-6,
+  .col-lg-7,
+  .col-lg-9,
+  .col-lg-12 {
+      position: relative;
+      width: 100%;
+      min-height: 1px;
+      padding-right: 15px;
+      padding-left: 15px;
+  }
+
+  .bg-light {
+      background: rgba(255, 255, 255, 0.05) !important;
+  }
+
+  .p-4 {
+      padding: 1.5rem !important;
+  }
+
+  .rounded {
+      border-radius: 0.25rem !important;
+  }
+
+  .bg-light {
+      background-color: #1e2429 !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+  }
+
+  user agent stylesheet div {
+      display: block;
+  }
+
+  .site-section {
+      padding: 5em 0;
+  }
+
+  .site-section {
+      padding: 2.5em 0;
+  }
+
+  *,
+  *::before,
+  *::after {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+  }
+
+  user agent stylesheet div {
+      display: block;
+  }
+
+  .container {
+      width: 100%;
+      padding-right: 15px;
+      padding-left: 15px;
+      margin-right: auto;
+      margin-left: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+  }
+
+  user agent stylesheet div {
+      display: block;
+  }
+
+  .row {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+      margin-right: -15px;
+      margin-left: -15px;
+  }
+
+  *,
+  *::before,
+  *::after {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+  }
+
+  user agent stylesheet div {
+      display: block;
+  }
+
+  .title-section {
+      margin-bottom: 30px;
+  }
+
+  .col-6 {
+      -webkit-box-flex: 0;
+      -ms-flex: 0 0 50%;
+      flex: 0 0 50%;
+      max-width: 50%;
+  }
+
+  .col-6,
+  .col-12,
+  .col,
+  .col-md-4,
+  .col-md-8,
+  .col-md-12,
+  .col-lg-3,
+  .col-lg-4,
+  .col-lg-5,
+  .col-lg-6,
+  .col-lg-7,
+  .col-lg-9,
+  .col-lg-12 {
+      position: relative;
+      width: 100%;
+      min-height: 1px;
+      padding-right: 15px;
+      padding-left: 15px;
+  }
+
+  *,
+  *::before,
+  *::after {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+  }
+
+  .text-right {
+      text-align: right !important;
+  }
+
+  .col-6 {
+      -webkit-box-flex: 0;
+      -ms-flex: 0 0 50%;
+      flex: 0 0 50%;
+      max-width: 50%;
+  }
+
+  .col-6,
+  .col-12,
+  .col,
+  .col-md-4,
+  .col-md-8,
+  .col-md-12,
+  .col-lg-3,
+  .col-lg-4,
+  .col-lg-5,
+  .col-lg-6,
+  .col-lg-7,
+  .col-lg-9,
+  .col-lg-12 {
+      position: relative;
+      width: 100%;
+      min-height: 1px;
+      padding-right: 15px;
+      padding-left: 15px;
+  }
+
+  *,
+  *::before,
+  *::after {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+  }
+
+  .owl-carousel.owl-loaded {
+      display: block;
+  }
+
+  .owl-carousel {
+      display: none;
+      width: 100%;
+      z-index: 1;
+  }
+
+  .owl-carousel,
+  .owl-carousel .owl-item {
+      -webkit-tap-highlight-color: transparent;
+      position: relative;
+  }
+
+  *,
+  *::before,
+  *::after {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+  }
+
+  user agent stylesheet div {
+      display: block;
+  }
+
+  .footer-section {
+      padding: 70px 0;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.5);
+      background: #1a1e25;
+  }
+
+  article,
+  figcaption,
+  figure,
+  footer,
+  header,
+  main,
+  nav {
+      display: block;
+  }
+
+  *,
+  *::before,
+  *::after {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+  }
+
+  user agent stylesheet footer {
+      display: block;
+  }
+
+  .text-center {
+      text-align: center !important;
+  }
+
+  .row {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+      margin-right: -15px;
+      margin-left: -15px;
+  }
+
+  *,
+  *::before,
+  *::after {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+  }
+  a.button {
+display: inline-block;
+padding: 10px 20px;
+border: 2px solid #000;
+background-color: #fff;
+color: #000;
+text-decoration: none;
+font-weight: bold;
+border-radius: 12px;
+}
+
+a.button:hover {
+background-color: #37c514;
+color: #100808;
+}
+</style>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div class="hero overlay" style="background-image: url('/wallpaper2.jpg');">
+
+  <div class="container">
+      
+      <div class="row align-items-center">
+          <div class="col-lg-5 mx-auto text-center">
+              <h1 class="text-white">Matches</h1>
+              <p>Reserve your tickets</p>
+          </div>
+      </div>
+  </div>
+</div>
+
+<div class="site-section bg-dark">
+  <div class="container">
+      <div class="row mb-5">
+          
+      <div class="row">
+          <div class="col-12 title-section " >
+              <h2 class="heading ">Upcoming Match</h2>
+          </div>
+          <div th:each="match : ${AllMatches}" class="col-lg-6 mb-4">
+              <div   class="bg-light p-4 rounded">
+                  <div class="widget-body">
+                      <div class="widget-vs">
+                          <div class="d-flex align-items-center justify-content-around justify-content-between w-100">
+                              <div class="team-1 text-center">
+                                  <img th:if="${match.team1.image != null}"  th:src="@{'/photos/teams/' + ${match.team1.id} + '/' +${match.team1.image} }" alt="Team Image">
+                                  <h3 th:text="${match.team1.name}"></h3>
+                              </div>
+                              <div>
+                                  <span class="vs"><span>VS</span></span>
+                              </div>
+                              <div class="team-2 text-center">
+                                  <img th:if="${match.team2.image != null}" th:src="@{'/photos/teams/' + ${match.team2.id} + '/' +${match.team2.image} }" alt="Team Image">
+                                  
+                                  <h3 th:text="${match.team2.name}"></h3>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="text-center widget-vs-contents mb-4">
+                      <h4  th:text="${match.tournament.name}"></h4>
+                      <h4  th:text="${match.stadium.name}"></h4>
+                      <h4  th:text="${match.date}"></h4>
+                      <a th:href="@{/tickets/reserve(id=${match.id})}" class="button">Reserve</a>
+                      
+                  </div>
+              </div>
+          </div>
+          
+      </div>
+  </div>
+</div>
+
+
+</div>
+
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/jquery-migrate-3.0.1.min.js"></script>
+<script src="js/jquery-ui.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/jquery.stellar.min.js"></script>
+<script src="js/jquery.countdown.min.js"></script>
+<script src="js/bootstrap-datepicker.min.js"></script>
+<script src="js/jquery.easing.1.3.js"></script>
+<script src="js/aos.js"></script>
+<script src="js/jquery.fancybox.min.js"></script>
+<script src="js/jquery.sticky.js"></script>
+<script src="js/jquery.mb.YTPlayer.min.js"></script>
+<script src="js/main.js"></script>
+
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+</script>
+<script defer=""
+  src="https://static.cloudflareinsights.com/beacon.min.js/v52afc6f149f6479b8c77fa569edb01181681764108816"
+  integrity="sha512-jGCTpDpBAYDGNYR5ztKt4BQPGef1P0giN6ZGVUi835kFF88FOmmn8jBQWNgrNd8g/Yu421NdgWhwQoaOPFflDw=="
+  data-cf-beacon="{&quot;rayId&quot;:&quot;7cb5fa0e788d0772&quot;,&quot;token&quot;:&quot;cd0b4b3a733644fc843ef0b185f98241&quot;,&quot;version&quot;:&quot;2023.4.0&quot;,&quot;si&quot;:100}"
+  crossorigin="anonymous"></script>
+
+</body>
+
+</html>
