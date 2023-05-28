@@ -46,85 +46,89 @@ import com.fasterxml.jackson.databind.deser.DataFormatReaders.Match;
 @Controller
 @RequestMapping("/tickets")
 public class TicketController {
-    @Autowired
-    private StoreService storeService;
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private PaymentHistoryService paymentHistoryService;
-    @Autowired
-    private TicketService ticketService;
-    @Autowired
-    private StadiumCategoriesService stadiumCategoriesService;
-    @Autowired
-    private StadiumService stadiumService;
-    @Autowired
-    private MatchesService matchesService;
-    @Autowired
-    private StadiumImageService stadiumImageService;
-    @Autowired
-    private CategoryService categoryService;
+  @Autowired
+  private StoreService storeService;
+  @Autowired
+  private UserService userService;
+  @Autowired
+  private PaymentHistoryService paymentHistoryService;
+  @Autowired
+  private TicketService ticketService;
+  @Autowired
+  private StadiumCategoriesService stadiumCategoriesService;
+  @Autowired
+  private StadiumService stadiumService;
+  @Autowired
+  private MatchesService matchesService;
+  @Autowired
+  private StadiumImageService stadiumImageService;
+  @Autowired
+  private CategoryService categoryService;
 
-    @GetMapping("/reserve")
-    public ModelAndView reserve(@RequestParam("id") Long id,@AuthenticationPrincipal UserDetails userDetails)
-    {
-      System.out.println(userDetails.getUsername());
+  @GetMapping("/reserve")
+  public ModelAndView reserve(@RequestParam("id") Long id, @AuthenticationPrincipal UserDetails userDetails) {
+    System.out.println(userDetails.getUsername());
 
-        /*List<Ticket> tickets  = this.ticketService.getUnconfirmedTicketsByMatch(id);
-        if(tickets.size() > 4){
-          ModelAndView view = new ModelAndView("newViewMatch.html");
-          List<Matches> allMatches = matchesService.getAllMatches();
-          view.addObject("AllMatches", allMatches);
-          return view;
-        }*/
-        Matches matches = matchesService.getMatchById(id);
+    /*
+     * List<Ticket> tickets = this.ticketService.getUnconfirmedTicketsByMatch(id);
+     * if(tickets.size() > 4){
+     * ModelAndView view = new ModelAndView("newViewMatch.html");
+     * List<Matches> allMatches = matchesService.getAllMatches();
+     * view.addObject("AllMatches", allMatches);
+     * return view;
+     * }
+     */
+    Matches matches = matchesService.getMatchById(id);
 
-        Stadium stadium=matches.getStadium();
-        StadiumImage stadiumImage = stadiumImageService.getImgLink(stadium.getId());
-        List<Stores> stores = this.storeService.getAllStores();
-        List<Category> allCategories =  stadiumCategoriesService.getCategoriesForStadium(matches.getStadium());
-        HashMap<Category,Double> priceOfCategory = new HashMap<>();
+    Stadium stadium = matches.getStadium();
+    StadiumImage stadiumImage = stadiumImageService.getImgLink(stadium.getId());
+    List<Stores> stores = this.storeService.getAllStores();
+    List<Category> allCategories = stadiumCategoriesService.getCategoriesForStadium(matches.getStadium());
+    HashMap<Category, Double> priceOfCategory = new HashMap<>();
 
-        for(Category c:allCategories){
-          double total = (c.getPricePercentage() * matches.getPrice())/100+ matches.getPrice();
-          priceOfCategory.put(c,total);
-        }
-        ModelAndView view = new ModelAndView("Reserve-Ticket.html");
-        Ticket ticket = new Ticket();
-        view.addObject("Ticket", ticket)
+    for (Category c : allCategories) {
+      double total = (c.getPricePercentage() * matches.getPrice()) / 100 + matches.getPrice();
+      priceOfCategory.put(c, total);
+    }
+    ModelAndView view = new ModelAndView("Reserve-Ticket.html");
+    Ticket ticket = new Ticket();
+    view.addObject("Ticket", ticket)
         .addObject("allStores", stores)
         .addObject("priceOfCategory", priceOfCategory)
         .addObject("allCategories", allCategories)
         .addObject("stadiumImage", stadiumImage).addObject("matches", matches);
-        return view;
-         
+    return view;
+
+
+  }
+
+
+  @PostMapping("/reserve")
+  public String reserve(@RequestParam Map<String, String> myMapp, @ModelAttribute Matches matches,
+      @RequestParam("store") Long storeId, @AuthenticationPrincipal UserDetails userDetails) {
+    Stores store = this.storeService.getStoreById(storeId);
+    String email = userDetails.getUsername();
+    User user = this.userService.getUserByEmail(email);
+    if (user == null) {
+      System.out.println("user is null");
+      return "redirect:/Home";
     }
 
-    @PostMapping("/reserve")
-    public String reserve(@RequestParam Map<String, String> myMapp,@ModelAttribute Matches matches,@RequestParam("store") Long storeId,@AuthenticationPrincipal UserDetails userDetails)
-    {
-      Stores store = this.storeService.getStoreById(storeId);
-      String email = userDetails.getUsername();
-      User user = this.userService.getUserByEmail(email);
-      if(user == null){
-        System.out.println("user is null");
-        return "refirect:/matches/view";
+    Matches thisMatch = this.matchesService.getMatchById(matches.getId());
+    Stadium thisStadium = this.stadiumService.getStadiumById(thisMatch.getStadium().getId());
+    if (this.ticketService.getTicketsByUser(userDetails).size() > 4) {
+      return "redirect:/tickets/reserve?id=" + matches.getId();
+    }
+    for (Entry<String, String> key : myMapp.entrySet()) {
+      Category thisCategory = this.categoryService.GetCategoryById(key.getKey());
+      if (thisCategory == null)
+        continue;
+      Integer size = 0;
+      try {
+        size = Integer.parseInt(key.getValue());
+      } catch (Exception e) {
+        size = 0;
       }
-
-      Matches thisMatch = this.matchesService.getMatchById(matches.getId());
-      Stadium thisStadium = this.stadiumService.getStadiumById(thisMatch.getStadium().getId());
-      if(this.ticketService.getTicketsByUser(userDetails).size() > 4){
-        return "redirect:/tickets/reserve?id=" + matches.getId();
-      }
-      for (Entry<String, String> key :myMapp.entrySet()) {
-        Category thisCategory = this.categoryService.GetCategoryById(key.getKey());
-        if(thisCategory == null) continue;
-        Integer size = 0;
-        try{
-          size = Integer.parseInt(key.getValue());
-        }catch(Exception e){
-          size = 0;
-        }
         for(int i =0; i < size ;i++){          
           Ticket ticket = new Ticket();
           ticket.setCategory(thisCategory);
@@ -138,26 +142,26 @@ public class TicketController {
           ticket.setUser(user);
           if(this.ticketService.addTicket(ticket) == null){
             return "redirect:/tickets/reserve?id=" + matches.getId();
-          }
         }
       }
-      return "redirect:/Home";
     }
-    @GetMapping("/view")
-    public ModelAndView view(@AuthenticationPrincipal UserDetails userDetails)
-    {
-      //List<Ticket> tickets = this.ticketService.getTicketsByManager(userDetails);
-      List<Ticket> tickets = this.ticketService.getTicketsByManager(userDetails);
-      if(tickets.size() == 0){
-        System.out.println("empty");
-        ModelAndView ticketView = new ModelAndView("home.html");
-      return ticketView;
-      }
-      System.out.println("not empty");
-      ModelAndView ticketView = new ModelAndView("StoreManConf.html");
-      ticketView.addObject("allTickets", tickets);
+    return "redirect:/Home";
+  }
+
+  @GetMapping("/view")
+  public ModelAndView view(@AuthenticationPrincipal UserDetails userDetails) {
+    // List<Ticket> tickets = this.ticketService.getTicketsByManager(userDetails);
+    List<Ticket> tickets = this.ticketService.getTicketsByManager(userDetails);
+    if (tickets.size() == 0) {
+      System.out.println("empty");
+      ModelAndView ticketView = new ModelAndView("home.html");
       return ticketView;
     }
+    System.out.println("not empty");
+    ModelAndView ticketView = new ModelAndView("StoreManConf.html");
+    ticketView.addObject("allTickets", tickets);
+    return ticketView;
+  }
 
 
     @PostMapping("/confirm")
